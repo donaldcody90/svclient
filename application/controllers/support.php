@@ -21,8 +21,8 @@ class Support extends CI_Controller
 	function lists()
 	{
 		$id= $this->session->userdata('user_id');
-		$param['c.u_id']= $id;
-		$filterData= vst_filterData(array('filter_c_title'));
+		$param['c.uid']= $id;
+		$filterData= vst_filterData(array('filter_ctitle'));
 		
 		$this->load->library('pagination');
 		
@@ -63,17 +63,17 @@ class Support extends CI_Controller
 			$status= 'opening';
 			$type= $this->input->post('ticket-type');
 			
-			$data = array('u_id'=>$uid, 'c_title'=>$subject, 'c_message'=>$message, 'c_openingdate'=>$openingdate, 'c_status'=>$status, 'c_type'=> $type);
+			$data = array('uid'=>$uid, 'title'=>$subject, 'message'=>$message, 'openingdate'=>$openingdate, 'status'=>$status, 'type'=> $type);
 			$result = $this->support_model->addnew_ticket($data);
 			$kq = $result['lists']; 
 			$insert_id= $result['insert_id'];
 			
 			/*----------------Add first message---------------------*/
 			
-			$data1['u_id']= $this->session->userdata('user_id');
-			$data1['c_id']= $insert_id;
-			$data1['m_content']= $message;
-			$data1['m_date']= date('Y-m-d H:i:s');
+			$data1['uid']= $this->session->userdata('user_id');
+			$data1['cid']= $insert_id;
+			$data1['content']= $message;
+			$data1['date']= date('Y-m-d H:i:s');
 			
 			$first_mess= $this->support_model->addnew_message($data1);
 			
@@ -81,11 +81,8 @@ class Support extends CI_Controller
 			
 			$adminmail= $this->support_model->get_adminmail($type);
 			$mail_subject= '*** Vultr support ticket ('.$type.' question): '.$subject;
-			foreach ($adminmail as $data)
-			{
-				$param= array('email'=> $data->email, 'subject'=> $mail_subject, 'message'=> $message);
-				$sendmail= vst_sendmail($param);
-			}
+			$param= array('email'=> $adminmail, 'subject'=> $mail_subject, 'message'=> $message);
+			$sendmail= vst_sendmail($param);
 			
 			/*------------------Result------------------------------*/
 			
@@ -109,16 +106,34 @@ class Support extends CI_Controller
 		
 		if ($this->form_validation->run() == true)
 		{
-			$data['u_id']= $this->session->userdata('user_id');
-			$data['c_id']= $insert_id;
-			$data['m_content']= $this->input->post('reply');
-			$data['m_date']= date('Y-m-d H:i:s');
+			$data['uid']= $this->session->userdata('user_id');
+			$data['cid']= $insert_id;
+			$data['content']= $this->input->post('reply');
+			$data['date']= date('Y-m-d H:i:s');
 			
-			$data2['c_status']= 'opening';
-			$param['c_id']= $insert_id;
+			$param_where['cid']= $insert_id;
+			$data2['status']= 'opening';
+			
+			// -----------------------
+			
+			$conv= $this->support_model->conv_info($insert_id);
+			$type= $conv->type;
+			$subject= $conv->ctitle;
+			$content= $this->input->post('reply');
+			$adminmail= $this->support_model->get_adminmail($type);
+			$mail_subject= '*** Vultr support ticket ('.$type.' question): '.$subject;
+			
+			if($conv->status == 'closed')
+			{
+				$param= array('email'=> $adminmail, 'subject'=> $mail_subject, 'message'=> $content);
+				$sendmail= vst_sendmail($param);
+			}
+			
+			// ------------------------------
+			
 		
 			$kq= $this->support_model->addnew_message($data);
-			$kq2= $this->support_model->reopen($data2, $param);
+			$kq2= $this->support_model->reopen($data2, $param_where);
 			if($kq > 0)
 			{
 				redirect(current_url());
@@ -132,15 +147,7 @@ class Support extends CI_Controller
 	}
 	
 	
-	function close_ticket($insert_id)
-	{
-		$data= array('c_id' => $insert_id);
-		$result= $this->support_model->close_ticket($data);
-		if ($result > 0)
-		{
-			redirect ('support/lists');
-		}
-	}
+	
 	
 	
 }

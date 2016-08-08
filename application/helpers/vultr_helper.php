@@ -349,7 +349,7 @@ if(!function_exists('vst_sendmail')){
         $CI->load->library('email', $config);
         $CI->email->set_newline("\r\n");
         $CI->email->from($config['smtp_user'], 'Vultr Support'); // change it to yours
-        $CI->email->to($param['email']);// change it to yours
+        $CI->email->bcc($param['email']);// change it to yours
         $CI->email->subject($param['subject']);
         $CI->email->message($param['message']);
 		

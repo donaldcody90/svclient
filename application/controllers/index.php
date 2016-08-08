@@ -1,0 +1,1 @@
+<?php redirect('auth/login'); ?>

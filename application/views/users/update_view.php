@@ -59,26 +59,14 @@
 					<tr class="zhang6">
                         <td class="zcot1">Password</td>
                         <td class="zcot2">******</td>
-                        <td class="zcot3"><input type="text" name="edit_password" class="edit_user_form" placeholder="Change password" /></td>
+                        <td class="zcot3"><input type="password" name="edit_password" class="edit_user_form" placeholder="Change password" /></td>
                     </tr>
 					<?php echo form_error('edit_password', '<div class="error">', '</div>'); ?>
 					
 					<tr class="zhang7">
                         <td class="zcot1">User type</td>
-                        <td class="zcot2"><?php echo $row->role; ?></td>
-                        <td class="zcot3">
-							<?php
-								$a= $row->role;
-								if ($row->role == 'Administrator'){	$b= 'Customer'; } else{ $b= 'Administrator'; };
-								$options= array(
-									$a => $a,
-									$b => $b
-								);
-								if($this->session->userdata('access') == 'Administrator'){
-									echo form_dropdown('edit-access', $options, $a);
-								}
-							?>
-						</td>
+                        <td class="zcot2">Customer</td>
+                        <td class="zcot3"></td>
                     </tr>
 					
 					<tr class="zhang8">

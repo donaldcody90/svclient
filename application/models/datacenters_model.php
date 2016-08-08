@@ -64,15 +64,17 @@ class Datacenters_model extends CI_Model
 		}
      }
 	  
-	 function listDC($filter, $limit, $start){
+	 function listDC($param_where, $filter, $limit, $start){
           vst_buildFilter($filter);
-          $query = $this->db->limit($limit, $start);
+		  $this->db->where($param_where);
+          $this->db->limit($limit, $start);
           $query = $this->db->get($this->table);
           return $query->result();
      }
 	 
-	 function totalDC($filter){
+	 function totalDC($param_where, $filter){
 		vst_buildFilter($filter);
+		$this->db->where($param_where);
 		$query = $this->db->get($this->table);
 		return $query->num_rows();
      }

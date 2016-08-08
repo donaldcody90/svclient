@@ -4,6 +4,7 @@ if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 class Users_model extends MY_Model
 {
 	 private $table_users = 'users';
+	 private $table_cust = 'customers';
 
      function __construct()
      {
@@ -19,14 +20,14 @@ class Users_model extends MY_Model
 	{
 		
 		$this->db->where($params_where);
-		$result= $this->db->get($this->table_users);
+		$result= $this->db->get($this->table_cust);
 		return $result->row();
 	}
 	
 	  
 	function updateUser($data,$params_where){
            $user = $this->_save(array(
-                                        'table'        => $this->table_users,
+                                        'table'        => $this->table_cust,
                                         'data'         => $data,
                                         'param_where'  => $params_where
                                    ));
@@ -35,13 +36,13 @@ class Users_model extends MY_Model
 
      /*function insertUser($data){
           return $this->_save(array(
-               'table' => $this->table_users,
+               'table' => $this->table_cust,
                'data' => $data
           ));
      }*/
 
      function deleteUser($params_where){
-        $this->db->delete($this->table_users, $params_where);
+        $this->db->delete($this->table_cust, $params_where);
 		  
 		if($this->db->affected_rows() == 1)
 		{
@@ -56,13 +57,13 @@ class Users_model extends MY_Model
 	 function listUser($filter, $limit, $start){
           vst_buildFilter($filter);
           $query = $this->db->limit($limit, $start);
-          $query = $this->db->get($this->table_users);
+          $query = $this->db->get($this->table_cust);
           return $query->result();
      }
 	 
 	 function totalUser($filter){
 		vst_buildFilter($filter);
-		$query = $this->db->get($this->table_users);
+		$query = $this->db->get($this->table_cust);
 		return $query->num_rows();
      }
 

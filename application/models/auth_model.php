@@ -7,7 +7,7 @@ class Auth_model extends CI_Model{
 	
 	function check_login($username, $password)
 	{
-		$query= "SELECT * FROM users WHERE (username = ? OR email = ?) AND password = ?";
+		$query= "SELECT * FROM customers WHERE (username = ? OR email = ?) AND password = ?";
 		$result= $this->db->query($query, array($username, $username, hash('sha512', $password)));
 		
 		if ($result->num_rows() > 0)
@@ -24,7 +24,7 @@ class Auth_model extends CI_Model{
 	
 	function add_user($data)
 	{
-		$this->db->insert('users', $data);
+		$this->db->insert('customers', $data);
 		
 		if ($this->db->affected_rows() == 1)
 		{

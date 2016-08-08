@@ -31,7 +31,7 @@
 					
 					<tr class="zhang6">
                         <td class="zcot1">User type</td>
-                        <td class="zcot2"><?php echo $row->role; ?></td>
+                        <td class="zcot2">Customer</td>
                     </tr>
                     
                     <tr class="zhang-cuoi">

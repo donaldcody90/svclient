@@ -15,45 +15,54 @@ class Users extends CI_Controller
 	
 	function index()
 	{
-
-		redirect('users/list_user');
+		$id= $this->session->userdata('user_id');
+		redirect("users/profile/$id");
 	}
 	
-	function list_user()
-	{
+	// function list_user()
+	// {
 	
-		//$userinfo=$this->users_model->findUser(array('username'=>'meo'));
-		//var_dump($userinfo);
-		$access= $this->session->userdata('access');
-		if ($access == 'Administrator')
-		{
-			$filterData= vst_filterData(array('filter_id'));
+		// $userinfo=$this->users_model->findUser(array('username'=>'meo'));
+		// var_dump($userinfo);
+		// $role= $this->session->userdata('role');
+		// if ($role == 'Administrator')
+		// {
+			// $filterData= vst_filterData(array('filter_id'));
+			// /*$search= trim($this->input->get('filter_id'));
+			// $filterData=array();
+			// if(!empty($search))
+				// $filterData=array(
+				   // 'id'=>array('value'=>$search,'condition'=>'where'),
+				   // 'username'=>array('value'=>$search,'condition'=>'or_like'),
+				   // 'firstname'=>array('value'=>$search,'condition'=>'or_like'),
+				   // 'email'=>array('value'=>$search,'condition'=>'or_like'),
+				// );*/
+				
+			// $this->load->library('pagination');
+			// $total= $this->users_model->totalUser($filterData);
 			
-			$this->load->library('pagination');
-			$total= $this->users_model->totalUser($filterData);
+			// $config= vst_Pagination($total);
+			// $this->pagination->initialize($config);
 			
-			$config= vst_Pagination($total);
-			$this->pagination->initialize($config);
+			// $start = $this->input->get('page');
+			// $limit= $config['per_page'];
 			
-			$start = $this->input->get('page');
-			$limit= $config['per_page'];
-			
-			$data['result']= $this->users_model->listUser($filterData, $limit, $start);
-			$data['link']= $this->pagination->create_links();
-			$this->load->view('users/list_user_view', $data);
-		}
-		if ($access == 'Customer')
-		{
-			$id= $this->session->userdata('user_id');
-			redirect("users/profile/$id");
-		}
+			// $data['result']= $this->users_model->listUser($filterData, $limit, $start);
+			// $data['link']= $this->pagination->create_links();
+			// $this->load->view('users/list_user_view', $data);
+		// }
+		// if ($role == 'Customer')
+		// {
+			// $id= $this->session->userdata('user_id');
+			// redirect("users/profile/$id");
+		// }
 		
-	}
+	// }
 	
 	function profile($uid)
 	{
 		
-		if ($this->session->userdata('access') == 'Customer' && $uid != $this->session->userdata('user_id'))
+		if ($uid != $this->session->userdata('user_id'))
 		{
 			redirect('auth/login');
 		}
@@ -71,7 +80,7 @@ class Users extends CI_Controller
 	function update($uid)
 	{
 		
-		if ($this->session->userdata('access') == 'Customer' && $uid != $this->session->userdata('user_id'))
+		if ($uid != $this->session->userdata('user_id'))
 		{
 			redirect('auth/login');
 		}
@@ -113,10 +122,6 @@ class Users extends CI_Controller
 				if($email!=''){
 					$data['email'] = $this->input->post('edit_email');
 				}
-				if($this->session->userdata('access') == 'Administrator')
-				{
-					$data['role']= $this->input->post('edit-access');
-				}
 				if(count($data)>0 ){
 					$success= $this->users_model->updateUser($data, $params_where);
 					if ($success == TRUE)
@@ -134,7 +139,7 @@ class Users extends CI_Controller
 		
 	}
 	
-	
+	/*
 	function add_new_user()
 	{
 		
@@ -207,6 +212,6 @@ class Users extends CI_Controller
 			redirect('auth/login');
 		}
 		
-	}
+	}  */
 }
 

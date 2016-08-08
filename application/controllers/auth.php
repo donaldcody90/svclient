@@ -30,7 +30,6 @@ class Auth extends CI_Controller {
 			extract($_POST);
 			
 			$user_id= $this->Auth_model->check_login($username, $password)->id;
-			$access= $this->Auth_model->check_login($username, $password)->role;
 			
 			if(! $user_id)
 			{
@@ -44,10 +43,9 @@ class Auth extends CI_Controller {
 				$this->session->set_userdata(array(
 									'logged_in'=> true,
 									'user_id' => $user_id,
-									'username' => $username,
-									'access' => $access
+									'username' => $username
 								));
-				redirect('users/list_user');
+				redirect('users');
 			}
 		}
 	}
@@ -79,9 +77,8 @@ class Auth extends CI_Controller {
 			$data['username']= $_POST['username'];
 			$data['password']= hash('sha512', $_POST['password']);
 			$data['email']= $_POST['email'];
-			$data['role']= 'Customer';
 			
-			$result= $this->Auth_model->add_user($data);
+			$result= $this->auth_model->add_user($data);
 			
 			if ($result == false)
 			{
@@ -105,8 +102,6 @@ class Auth extends CI_Controller {
 	
 	function logout()
 	{
-		$item = array('username' => '', 'logged_in' => '', 'user_id' => '', 'access' => '');
-		$this->session->unset_userdata($items);
 		$this->session->sess_destroy();
 		redirect('auth/login');
 

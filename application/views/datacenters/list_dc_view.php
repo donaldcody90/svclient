@@ -42,21 +42,9 @@
 						foreach($result as $row){ ?>
 						<tr>
 							<td><?php echo $row->id; ?></td>
-							<td><?php echo $row->ip; ?></td>
-							<td><?php echo $row->sv_key; ?></td>
-							<td><?php echo $row->sv_pass; ?></td>
-							<!--<td>
-								<?php 
-									//$svAPI=initServerAPI($row->ip,$row->sv_key,$row->sv_pass);
-									
-									//echo count($svAPI->servers());
-								?>
-							</td>
-							<td>
-								<a href="<?php echo base_url().'datacenters/restart/'.$row->id; ?>">Restart</a><br>
-								<a href="<?php echo base_url().'datacenters/stop/'.$row->id; ?>">Stop</a><br>
-								<a href="<?php echo base_url().'datacenters/start/'.$row->id; ?>">Start</a>
-							</td>-->
+							<td><a href="<?php echo site_url().'datacenters/profile/'.$row->id; ?>"><?php echo $row->ip; ?></a></td>
+							<td><?php echo $row->svkey; ?></td>
+							<td><?php echo $row->svpass; ?></td>
 							<td class="cot7"><a href="<?php echo base_url() . 'datacenters/update/' . $row->id; ?>" >Edit</a></td>
 							<td class="cot8"><a href="<?php echo base_url() . 'datacenters/deletedc/' . $row->id; ?>" onclick="return confirm('Are you sure you want to delete?')">Delete</a></td>
 						</tr>

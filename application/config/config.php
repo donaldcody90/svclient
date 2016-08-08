@@ -26,7 +26,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 switch (ENVIRONMENT)
 {
 	case 'development':
-		$config['base_url'] = 'http://localhost/server/svclient';
+		$config['base_url'] = 'http://localhost/server/svclient/';
 		break;
 	case 'testing';
 		$config['base_url'] = '';

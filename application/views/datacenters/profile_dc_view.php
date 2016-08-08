@@ -11,27 +11,22 @@
 					
                     <tr class="zhang2">
                         <td class="zcot1">IP Address</td>
-                        <td class="zcot2"><?php echo $row->id; ?></td>
+                        <td class="zcot2"><?php echo $row->ip; ?></td>
                     </tr>
 					
 					<tr class="zhang3">
                         <td class="zcot1">Key</td>
-                        <td class="zcot2"><?php echo $row->sv_key; ?></td>
+                        <td class="zcot2"><?php echo $row->svkey; ?></td>
                     </tr>
 					
 					<tr class="zhang4">
                         <td class="zcot1">Password</td>
-                        <td class="zcot2"><?php echo $row->sv_pass; ?></td>
-                    </tr>
-					
-					<tr class="zhang5">
-                        <td class="zcot1">Status</td>
-                        <td class="zcot2"><?php echo $row->email; ?></td>
+                        <td class="zcot2"><?php echo $row->svpass; ?></td>
                     </tr>
                     
                     <tr class="zhang-cuoi">
                         <td></td>
-                        <td><a href="<?php echo base_url().'users/update/'. $row->id; ?>"><button>Edit</button></a></td>
+                        <td><a href="<?php echo base_url().'datacenters/update/'. $row->id; ?>"><button>Edit</button></a></td>
                     </tr>
                 </table>
             </div>

@@ -6,6 +6,7 @@ class Support_model extends My_Model
 	private $table_mess= 'message';
 	private $table_conv= 'conversation';
 	private $table_users= 'users';
+	private $table_cat= 'categories';
 	
 	
 	public function __construct()
@@ -16,29 +17,27 @@ class Support_model extends My_Model
 	
 	function listTicket($filterData, $limit, $start, $param)
 	{
-		$this->db->select('c.c_id, c.c_title, u.username, c.c_status');
+		$this->db->select('c.cid, c.title, m.content, c.status');
 		$this->db->from("$this->table_mess as m");
-		$this->db->join("$this->table_conv as c", 'c.c_id = m.c_id', 'inner');
-		$this->db->join("$this->table_users as u", 'm.u_id = u.id', 'inner');
-		$this->db->join("$this->table_mess as m2", "m.c_id = m2.c_id && m.m_id < m2.m_id", 'left');
-		$this->db->where('m2.m_id', NULL);
+		$this->db->join("$this->table_conv as c", 'c.cid = m.cid', 'inner');
+		$this->db->join("$this->table_mess as m2", "m.cid = m2.cid && m.mid < m2.mid", 'left');
+		$this->db->where('m2.mid', NULL);
 		//vst_abc($param);
-		if($this->session->userdata('access') == 'Customer')
-		{
-			$this->db->where($param);
-		}
+		$this->db->where($param);
 		vst_buildFilter($filterData);
-		$this->db->order_by('m.m_date', 'DESC');
+		$this->db->order_by('m.date', 'DESC');
 		$this->db->limit($limit, $start);
 		
+
 		$result= $this->db->get();
 		
-		/*$sql=  "select c.c_id, c.c_title, u.username, c.c_status
-				from message as m INNER JOIN users as u ON m.u_id = u.id
-								INNER JOIN conversation as c ON c.c_id = m.c_id
-								LEFT JOIN message as m2 ON (m.c_id = m2.c_id AND m.m_id < m2.m_id)
-				where m2.m_id IS NULL
-				  and c.u_id = ?";
+		
+		/*$sql=  "select c.cid, c.title, u.username, c.status
+				from message as m INNER JOIN users as u ON m.uid = u.id
+								INNER JOIN conversation as c ON c.cid = m.cid
+								LEFT JOIN message as m2 ON (m.cid = m2.cid AND m.mid < m2.mid)
+				where m2.mid IS NULL
+				  and c.uid = ?";
 				
 		$result= $this->db->query($sql, array($id));*/
 				
@@ -47,12 +46,11 @@ class Support_model extends My_Model
 	
 	function totalTicket($filterData, $param)
 	{
-		$this->db->select('c.c_id, c.c_title, u.username, c.c_status');
+		$this->db->select('c.cid, c.title, m.content, c.status');
 		$this->db->from("$this->table_mess as m");
-		$this->db->join("$this->table_conv as c", 'c.c_id = m.c_id', 'inner');
-		$this->db->join("$this->table_users as u", 'm.u_id = u.id', 'inner');
-		$this->db->join("$this->table_mess as m2", "m.c_id = m2.c_id && m.m_id < m2.m_id", 'left');
-		$this->db->where('m2.m_id', NULL);
+		$this->db->join("$this->table_conv as c", 'c.cid = m.cid', 'inner');
+		$this->db->join("$this->table_mess as m2", "m.cid = m2.cid && m.mid < m2.mid", 'left');
+		$this->db->where('m2.mid', NULL);
 		$this->db->where($param);
 		vst_buildFilter($filterData);
 		
@@ -75,12 +73,18 @@ class Support_model extends My_Model
 	function get_adminmail($type)
 	{
 		$this->db->select('email');
-		$this->db->from($this->table_users);
-		$this->db->where('responsibility', $type);
-		$this->db->or_where('responsibility', 'All');
+		$this->db->from("$this->table_users as u");
+		$this->db->join("$this->table_cat as ca", 'u.id = ca.uid');
+		$this->db->where('ca.name', $type);
 		$result= $this->db->get();
+		$array= array();
 		
-		return $result->result();
+		foreach($result->result() as $data)
+		{
+			$array[]= $data->email;
+		}
+		
+		return $array;
 	}
 	
 	
@@ -103,28 +107,41 @@ class Support_model extends My_Model
 	
 	function get_message($insert_id)
 	{
-		$this->db->select('u.username, u.role, m.m_date, m.m_content');
-		$this->db->from("$this->table_users as u, $this->table_mess as m");
-		$this->db->where('u.id = m.u_id');
-		$this->db->where('c_id', $insert_id);
-		$this->db->order_by('m.m_date', 'DESC');
+		// $this->db->select('u.username, u.role, m.date, m.content');
+		// $this->db->from("$this->table_users as u, $this->table_mess as m");
+		// $this->db->where('u.id = m.uid');
+		// $this->db->where('cid', $insert_id);
+		// $this->db->order_by('m.date', 'DESC');
+		// $result = $this->db->get();
+		
+		$sql="select * from(select u.username, m.date, m.content, u.role
+				from users as u, message as m
+				where u.id = m.uid
+				  and cid = ?
+				UNION
+				select cu.username, m.date, m.content, null
+				from customers as cu, message as m
+				where cu.id = m.uid
+				  and cid = ?) as uniontable
+				order by date DESC";
 
-		$result = $this->db->get();
+		$result= $this->db->query($sql, array($insert_id, $insert_id));
+		
 		return $result->result();
 	}
 	
 	function conv_info($insert_id)
 	{
-		$this->db->where('c_id', $insert_id);
+		$this->db->where('cid', $insert_id);
 		$result= $this->db->get($this->table_conv);
-		return $result->result();
+		return $result->row();
 		
 	}
 	
 	function close_ticket($data)
 	{
 		$this->db->where($data);
-		$this->db->update("$this->table_conv", array('c_status'=> 'closed'));
+		$this->db->update("$this->table_conv", array('status'=> 'closed'));
 		
 		return $this->db->affected_rows();
 	}
