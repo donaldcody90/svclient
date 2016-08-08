@@ -28,16 +28,7 @@ class Users extends CI_Controller
 		if ($access == 'Administrator')
 		{
 			$filterData= vst_filterData(array('filter_id'));
-			/*$search= trim($this->input->get('filter_id'));
-			$filterData=array();
-			if(!empty($search))
-				$filterData=array(
-				   'id'=>array('value'=>$search,'condition'=>'where'),
-				   'username'=>array('value'=>$search,'condition'=>'or_like'),
-				   'firstname'=>array('value'=>$search,'condition'=>'or_like'),
-				   'email'=>array('value'=>$search,'condition'=>'or_like'),
-				);*/
-				
+			
 			$this->load->library('pagination');
 			$total= $this->users_model->totalUser($filterData);
 			
