@@ -49,7 +49,10 @@ class Support extends CI_Controller
 		
 		if ($this->form_validation->run() == false)
 		{
-			$this->load->view('support/addnew_ticket_view');
+			$data['billing']= $this->support_model->getCategory('Billing');
+			$data['general']= $this->support_model->getCategory('General');
+			//print_r($data['general']);die;
+			$this->load->view('support/addnew_ticket_view', $data);
 		}
 		else
 		{
@@ -60,11 +63,11 @@ class Support extends CI_Controller
 			$message= $this->input->post('ticket-message');
 			$uid= $this->session->userdata('user_id');
 			$openingdate= date('Y-m-d H:i:s');
-			$status= 'opening';
+			$status= 1;
 			$type= $this->input->post('ticket-type');
 			
 			$data = array('uid'=>$uid, 'title'=>$subject, 'message'=>$message, 'openingdate'=>$openingdate, 'status'=>$status, 'type'=> $type);
-			$result = $this->support_model->addnew_ticket($data);
+			$result = $this->support_model->addTicket($data);
 			$kq = $result['lists']; 
 			$insert_id= $result['insert_id'];
 			
@@ -75,11 +78,15 @@ class Support extends CI_Controller
 			$data1['content']= $message;
 			$data1['date']= date('Y-m-d H:i:s');
 			
-			$first_mess= $this->support_model->addnew_message($data1);
+			$first_mess= $this->support_model->addMessage($data1);
 			
 			/*-----------------Send mail---------------------------*/
-			
-			$adminmail= $this->support_model->get_adminmail($type);
+			$mailresult=  $this->support_model->getAdminmail($type);
+			$adminmail= array();
+			foreach($mailresult as $datamail)
+			{
+				$adminmail[]= $datamail->email;
+			}
 			$mail_subject= '*** Vultr support ticket ('.$type.' question): '.$subject;
 			$param= array('email'=> $adminmail, 'subject'=> $mail_subject, 'message'=> $message);
 			$sendmail= vst_sendmail($param);
@@ -112,18 +119,23 @@ class Support extends CI_Controller
 			$data['date']= date('Y-m-d H:i:s');
 			
 			$param_where['cid']= $insert_id;
-			$data2['status']= 'opening';
+			$data2['status']= 1;
 			
 			// -----------------------
 			
-			$conv= $this->support_model->conv_info($insert_id);
+			$conv= $this->support_model->getConversationinfo($insert_id);
 			$type= $conv->type;
 			$subject= $conv->ctitle;
 			$content= $this->input->post('reply');
-			$adminmail= $this->support_model->get_adminmail($type);
+			$mailresult=  $this->support_model->getAdminmail($type);
+			$adminmail= array();
+			foreach($mailresult as $datamail)
+			{
+				$adminmail[]= $datamail->email;
+			}
 			$mail_subject= '*** Vultr support ticket ('.$type.' question): '.$subject;
 			
-			if($conv->status == 'closed')
+			if($conv->status == 0)
 			{
 				$param= array('email'=> $adminmail, 'subject'=> $mail_subject, 'message'=> $content);
 				$sendmail= vst_sendmail($param);
@@ -132,7 +144,7 @@ class Support extends CI_Controller
 			// ------------------------------
 			
 		
-			$kq= $this->support_model->addnew_message($data);
+			$kq= $this->support_model->addMessage($data);
 			$kq2= $this->support_model->reopen($data2, $param_where);
 			if($kq > 0)
 			{
@@ -140,8 +152,8 @@ class Support extends CI_Controller
 			}
 		}
 		
-		$message['info']= $this->support_model->conv_info($insert_id);
-		$message['result']= $this->support_model->get_message($insert_id);
+		$message['info']= $this->support_model->getConversationinfo($insert_id);
+		$message['result']= $this->support_model->getMessage($insert_id);
 		$this->load->view('support/ticket_content_view', $message);	
 	
 	}

@@ -6,10 +6,10 @@
 					Ticket #<?php echo $info->cid; ?>&nbsp;&nbsp;
 					Opened <?php echo $info->openingdate; ?>&nbsp;&nbsp;
 					Status: <?php 
-							if($info->status == 'closed'){
-									echo $info->status.' (If your issue is not resolved, you can reopen by adding a reply)';
+							if($info->status == 0){
+									echo 'closed (If your issue is not resolved, you can reopen by adding a reply)';
 								}else{
-									echo $info->status;
+									echo 'opening';
 									} ?>
 				</p>
 			</div>

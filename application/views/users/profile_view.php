@@ -15,13 +15,8 @@
                     </tr>
 					
 					<tr class="zhang3">
-                        <td class="zcot1">First Name</td>
-                        <td class="zcot2"><?php echo $row->firstname; ?></td>
-                    </tr>
-					
-					<tr class="zhang4">
-                        <td class="zcot1">Last Name</td>
-                        <td class="zcot2"><?php echo $row->lastname; ?></td>
+                        <td class="zcot1">Full Name</td>
+                        <td class="zcot2"><?php echo $row->fullname; ?></td>
                     </tr>
 					
 					<tr class="zhang5">

@@ -3,10 +3,10 @@ if ( ! defined ('BASEPATH')) exit ('No direct script access allowed');
 
 class Support_model extends My_Model
 {
-	private $table_mess= 'message';
-	private $table_conv= 'conversation';
-	private $table_users= 'users';
-	private $table_cat= 'categories';
+	private $message= 'message';
+	private $conversation= 'conversation';
+	private $users= 'users';
+	private $categories= 'categories';
 	
 	
 	public function __construct()
@@ -18,9 +18,9 @@ class Support_model extends My_Model
 	function listTicket($filterData, $limit, $start, $param)
 	{
 		$this->db->select('c.cid, c.title, m.content, c.status');
-		$this->db->from("$this->table_mess as m");
-		$this->db->join("$this->table_conv as c", 'c.cid = m.cid', 'inner');
-		$this->db->join("$this->table_mess as m2", "m.cid = m2.cid && m.mid < m2.mid", 'left');
+		$this->db->from("$this->message as m");
+		$this->db->join("$this->conversation as c", 'c.cid = m.cid', 'inner');
+		$this->db->join("$this->message as m2", "m.cid = m2.cid && m.mid < m2.mid", 'left');
 		$this->db->where('m2.mid', NULL);
 		//vst_abc($param);
 		$this->db->where($param);
@@ -47,9 +47,9 @@ class Support_model extends My_Model
 	function totalTicket($filterData, $param)
 	{
 		$this->db->select('c.cid, c.title, m.content, c.status');
-		$this->db->from("$this->table_mess as m");
-		$this->db->join("$this->table_conv as c", 'c.cid = m.cid', 'inner');
-		$this->db->join("$this->table_mess as m2", "m.cid = m2.cid && m.mid < m2.mid", 'left');
+		$this->db->from("$this->message as m");
+		$this->db->join("$this->conversation as c", 'c.cid = m.cid', 'inner');
+		$this->db->join("$this->message as m2", "m.cid = m2.cid && m.mid < m2.mid", 'left');
 		$this->db->where('m2.mid', NULL);
 		$this->db->where($param);
 		vst_buildFilter($filterData);
@@ -58,10 +58,10 @@ class Support_model extends My_Model
 		return $result->num_rows();
 	}
 	
-	function addnew_ticket($data)
+	function addTicket($data)
 	{
 		$lists = $this->_save(array(
-					'table'=>$this->table_conv,
+					'table'=>$this->conversation,
 					'data' =>$data
 		));
 		$insert_id = $this->db->insert_id();
@@ -70,28 +70,22 @@ class Support_model extends My_Model
 	}
 	
 	
-	function get_adminmail($type)
+	function getAdminmail($type)
 	{
 		$this->db->select('email');
-		$this->db->from("$this->table_users as u");
-		$this->db->join("$this->table_cat as ca", 'u.id = ca.uid');
+		$this->db->from("$this->users as u");
+		$this->db->join("$this->categories as ca", 'u.id = ca.uid');
 		$this->db->where('ca.name', $type);
 		$result= $this->db->get();
-		$array= array();
+		return $result->result();
 		
-		foreach($result->result() as $data)
-		{
-			$array[]= $data->email;
-		}
-		
-		return $array;
 	}
 	
 	
-	function addnew_message($data)
+	function addMessage($data)
 	{
 		return $this->_save(array(
-						'table'=> $this->table_mess,
+						'table'=> $this->message,
 						'data'=> $data
 		));
 	}
@@ -99,16 +93,16 @@ class Support_model extends My_Model
 	function reopen($data, $param)
 	{
 		return $this->_save(array(
-						'table'=> $this->table_conv,
+						'table'=> $this->conversation,
 						'data'=> $data,
 						'param_where'=> $param
 		));
 	}
 	
-	function get_message($insert_id)
+	function getMessage($insert_id)
 	{
 		// $this->db->select('u.username, u.role, m.date, m.content');
-		// $this->db->from("$this->table_users as u, $this->table_mess as m");
+		// $this->db->from("$this->users as u, $this->message as m");
 		// $this->db->where('u.id = m.uid');
 		// $this->db->where('cid', $insert_id);
 		// $this->db->order_by('m.date', 'DESC');
@@ -130,23 +124,23 @@ class Support_model extends My_Model
 		return $result->result();
 	}
 	
-	function conv_info($insert_id)
+	function getConversationinfo($insert_id)
 	{
 		$this->db->where('cid', $insert_id);
-		$result= $this->db->get($this->table_conv);
+		$result= $this->db->get($this->conversation);
 		return $result->row();
 		
 	}
 	
-	function close_ticket($data)
+	function getCategory($type)
 	{
-		$this->db->where($data);
-		$this->db->update("$this->table_conv", array('status'=> 'closed'));
 		
-		return $this->db->affected_rows();
+		$this->db->where('name', $type);
+		$this->db->order_by('rand()');
+		$this->db->limit(1);
+		$result= $this->db->get($this->categories);
+		return $result->row();
 	}
-	
-	
 	
 	
 	

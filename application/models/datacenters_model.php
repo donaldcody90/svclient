@@ -3,7 +3,7 @@ if (!defined ('BASEPATH')) exit ('No direct script access allowed');
 
 class Datacenters_model extends CI_Model
 {
-	private $table= 'datacenters';
+	private $datacenters= 'datacenters';
 	
 	public function __construct()
 	{
@@ -17,7 +17,7 @@ class Datacenters_model extends CI_Model
 	function findDC($params_where)
 	{
 		$this->db->where($params_where);
-		$result= $this->db->get($this->table);
+		$result= $this->db->get($this->datacenters);
 		return $result->row();
 	}
 	
@@ -25,57 +25,36 @@ class Datacenters_model extends CI_Model
 	function updateDC($data, $params_where)
 	{
         $this->db->where($params_where);
-		$this->db->update($this->table, $data);
+		$this->db->update($this->datacenters, $data);
 		
-		if ($this->db->affected_rows() == 1)
-		{
-			return TRUE;
-		}
-		else
-		{
-			return FALSE;
-		}
+		return $this->db->affected_rows();
     }
 
     function addDC($data){
-        $this->db->insert($this->table, $data);
+        $this->db->insert($this->datacenters, $data);
         
-		if($this->db->affected_rows() == 1)
-		{
-			return true;
-		}	
-		else
-		{
-			return false;
-		}
+		return $this->db->affected_rows();
     }
 	
 
     function deleteDC($params_where){
-        $this->db->delete($this->table, $params_where);
+        $this->db->delete($this->datacenters, $params_where);
 		  
-		if($this->db->affected_rows() == 1)
-		{
-			return true;
-		}	
-		else
-		{
-			return false;
-		}
+		return $this->db->affected_rows();
      }
 	  
 	 function listDC($param_where, $filter, $limit, $start){
           vst_buildFilter($filter);
 		  $this->db->where($param_where);
           $this->db->limit($limit, $start);
-          $query = $this->db->get($this->table);
+          $query = $this->db->get($this->datacenters);
           return $query->result();
      }
 	 
 	 function totalDC($param_where, $filter){
 		vst_buildFilter($filter);
 		$this->db->where($param_where);
-		$query = $this->db->get($this->table);
+		$query = $this->db->get($this->datacenters);
 		return $query->num_rows();
      }
 

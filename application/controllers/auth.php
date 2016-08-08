@@ -29,7 +29,7 @@ class Auth extends CI_Controller {
 		{
 			extract($_POST);
 			
-			$user_id= $this->Auth_model->check_login($username, $password)->id;
+			$user_id= $this->Auth_model->checkLogin($username, $password)->id;
 			
 			if(! $user_id)
 			{
@@ -39,7 +39,7 @@ class Auth extends CI_Controller {
 			}
 			else
 			{
-				$username= $this->Auth_model->check_login($username, $password)->username;
+				$username= $this->Auth_model->checkLogin($username, $password)->username;
 				$this->session->set_userdata(array(
 									'logged_in'=> true,
 									'user_id' => $user_id,
@@ -56,8 +56,7 @@ class Auth extends CI_Controller {
 	
 	function signup()
 	{
-		$this->form_validation->set_rules('firstname', 'First name', 'required|min_length[2]|max_length[20]|trim|xss_clean');
-		$this->form_validation->set_rules('lastname', 'Last name', 'required|min_length[2]|max_length[20]|trim|xss_clean');
+		$this->form_validation->set_rules('fullname', 'First name', 'required|min_length[2]|max_length[20]|trim|xss_clean');
 		$this->form_validation->set_rules('username', 'Username', 'required|alpha_numeric|min_length[3]|max_length[20]|is_unique[users.Username]|trim|xss_clean');
 		$this->form_validation->set_rules('password', 'Password', 'required|min_length[6]|trim|xss_clean');
 		$this->form_validation->set_rules('passconf', 'Password Confirm', 'required|matches[password]|min_length[6]|trim|xss_clean');
@@ -72,15 +71,14 @@ class Auth extends CI_Controller {
 		}
 		else
 		{
-			$data['firstname']= $_POST['firstname'];
-			$data['lastname']= $_POST['lastname'];
+			$data['fullname']= $_POST['fullname'];
 			$data['username']= $_POST['username'];
 			$data['password']= hash('sha512', $_POST['password']);
 			$data['email']= $_POST['email'];
 			
-			$result= $this->auth_model->add_user($data);
+			$result= $this->auth_model->addUser($data);
 			
-			if ($result == false)
+			if ($result == 1)
 			{
 				$this->session->set_flashdata('signup_error', TRUE);
 				redirect('auth/signup');

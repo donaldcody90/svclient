@@ -36,18 +36,11 @@
 					<?php echo form_error('edit_username', '<div class="error">', '</div>'); ?>
 					
 					<tr class="zhang3">
-                        <td class="zcot1">First Name</td>
-                        <td class="zcot2"><?php echo $row->firstname; ?></td>
-                        <td class="zcot3"><input type="text" name="edit_firstname" placeholder="Change first name" /></td>
+                        <td class="zcot1">Full Name</td>
+                        <td class="zcot2"><?php echo $row->fullname; ?></td>
+                        <td class="zcot3"><input type="text" name="edit_fullname" placeholder="Change full name" /></td>
                     </tr>
-					<?php echo form_error('edit_firstname', '<div class="error">', '</div>'); ?>
-					
-					<tr class="zhang4">
-                        <td class="zcot1">Last Name</td>
-                        <td class="zcot2"><?php echo $row->lastname; ?></td>
-                        <td class="zcot3"><input type="text" name="edit_lastname" placeholder="Change last name" /></td>
-                    </tr>
-					<?php echo form_error('edit_lastname', '<div class="error">', '</div>'); ?>
+					<?php echo form_error('edit_fullname', '<div class="error">', '</div>'); ?>
 					
 					<tr class="zhang5">
                         <td class="zcot1">Email</td>

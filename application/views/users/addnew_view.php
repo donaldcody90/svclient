@@ -20,18 +20,10 @@
 						</tr>
 						
 						<tr class="zhang3">
-							<td class="zcot1">First Name</td>
+							<td class="zcot1">Full Name</td>
 							<td class="zcot2">
-								<input type="text" name="firstname" value="" />
-								<?php echo form_error('firstname', '<div class="error">', '</div>'); ?>
-							</td>
-						</tr>
-						
-						<tr class="zhang4">
-							<td class="zcot1">Last Name</td>
-							<td class="zcot2">
-								<input type="text" name="lastname" value="" />
-								<?php echo form_error('lastname', '<div class="error">', '</div>'); ?>
+								<input type="text" name="fullname" value="" />
+								<?php echo form_error('fullname', '<div class="error">', '</div>'); ?>
 							</td>
 						</tr>
 						

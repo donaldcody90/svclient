@@ -9,14 +9,21 @@
 				<?php echo form_open(base_url().'support/addnew'); ?>
 				
 					<div class="button1">
-						<label>
-							<input type="radio" name="ticket-type" value="General" checked />
-							<div>General Support</div>
-						</label>
-						<label>
-							<input type="radio" name="ticket-type" value="Billing" />
-							<div>Billing Questions</div>
-						</label>
+						<?php if($general->status == 1) 
+						{
+							echo '<label>
+									<input type="radio" name="ticket-type" value="'.$general->id.'" checked />
+									<div>General Support</div>
+								</label>';
+						}
+						if($billing->status == 1)
+						{
+							echo '<label>
+									<input type="radio" name="ticket-type" value="'.$billing->id.'" />
+									<div>Billing Questions</div>
+								</label>';
+						}
+						?>
 					</div>
 				
 					<select>

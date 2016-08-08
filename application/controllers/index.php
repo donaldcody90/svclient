@@ -1,1 +1,6 @@
-<?php redirect('auth/login'); ?>
+<?php 
+function index()
+{
+	redirect('auth');
+}
+?>

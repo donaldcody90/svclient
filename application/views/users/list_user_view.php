@@ -29,7 +29,7 @@
 						<tr class="zhang1">
 							<td class="zcot1">ID</td>
 							<td class="zcot2">Username</td>
-							<td class="zcot3">First Name</td>
+							<td class="zcot3">Full Name</td>
 							<td class="zcot4">Last Name</td>
 							<td class="zcot5">Email</td>
 							<td class="zcot6"></td>
@@ -40,8 +40,7 @@
 						<tr>
 							<td><?php echo $row->id; ?></td>
 							<td><?php echo $row->username; ?></td>
-							<td><?php echo $row->firstname; ?></td>
-							<td><?php echo $row->lastname; ?></td>
+							<td><?php echo $row->fullname; ?></td>
 							<td><?php echo $row->email; ?></td>
 							<td class="zcot6"><a href="<?php echo base_url() . 'users/update/' . $row->id; ?>" >Edit</a></td>
 							<td class="zcot7"><a href="<?php echo base_url() . 'users/delete_user/' . $row->id; ?>" onclick="return confirm('Are you sure you want to delete?')">Delete</a></td>

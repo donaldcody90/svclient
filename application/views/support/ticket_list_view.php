@@ -29,7 +29,7 @@
 						<tr>
 							<td><a href="<?php echo base_url().'support/ticket/'.$row->cid; ?>"><?php echo $row->title.'<br>'.$row->cid; ?></a></td>
 							<td><?php echo substr($row->content, 0, 20); ?></td>
-							<td><?php echo $row->status; ?></td>
+							<td><?php echo getStatusConversation($row->status); ?></td>
 							<td><img src="<?php echo base_url().'static/images/logo17.png'; ?>" /></td>
 						</tr>
 					<?php } ?>

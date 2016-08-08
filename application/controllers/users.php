@@ -34,7 +34,7 @@ class Users extends CI_Controller
 				// $filterData=array(
 				   // 'id'=>array('value'=>$search,'condition'=>'where'),
 				   // 'username'=>array('value'=>$search,'condition'=>'or_like'),
-				   // 'firstname'=>array('value'=>$search,'condition'=>'or_like'),
+				   // 'fullname'=>array('value'=>$search,'condition'=>'or_like'),
 				   // 'email'=>array('value'=>$search,'condition'=>'or_like'),
 				// );*/
 				
@@ -93,8 +93,7 @@ class Users extends CI_Controller
 
 			
 			$this->form_validation->set_rules('edit_username', 'Username', 'alpha_numeric|min_length[3]|max_length[20]|is_unique[users.username]|trim|xss_clean');
-			$this->form_validation->set_rules('edit_firstname', 'First name', 'min_length[2]|max_length[20]|trim|xss_clean');
-			$this->form_validation->set_rules('edit_lastname', 'Last name', 'min_length[2]|max_length[20]|trim|xss_clean');
+			$this->form_validation->set_rules('edit_fullname', 'First name', 'min_length[2]|max_length[20]|trim|xss_clean');
 			$this->form_validation->set_rules('edit_password', 'Password', 'min_length[6]|trim|xss_clean');
 			$this->form_validation->set_rules('edit_email', 'Email', 'valid_email|is_unique[users.email]|trim|xss_clean');
 			
@@ -106,13 +105,9 @@ class Users extends CI_Controller
 				if($username!='' ){
 					$data['username'] = $this->input->post('edit_username');
 				}
-				$firstname = $this->input->post('edit_firstname');
-				if($firstname!='' ){
-					$data['firstname'] = $this->input->post('edit_firstname');
-				}
-				$lastname = $this->input->post('edit_lastname');
-				if($lastname!=''){
-					$data['lastname'] = $this->input->post('edit_lastname');
+				$fullname = $this->input->post('edit_fullname');
+				if($fullname!='' ){
+					$data['fullname'] = $this->input->post('edit_fullname');
 				}
 				$password = $this->input->post('edit_password');
 				if($password!=''){
@@ -145,8 +140,7 @@ class Users extends CI_Controller
 		
 		if ($this->session->userdata('access') == 'Administrator')
 		{
-			$this->form_validation->set_rules('firstname', 'First name', 'required|min_length[2]|max_length[20]|trim|xss_clean');
-			$this->form_validation->set_rules('lastname', 'Last name', 'required|min_length[2]|max_length[20]|trim|xss_clean');
+			$this->form_validation->set_rules('fullname', 'First name', 'required|min_length[2]|max_length[20]|trim|xss_clean');
 			$this->form_validation->set_rules('username', 'Username', 'required|alpha_numeric|min_length[3]|max_length[20]|is_unique[users.username]|trim|xss_clean');
 			$this->form_validation->set_rules('password', 'Password', 'required|min_length[6]|trim|xss_clean');
 			$this->form_validation->set_rules('passconf', 'Password Confirm', 'required|matches[password]|min_length[6]|trim|xss_clean');
@@ -161,8 +155,7 @@ class Users extends CI_Controller
 			}
 			else
 			{
-				$data['firstname']= $_POST['firstname'];
-				$data['lastname']= $_POST['lastname'];
+				$data['fullname']= $_POST['fullname'];
 				$data['username']= $_POST['username'];
 				$data['password']= hash('sha512', $_POST['password']);
 				$data['email']= $_POST['email'];

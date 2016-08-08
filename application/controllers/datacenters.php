@@ -92,7 +92,7 @@ class Datacenters extends CI_Controller
 			}
 			if(count($data)>0 ){
 				$success= $this->datacenters_model->updateDC($data, $params_where);
-				if ($success == TRUE)
+				if ($success == 1)
 				{
 					$this->session->set_flashdata('success', TRUE);
 				}
@@ -216,7 +216,7 @@ class Datacenters extends CI_Controller
 		$params_where= array('id'=> $uid);
 		$result= $this->datacenters_model->deleteDC($params_where);
 		
-		if ($result == true)
+		if ($result == 1)
 		{
 			$this->session->set_flashdata('success', true);
 		}
