@@ -9,17 +9,17 @@
 				<?php echo form_open(base_url().'support/addnew'); ?>
 				
 					<div class="button1">
-						<?php if($general->status == 1) 
+						<?php if($general['status'] == 1) 
 						{
 							echo '<label>
-									<input type="radio" name="ticket-type" value="'.$general->id.'" checked />
+									<input type="radio" name="ticket-type" value="'.$general['id'].'" checked />
 									<div>General Support</div>
 								</label>';
 						}
-						if($billing->status == 1)
+						if($billing['status'] == 1)
 						{
 							echo '<label>
-									<input type="radio" name="ticket-type" value="'.$billing->id.'" />
+									<input type="radio" name="ticket-type" value="'.$billing['id'].'" />
 									<div>Billing Questions</div>
 								</label>';
 						}

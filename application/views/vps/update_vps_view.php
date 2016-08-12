@@ -3,7 +3,7 @@
             <div class="title">Data Center Information</div>
 
             <div class="edit-view">
-			<?php echo form_open(base_url().'datacenters/update/'.$row->id); ?>
+			<?php echo form_open(base_url().'vps/update/'.$row['id']); ?>
                 <table class="main-content">
 					<tr class="zhang1">
                         <td class="zcot1">Properties</td>
@@ -37,12 +37,7 @@
                         <td class="zcot2"></td>
                         <td class="zcot3"><div class="button">
 							<button>Confirm</button>
-							<a href="<?php 
-									if ($this->session->userdata('access') == 'Administrator'){
-										echo base_url().'datacenters/lists';
-									}
-									?>
-										"><div class="cancel"><center>Cancel</center></div></a>
+							<a href="<?php echo site_url().'vps/lists/'.$row['cuid']; ?>" ><div class="cancel"><center>Cancel</center></div></a>
 						</div></td>
                     </tr>
                     

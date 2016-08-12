@@ -4,10 +4,10 @@
             
 			<div class="list-DC">
 				<div>
-					<a href="<?php echo base_url().'datacenters/add'; ?>"><button>Add new Data Centers</button></a>
+					<a href="<?php echo base_url().'vps/add'; ?>"><button>Add new Data Centers</button></a>
 					
 					<div class="search">
-						<?php echo form_open(base_url().'datacenters/lists', 'method= "GET"'); ?>
+						<?php echo form_open(base_url().'vps/lists', 'method= "GET"'); ?>
 							<input type="search" value="<?php echo $this->input->get('filter_ip') ?>" name="filter_ip" placeholder="Search by IP" />
 						<?php echo form_close() ?>
 					</div>
@@ -31,9 +31,10 @@
 					
 						<tr class="zhang1">
 							<td class="cot1">ID</td>
-							<td class="cot2">IP Address</td>
-							<td class="cot3">Key</td>
-							<td class="cot4">Password</td>
+							<td class="cot2">VPS Label</td>
+							<td class="cot3">VPS IP</td>
+							<td class="cot4">Datacenters</td>
+							<td class="cot5">Create Date</td>
 							<td class="cot7"></td>
 							<td class="cot8"></td>
 						</tr>
@@ -42,18 +43,21 @@
 						foreach($result as $row){ ?>
 						<tr>
 							<td><?php echo $row->id; ?></td>
-							<td><a href="<?php echo site_url().'datacenters/profile/'.$row->id; ?>"><?php echo $row->ip; ?></a></td>
-							<td><?php echo $row->svkey; ?></td>
-							<td><?php echo $row->svpass; ?></td>
-							<td class="cot7"><a href="<?php echo base_url() . 'datacenters/update/' . $row->id; ?>" >Edit</a></td>
-							<td class="cot8"><a href="<?php echo base_url() . 'datacenters/deletedc/' . $row->id; ?>" onclick="return confirm('Are you sure you want to delete?')">Delete</a></td>
+							<td><a href="<?php echo site_url().'vps/profile/'.$row->id; ?>"><?php echo $row->vps_label; ?></a></td>
+							<td><?php echo $row->vps_ip; ?></td>
+							<td><?php echo $row->label; ?></td>
+							<td><?php echo $row->create_date; ?></td>
+							<td class="cot7"><a href="<?php echo base_url() . 'vps/update/' . $row->id; ?>" >Edit</a></td>
+							<td class="cot8"><a href="<?php echo base_url() . 'vps/deleteVps/' . $row->id; ?>" onclick="return confirm('Are you sure you want to delete?')">Delete</a></td>
 						</tr>
 						<?php } ?>
 						
 						<tr class="zhang-cuoi">
 							<td></td>
 							<td></td>
+							<td></td>
 							<td><center><?php echo $link; ?></center></td>
+							<td></td>
 							<td></td>
 							<td></td>
 						</tr>

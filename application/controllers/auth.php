@@ -3,7 +3,7 @@
 class Auth extends CI_Controller {
 	public function __construct(){
 		parent::__construct();
-		
+		$this->load->model('users_model');
 	}
 	
 	function index()
@@ -18,8 +18,10 @@ class Auth extends CI_Controller {
 	
 	function login()
 	{
-		$this->form_validation->set_rules('username', 'Username', 'required|trim|max_length[50]|xss_clean');
-		$this->form_validation->set_rules('password', 'Password', 'required|trim|max_length[50]|xss_clean');
+		$username = $this->input->post("username");
+        $password = $this->input->post("password");
+		$this->form_validation->set_rules('username', 'Username', 'required|trim|max_length[50]');
+		$this->form_validation->set_rules('password', 'Password', 'required|trim|max_length[50]');
 		
 		if ($this->form_validation->run() == FALSE)
 		{
@@ -27,26 +29,29 @@ class Auth extends CI_Controller {
 		}
 		else
 		{
-			extract($_POST);
-			
-			$user_id= $this->Auth_model->checkLogin($username, $password)->id;
-			
-			if(! $user_id)
-			{
-				//login failed
-				$this->session->set_flashdata('login_error', TRUE);
-				redirect('auth/login');
-			}
-			else
-			{
-				$username= $this->Auth_model->checkLogin($username, $password)->username;
-				$this->session->set_userdata(array(
+			if ($this->input->post('btn_login'))
+		    {
+				$data= $this->users_model->findUser( array('username'=> $username, 'password'=> vst_password($password)) );
+				if(count($data)){
+					$user_id= $data['id'];
+					$this->session->set_userdata(array(
 									'logged_in'=> true,
 									'user_id' => $user_id,
 									'username' => $username
 								));
-				redirect('users');
-			}
+					redirect('users');
+				}
+				else{
+					$this->session->set_flashdata('login_error', TRUE);
+					redirect(site_url('auth/login'));
+				}  				
+		  
+		    }
+			else
+			{
+			   redirect(site_url('auth/login'));
+		    }
+			
 		}
 	}
 	

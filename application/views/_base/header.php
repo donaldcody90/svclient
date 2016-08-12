@@ -26,7 +26,7 @@
 			<div class="main-menu">
 				<center><ul>
 					<li class="logo"><a href="#"><img src="<?php echo base_url(); ?>static/images/logo1.png"></a></li>
-					<li><a href="<?php echo base_url().'datacenters'; ?>"><img src="<?php echo base_url(); ?>static/images/logo12.png"><p <?php echo $cController == 'datacenters' ? 'class="menu2"':'class="menu1"'; ?> >Servers</p></a></li>
+					<li><a href="<?php echo base_url().'vps'; ?>"><img src="<?php echo base_url(); ?>static/images/logo12.png"><p <?php echo $cController == 'vps' ? 'class="menu2"':'class="menu1"'; ?> >Servers</p></a></li>
 					<li><a href=""><img src="<?php echo base_url(); ?>static/images/logo3.png"><p class="menu1">Billing</p></a></li>
 					<li><a href="<?php echo base_url().'support/lists'; ?>"><img src="<?php echo base_url(); ?>static/images/logo4.png"><p <?php echo $cController == 'support' ? 'class="menu2"' : 'class="menu1"'; ?>>Support</p></a></li>
 					<li><a href="#"><img src="<?php echo base_url(); ?>static/images/logo5.png"><p class="menu1">Affiliate</p></a></li>

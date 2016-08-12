@@ -75,9 +75,9 @@ class Support_model extends My_Model
 		$this->db->select('email');
 		$this->db->from("$this->users as u");
 		$this->db->join("$this->categories as ca", 'u.id = ca.uid');
-		$this->db->where('ca.name', $type);
+		$this->db->where('ca.id', $type);
 		$result= $this->db->get();
-		return $result->result();
+		return $result->row_array();
 		
 	}
 	
@@ -124,25 +124,51 @@ class Support_model extends My_Model
 		return $result->result();
 	}
 	
-	function getConversationinfo($insert_id)
-	{
-		$this->db->where('cid', $insert_id);
-		$result= $this->db->get($this->conversation);
-		return $result->row();
-		
-	}
 	
-	function getCategory($type)
-	{
-		
-		$this->db->where('name', $type);
-		$this->db->order_by('rand()');
-		$this->db->limit(1);
-		$result= $this->db->get($this->categories);
-		return $result->row();
+	
+	function getConversationinfo($params_where, $is_list=false){
+		 return  $this->_getwhere(array(
+						'table'        => $this->conversation,
+						'param_where'  => $params_where,
+						'list'         => $is_list
+			));
 	}
 	
 	
+	
+	function getCategory($param_where, $is_list= false)
+	{
+		return $this->_general(array(
+					'select'=> '*',
+					'table'=> $this->categories,
+					'param_where' => $param_where,
+					'orderby' => 'rand()',
+					'limit' => 1,
+					'start' => null,
+					'list' => $is_list
+		));
+	}
+	
+	
+	
+	
+	// function getConversationinfo($insert_id)
+	// {
+		// $this->db->where('cid', $insert_id);
+		// $result= $this->db->get($this->conversation);
+		// return $result->row();
+		
+	// }
+	
+	// function getCategory($type)
+	// {
+		
+		// $this->db->where('name', $type);
+		// $this->db->order_by('rand()');
+		// $this->db->limit(1);
+		// $result= $this->db->get($this->categories);
+		// return $result->row();
+	// }
 	
 	
 }

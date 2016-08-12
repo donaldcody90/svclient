@@ -14,18 +14,25 @@ class Auth_model extends CI_Model{
 		$query= "SELECT * FROM $this->customers WHERE (username = ? OR email = ?) AND password = ?";
 		$result= $this->db->query($query, array($username, $username, hash('sha512', $password)));
 		
-		return $result->row(0);
+		return $result->row();
 	}
 	
 	//----------signup------------
 	
-	function addUser($data)
-	{
-		$this->db->insert($this->customers, $data);
+	
+	function addUser($data){
+          return $this->_save(array(
+               'table' => $this->customers,
+               'data' => $data
+          ));
+    }
+	
+	// function addUser($data)
+	// {
+		// $this->db->insert($this->customers, $data);
 		
-		return $this->db->affected_rows();
-	}
-
+		// return $this->db->affected_rows();
+	// }
 	
 	
 	

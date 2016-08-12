@@ -21,7 +21,7 @@
 						echo '<center><div class="signup-success">Registration Successful. Login now!</div></center>';
 					}
 				?>
-				<input type="text" name="username" placeholder="Email Address or Username" />
+				<input type="text" name="username" placeholder="Username" />
 				<?php echo form_error('username', '<div class="error">', '</div>'); ?>
 				<input type="password" name="password" placeholder="Password" />
 				<?php
@@ -33,16 +33,15 @@
 					echo form_error('password', '<div class="error">', '</div>'); 
 				?>
 				
-				<button>Log In</button>
+				<input class="btn_login" type="submit" name="btn_login" value="Login" />
 				
 				<div class="message">
 					<center>Help, I <a href="#">forgot my password</a></center>
 				</div>
 			<?php echo form_close(); ?>
 			
-			
-			<table class="separate-line">
-					<tr><td></td></tr>
+			<table class="separate_line">
+					<tr><td>&nbsp;</td></tr>
 			</table>
 			
 			<div class="message">

@@ -19,45 +19,7 @@ class Users extends CI_Controller
 		redirect("users/profile/$id");
 	}
 	
-	// function list_user()
-	// {
 	
-		// $userinfo=$this->users_model->findUser(array('username'=>'meo'));
-		// var_dump($userinfo);
-		// $role= $this->session->userdata('role');
-		// if ($role == 'Administrator')
-		// {
-			// $filterData= vst_filterData(array('filter_id'));
-			// /*$search= trim($this->input->get('filter_id'));
-			// $filterData=array();
-			// if(!empty($search))
-				// $filterData=array(
-				   // 'id'=>array('value'=>$search,'condition'=>'where'),
-				   // 'username'=>array('value'=>$search,'condition'=>'or_like'),
-				   // 'fullname'=>array('value'=>$search,'condition'=>'or_like'),
-				   // 'email'=>array('value'=>$search,'condition'=>'or_like'),
-				// );*/
-				
-			// $this->load->library('pagination');
-			// $total= $this->users_model->totalUser($filterData);
-			
-			// $config= vst_Pagination($total);
-			// $this->pagination->initialize($config);
-			
-			// $start = $this->input->get('page');
-			// $limit= $config['per_page'];
-			
-			// $data['result']= $this->users_model->listUser($filterData, $limit, $start);
-			// $data['link']= $this->pagination->create_links();
-			// $this->load->view('users/list_user_view', $data);
-		// }
-		// if ($role == 'Customer')
-		// {
-			// $id= $this->session->userdata('user_id');
-			// redirect("users/profile/$id");
-		// }
-		
-	// }
 	
 	function profile($uid)
 	{
@@ -133,6 +95,49 @@ class Users extends CI_Controller
 		}
 		
 	}
+	
+	
+	
+	
+	// function list_user()
+	// {
+	
+		// $userinfo=$this->users_model->findUser(array('username'=>'meo'));
+		// var_dump($userinfo);
+		// $role= $this->session->userdata('role');
+		// if ($role == 'Administrator')
+		// {
+			// $filterData= vst_filterData(array('filter_id'));
+			// /*$search= trim($this->input->get('filter_id'));
+			// $filterData=array();
+			// if(!empty($search))
+				// $filterData=array(
+				   // 'id'=>array('value'=>$search,'condition'=>'where'),
+				   // 'username'=>array('value'=>$search,'condition'=>'or_like'),
+				   // 'fullname'=>array('value'=>$search,'condition'=>'or_like'),
+				   // 'email'=>array('value'=>$search,'condition'=>'or_like'),
+				// );*/
+				
+			// $this->load->library('pagination');
+			// $total= $this->users_model->totalUser($filterData);
+			
+			// $config= vst_Pagination($total);
+			// $this->pagination->initialize($config);
+			
+			// $start = $this->input->get('page');
+			// $limit= $config['per_page'];
+			
+			// $data['result']= $this->users_model->listUser($filterData, $limit, $start);
+			// $data['link']= $this->pagination->create_links();
+			// $this->load->view('users/list_user_view', $data);
+		// }
+		// if ($role == 'Customer')
+		// {
+			// $id= $this->session->userdata('user_id');
+			// redirect("users/profile/$id");
+		// }
+		
+	// }
 	
 	/*
 	function add_new_user()

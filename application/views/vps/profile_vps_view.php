@@ -26,7 +26,7 @@
                     
                     <tr class="zhang-cuoi">
                         <td></td>
-                        <td><a href="<?php echo base_url().'datacenters/update/'. $row->id; ?>"><button>Edit</button></a></td>
+                        <td><a href="<?php echo base_url().'vps/update/'. $row->id; ?>"><button>Edit</button></a></td>
                     </tr>
                 </table>
             </div>

@@ -186,7 +186,7 @@ if(!function_exists('message_flash')){
 
 if(!function_exists('vst_password')){
 	function vst_password($msg){
-		return md5($msg);
+		return hash('sha512', $msg);
 	}
 }
 

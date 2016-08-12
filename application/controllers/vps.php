@@ -1,30 +1,34 @@
 <?php
 if (!defined('BASEPATH')) exit('No direct script access allowed');
 
-class Datacenters extends CI_Controller
+class Vps extends CI_Controller
 {
 	
 	public function __construct()
 	{
 		parent::__construct();
 		vkt_checkAuth();
-		$this->load->model('datacenters_model');
+		$this->load->model('vps_model');
 		$this->load->helper('vultr_helper');
 	}
 	
 	function index()
 	{
-		redirect('datacenters/lists/'.$this->session->userdata('user_id'));
+		redirect('vps/lists/'.$this->session->userdata('user_id'));
 	}
 	
 	function lists($uid)
 	{	
 		
-		$filterData= vst_filterData(array('filter_ip'));
+		$filterData= vst_filterData(array(
+					array('filter_ip'),
+					array(),
+					array('ip'=> 'v')
+		));
 		$param_where= array('cuid'=> $uid);	
 				
 		$this->load->library('pagination');
-		$total= $this->datacenters_model->totalDC($param_where, $filterData);
+		$total= $this->vps_model->totalVps($param_where, $filterData);
 			
 		$config= vst_Pagination($total);
 		$this->pagination->initialize($config);
@@ -32,9 +36,9 @@ class Datacenters extends CI_Controller
 		$start = $this->input->get('page');
 		$limit= $config['per_page'];
 			
-		$data['result']= $this->datacenters_model->listDC($param_where, $filterData, $limit, $start);
+		$data['result']= $this->vps_model->listVps($param_where, $filterData, $limit, $start);
 		$data['link']= $this->pagination->create_links();
-		$this->load->view('datacenters/list_dc_view', $data);
+		$this->load->view('vps/list_vps_view', $data);
 		
 	}
 	
@@ -42,11 +46,11 @@ class Datacenters extends CI_Controller
 	function profile($id)
 	{
 		$params_where= array('id'=> $id);
-		$data['row']= $this->datacenters_model->findDC($params_where);
+		$data['row']= $this->vps_model->findVps($params_where);
 				
 		if ($data['row']->cuid= $this->session->userdata('user_id'))
 		{
-			$this->load->view('datacenters/profile_dc_view', $data);
+			$this->load->view('vps/profile_vps_view', $data);
 		}
 		else
 		{
@@ -58,17 +62,17 @@ class Datacenters extends CI_Controller
 	function update($uid)
 	{
 		
-		$this->form_validation->set_rules('edit_id', 'ID', 'numeric|max_length[20]|is_unique[datacenters.id]|trim|xss_clean');
-		$this->form_validation->set_rules('edit_ip', 'IP Address', 'valid_ip|is_unique[datacenters.ip]|trim|xss_clean');
+		$this->form_validation->set_rules('edit_id', 'ID', 'numeric|max_length[20]|is_unique[vps.id]|trim|xss_clean');
+		$this->form_validation->set_rules('edit_ip', 'IP Address', 'valid_ip|is_unique[vps.ip]|trim|xss_clean');
 		$this->form_validation->set_rules('edit_key', 'Key', 'min_length[6]|trim|xss_clean');
 		$this->form_validation->set_rules('edit_password', 'Password', 'min_length[6]|trim|xss_clean');
 		
 		if ($this->form_validation->run() == false)
 		{
 			$params_where= array('id'=> $uid);
-			$data['row']= $this->datacenters_model->findDC($params_where);
+			$data['row']= $this->vps_model->findVps($params_where);
 			
-			$this->load->view('datacenters/update_dc_view', $data);
+			$this->load->view('vps/update_vps_view', $data);
 		}
 		if ($this->form_validation->run() == true)
 		{
@@ -91,7 +95,7 @@ class Datacenters extends CI_Controller
 				$data['svpass'] = $this->input->post('edit_password');
 			}
 			if(count($data)>0 ){
-				$success= $this->datacenters_model->updateDC($data, $params_where);
+				$success= $this->vps_model->updateVps($data, $params_where);
 				if ($success == 1)
 				{
 					$this->session->set_flashdata('success', TRUE);
@@ -100,7 +104,7 @@ class Datacenters extends CI_Controller
 				{
 					$this->session->set_flashdata('error', TRUE);
 				}
-				redirect('datacenters/lists/'.$this->session->userdata('user_id'));
+				redirect('vps/lists/'.$this->session->userdata('user_id'));
 			}
 		}
 		
@@ -129,12 +133,12 @@ class Datacenters extends CI_Controller
 	{
 		$id1= $id;
 		$params_where= array('id' => $id1);
-		$result= $this->datacenters_model->findDC($params_where);
+		$result= $this->vps_model->findVps($params_where);
 		$ip= $result->ip;
 		$key= $result->svkey;
 		$pass= $result->svpass;
 		$output= sv_restart($ip, $key, $pass);
-		redirect('datacenters/lists');
+		redirect('vps/lists');
 	}
 	
 	
@@ -142,12 +146,12 @@ class Datacenters extends CI_Controller
 	{
 		$id1= $id;
 		$params_where= array('id' => $id1);
-		$result= $this->datacenters_model->findDC($params_where);
+		$result= $this->vps_model->findVps($params_where);
 		$ip= $result->ip;
 		$key= $result->svkey;
 		$pass= $result->svpass;
 		$output= sv_stop($ip, $key, $pass);
-		redirect('datacenters/lists');
+		redirect('vps/lists');
 	}
 	
 	
@@ -155,66 +159,62 @@ class Datacenters extends CI_Controller
 	{
 		$id1= $id;
 		$params_where= array('id' => $id1);
-		$result= $this->datacenters_model->findDC($params_where);
+		$result= $this->vps_model->findVps($params_where);
 		$ip= $result->ip;
 		$key= $result->svkey;
 		$pass= $result->svpass;
 		$output= sv_start($ip, $key, $pass);
-		redirect('datacenters/lists');
+		redirect('vps/lists');
 	}
 	
 	
-	/*
+	
 	function add()
 	{
 		
-		if ($this->session->userdata('access') == 'Administrator')
+		$this->form_validation->set_rules('label', 'Label', 'required|trim|xss_clean');
+		$this->form_validation->set_rules('ip', 'IP Address', 'required|valid_ip|is_unique[vps.ip]|trim|xss_clean');
+		$this->form_validation->set_rules('space', 'Space', 'required|numeric|trim|xss_clean');
+		$this->form_validation->set_rules('ram', 'Ram', 'required|numeric|trim|xss_clean');
+		
+		$this->form_validation->set_message('is_unique', 'This %s is already registered.');
+		//$this->form_validation->set_message('matches', 'That is not the same password as the first one.');
+		
+		if ($this->form_validation->run() == false)
 		{
-			$this->form_validation->set_rules('ip', 'IP Address', 'required|valid_ip|is_unique[datacenters.ip]|trim|xss_clean');
-			$this->form_validation->set_rules('key', 'Key', 'required|alpha|min_length[3]|max_length[20]|is_unique[datacenters.svkey]|trim|xss_clean');
-			$this->form_validation->set_rules('password', 'Password', 'required|min_length[6]|trim|xss_clean');
-			//$this->form_validation->set_rules('passconf', 'Password Confirm', 'required|matches[password]|min_length[6]|trim|xss_clean');
-			
-			$this->form_validation->set_message('is_unique', 'This %s is already registered.');
-			$this->form_validation->set_message('matches', 'That is not the same password as the first one.');
-			
-			if ($this->form_validation->run() == false)
-			{
-				$this->load->view('datacenters/add_dc_view');
-			}
-			else
-			{
-				$data['ip']= $this->input->post('ip');
-				$data['svkey']= $this->input->post('key');
-				$data['svpass']= $this->input->post('password');
-				
-				
-				$result= $this->datacenters_model->addDC($data);
-				
-				if ($result == TRUE)
-				{
-					$this->session->set_flashdata('success', true);
-					redirect('datacenters/lists');
-				}
-				if($result == FALSE)
-				{
-					$this->session->set_flashdata('error', true);
-					redirect('datacenters/add');
-				}
-			}
+			$this->load->view('vps/add_vps_view');
 		}
 		else
 		{
-			redirect('auth/login');
+			$data['vps_label']= $this->input->post('ip');
+			$data['vps_ip']= $this->input->post('key');
+			$data['space']= $this->input->post('space');
+			$data['ram']= $this->input->post('ram');
+			$data['cuid']= $this->session->userdata('user_id');
+			
+			
+			$result= $this->vps_model->addVps($data);
+			
+			if ($result == TRUE)
+			{
+				$this->session->set_flashdata('success', true);
+				redirect('vps/lists');
+			}
+			if($result == FALSE)
+			{
+				$this->session->set_flashdata('error', true);
+				redirect('vps/add');
+			}
 		}
 		
-	} */
+		
+	} 
 	
 	
-	function deletedc($uid)
+	function deleteVps($uid)
 	{
 		$params_where= array('id'=> $uid);
-		$result= $this->datacenters_model->deleteDC($params_where);
+		$result= $this->vps_model->deleteVps($params_where);
 		
 		if ($result == 1)
 		{
@@ -224,7 +224,7 @@ class Datacenters extends CI_Controller
 		{
 			$this->session->set_flashdata('error', true);
 		}
-		redirect('datacenters');
+		redirect('vps');
 			
 	}
 	

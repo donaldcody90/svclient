@@ -4,14 +4,22 @@
 
             <div class="addnew-view">
 			
-				<?php echo form_open(base_url().'datacenters/add'); ?>
+				<?php echo form_open(base_url().'vps/add'); ?>
 					<table class="main-content">
 						<tr class="zhang1">
 							<td class="zcot1">Properties</td>
-							<td class="zcot2">Edit</td>
+							<td class="zcot2">Values</td>
 						</tr>
 						
 						<tr class="zhang2">
+							<td class="zcot1">Label</td>
+							<td class="zcot2">
+								<input type="text" name="label" class="edit_user_form" value="" />
+								<?php echo form_error('label', '<div class="error">', '</div>'); ?>
+							</td>
+						</tr>
+						
+						<tr class="zhang3">
 							<td class="zcot1">IP Address</td>
 							<td class="zcot2">
 								<input type="text" name="ip" class="edit_user_form" value="" />
@@ -19,19 +27,19 @@
 							</td>
 						</tr>
 						
-						<tr class="zhang3">
-							<td class="zcot1">Key</td>
+						<tr class="zhang4">
+							<td class="zcot1">Space</td>
 							<td class="zcot2">
-								<input type="text" name="key" class="edit_user_form" value="" />
-								<?php echo form_error('key', '<div class="error">', '</div>'); ?>
+								<input type="text" name="space" class="edit_user_form" value="" />
+								<?php echo form_error('space', '<div class="error">', '</div>'); ?>
 							</td>
 						</tr>
 						
-						<tr class="zhang4">
-							<td class="zcot1">Password</td>
+						<tr class="zhang5">
+							<td class="zcot1">Ram</td>
 							<td class="zcot2">
-								<input type="text" name="password" class="edit_user_form" value="" />
-								<?php echo form_error('password', '<div class="error">', '</div>'); ?>
+								<input type="text" name="ram" class="edit_user_form" value="" />
+								<?php echo form_error('ram', '<div class="error">', '</div>'); ?>
 							</td>
 						</tr>
 						
@@ -39,7 +47,7 @@
 							<td class="zcot1"></td>
 							<td class="zcot2"><div class="button">
 								<button>Add</button>
-								<a href="<?php echo base_url().'datacenters/lists'; ?>">
+								<a href="<?php echo base_url().'vps/lists'; ?>">
 									<div class="cancel"><center>Cancel</center></div>
 								</a>
 							</div></td>

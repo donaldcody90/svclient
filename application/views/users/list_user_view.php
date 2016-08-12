@@ -38,12 +38,12 @@
 						
 						<?php foreach($result as $row){ ?>
 						<tr>
-							<td><?php echo $row->id; ?></td>
-							<td><?php echo $row->username; ?></td>
-							<td><?php echo $row->fullname; ?></td>
-							<td><?php echo $row->email; ?></td>
-							<td class="zcot6"><a href="<?php echo base_url() . 'users/update/' . $row->id; ?>" >Edit</a></td>
-							<td class="zcot7"><a href="<?php echo base_url() . 'users/delete_user/' . $row->id; ?>" onclick="return confirm('Are you sure you want to delete?')">Delete</a></td>
+							<td><?php echo $row['id']; ?></td>
+							<td><?php echo $row['username']; ?></td>
+							<td><?php echo $row['fullname']; ?></td>
+							<td><?php echo $row['email']; ?></td>
+							<td class="zcot6"><a href="<?php echo base_url() . 'users/update/' . $row['id']; ?>" >Edit</a></td>
+							<td class="zcot7"><a href="<?php echo base_url() . 'users/delete_user/' . $row['id']; ?>" onclick="return confirm('Are you sure you want to delete?')">Delete</a></td>
 						</tr>
 						<?php } ?>
 						

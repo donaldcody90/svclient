@@ -52,7 +52,7 @@ li{ margin: 0px; padding: 0px; list-style: none;}
 	font-size: 12px;
 }
 
-.login-form button{
+.login-form .btn_login{
     background: #1E88E5;
     width: 330px;
     border: 0;
@@ -103,15 +103,15 @@ li{ margin: 0px; padding: 0px; list-style: none;}
 	color: green;
 }
 
-.separate-line{
+.separate_line{
 	margin-top: 40px;
 }
 
-.separate-line tr{
+.separate_line tr{
 	border-bottom: 1px solid #1E88E5;
 }
 
-.separate-line tr td{
+.separate_line tr td{
 	width: 330px;
 }
 
@@ -1097,15 +1097,15 @@ input{
 }
 
 .list-DC .cot2{
-	width: 230px;
+	width: 330px;
 }
 
 .list-DC .cot3{
-	width: 310px;
+	width: 300px;
 }
 
 .list-DC .cot4{
-	width: 310px;
+	width: 250px;
 }
 
 .list-DC .cot5{
