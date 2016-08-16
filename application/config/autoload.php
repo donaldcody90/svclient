@@ -80,7 +80,7 @@ $autoload['helper'] = array('form', 'url', 'dc_helper', 'vultr_helper');
 |
 */
 
-$autoload['config'] = array('site');
+$autoload['config'] = array('site', 'paypal');
 
 
 /*

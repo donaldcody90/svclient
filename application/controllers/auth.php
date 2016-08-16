@@ -78,7 +78,7 @@ class Auth extends CI_Controller {
 		{
 			$data['fullname']= $_POST['fullname'];
 			$data['username']= $_POST['username'];
-			$data['password']= hash('sha512', $_POST['password']);
+			$data['password']= vst_password($_POST['password']);
 			$data['email']= $_POST['email'];
 			
 			$result= $this->auth_model->addUser($data);

@@ -1,11 +1,14 @@
-$(document).ready(function(){
-	
-	$('.addnew-ticket .button1 button').click(function(){
-
-		$('.addnew-ticket .button1 button').removeClass('current');
-		$('.addnew-ticket .button1 button').removeAttr('name', 'type');
-		$(this).addClass('current');
-		$(this).attr('name', 'type');
-	});
-
+$(document).ready(function () {
+   var location = window.location;
+   var found = false;
+   $(".credit_card a").each(function(){
+      var href = $(this).attr("href");
+      if(href==location){
+         $(this).parent().addClass("selected");
+         found = true;
+      }
+   });
+   if(!found){
+      $(".credit_card li:first").addClass("selected");
+   }
 });
