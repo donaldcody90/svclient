@@ -8,8 +8,6 @@ class Billing extends CI_Controller
 	{
 		parent::__construct();
 		vkt_checkAuth();
-		$this->load->model('billing_model');
-		$this->load->helper('vultr_helper');
 	}
 	
 	
@@ -20,31 +18,20 @@ class Billing extends CI_Controller
 	
 	function success()
 	{
-		// $result= $this->verifyWithPayPal ($_GET['tx']);
-		
-		$this->load->view('paypal/success');
+		$result= $this->verifyWithPayPal ($_GET['tx']);
+		$this->load->view('paypal/success', $result);
 	}
 	
-	function ipn(){
-        //paypal return transaction details array
-        $paypalInfo    = $this->input->post();
+	function ipn()
+	{
+		$file="ipn.txt";
+		
+		foreach($this->input->post() as $key => $value) {
+			  //echo $key." = ". $value."<br>";
+			  $text=$key.'=>'.$value;
+				file_put_contents($file,PHP_EOL .$text,FILE_APPEND);
+		}
 
-        // $data['cid'] = $paypalInfo['custom'];
-        // $data['type']    = $paypalInfo["item_number"];
-        $data['payment'] = $paypalInfo['payment_gross'];
-        // $data['txn_id']    = $paypalInfo["txn_id"];
-        // $data['currency_code'] = $paypalInfo["mc_currency"];
-        // $data['payer_email'] = $paypalInfo["payer_email"];
-        // $data['payment_status']    = $paypalInfo["payment_status"];
-
-        //$paypalURL = $this->paypal_lib->paypal_url;        
-        //$result    = $this->paypal_lib->curlPost($paypalURL, $paypalInfo);
-        
-        //check whether the payment is verified
-        //if(preg_match("/VERIFIED/i",$result)){
-            //insert the transaction data into the database
-            $this->product->insertTransaction($data);
-        //}
     }
 	
 	function getListProducts($result) 
