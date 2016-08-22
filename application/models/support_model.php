@@ -126,7 +126,7 @@ class Support_model extends My_Model
 	
 	
 	
-	function getConversationinfo($params_where, $is_list=false){
+	function getConversationinfo($params_where=null, $is_list=false){
 		 return  $this->_getwhere(array(
 						'table'        => $this->conversation,
 						'param_where'  => $params_where,
@@ -138,13 +138,9 @@ class Support_model extends My_Model
 	
 	function getCategory($param_where, $is_list= false)
 	{
-		return $this->_general(array(
-					'select'=> '*',
+		return $this->_getwhere(array(
 					'table'=> $this->categories,
 					'param_where' => $param_where,
-					'orderby' => 'rand()',
-					'limit' => 1,
-					'start' => null,
 					'list' => $is_list
 		));
 	}

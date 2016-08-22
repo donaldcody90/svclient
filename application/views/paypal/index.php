@@ -24,7 +24,7 @@
 							<input type="hidden" name="return" value="<?php echo $this->config->item('returnurl');?>" />
 							<input type="hidden" name="notify_url" value="<?php echo $this->config->item('notifyurl');?>" />
 							<input type="hidden" name="cmd" value="_cart" />
-							<input type="hidden" name="business" value="<?php echo $this->config->item('business'); ?>" />
+							<input type="hidden" name="business" value="<?php echo $paypal['meta_value']; ?>" />
 							
 							<!-- Product 1 -->
 							<input type="hidden" name="item_name_1" value="PayPal Payment" />

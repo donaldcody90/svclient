@@ -14,21 +14,20 @@ class Vps extends CI_Controller
 	
 	function index()
 	{
-		redirect('vps/lists/'.$this->session->userdata('user_id'));
+		redirect('vps/lists');
 	}
 	
-	function lists($uid)
+	function lists()
 	{	
-		
-		$filterData= vst_filterData(array(
-					array('filter_ip'),
+		$uid= $this->session->userdata('user_id');
+		$filterData= vst_filterData(
+					array('filter_vps_ip'),
 					array(),
-					array('ip'=> 'v')
-		));
-		$param_where= array('cuid'=> $uid);	
-				
-		$this->load->library('pagination');
-		$total= $this->vps_model->totalVps($param_where, $filterData);
+					array('vps_ip'=> 'v')
+		);
+		$filterData['cid']= array('value'=>$uid,'condition'=>'where');
+		
+		$total= $this->vps_model->totalVps($filterData);
 			
 		$config= vst_Pagination($total);
 		$this->pagination->initialize($config);
@@ -36,7 +35,7 @@ class Vps extends CI_Controller
 		$start = $this->input->get('page');
 		$limit= $config['per_page'];
 			
-		$data['result']= $this->vps_model->listVps($param_where, $filterData, $limit, $start);
+		$data['result']= $this->vps_model->listVps($filterData, $limit, $start);
 		$data['link']= $this->pagination->create_links();
 		$this->load->view('vps/list_vps_view', $data);
 		
@@ -48,7 +47,7 @@ class Vps extends CI_Controller
 		$params_where= array('id'=> $id);
 		$data['row']= $this->vps_model->findVps($params_where);
 				
-		if ($data['row']->cuid= $this->session->userdata('user_id'))
+		if ($data['row']['cid']= $this->session->userdata('user_id'))
 		{
 			$this->load->view('vps/profile_vps_view', $data);
 		}
@@ -62,10 +61,10 @@ class Vps extends CI_Controller
 	function update($uid)
 	{
 		
-		$this->form_validation->set_rules('edit_id', 'ID', 'numeric|max_length[20]|is_unique[vps.id]|trim|xss_clean');
-		$this->form_validation->set_rules('edit_ip', 'IP Address', 'valid_ip|is_unique[vps.ip]|trim|xss_clean');
-		$this->form_validation->set_rules('edit_key', 'Key', 'min_length[6]|trim|xss_clean');
-		$this->form_validation->set_rules('edit_password', 'Password', 'min_length[6]|trim|xss_clean');
+		//$this->form_validation->set_rules('edit_id', 'ID', 'numeric|max_length[20]|is_unique[vps.id]|trim|xss_clean');
+		$this->form_validation->set_rules('edit_ip', 'IP Address', 'valid_ip|is_unique[vps.vps_ip]|trim|xss_clean');
+		$this->form_validation->set_rules('edit_label', 'Label', 'min_length[6]|trim|xss_clean');
+		$this->form_validation->set_rules('edit_rootpass', 'Rootpass', 'min_length[6]|trim|xss_clean');
 		
 		if ($this->form_validation->run() == false)
 		{
@@ -78,21 +77,18 @@ class Vps extends CI_Controller
 		{
 			$params_where= array('id' => $uid);
 			$data = array();
-			$id = $this->input->post('edit_id');
-			if($id!='' ){
-				$data['id'] = $this->input->post('edit_id');
-			}
+			
 			$ip = $this->input->post('edit_ip');
 			if($ip!='' ){
-				$data['ip'] = $this->input->post('edit_ip');
+				$data['vps_ip'] = $this->input->post('edit_ip');
 			}
-			$svkey = $this->input->post('edit_key');
+			$svkey = $this->input->post('edit_label');
 			if($svkey!=''){
-				$data['svkey'] = $this->input->post('edit_key');
+				$data['vps_label'] = $this->input->post('edit_label');
 			}
-			$password = $this->input->post('edit_password');
+			$password = $this->input->post('edit_rootpass');
 			if($password!=''){
-				$data['svpass'] = $this->input->post('edit_password');
+				$data['rootpass'] = $this->input->post('edit_rootpass');
 			}
 			if(count($data)>0 ){
 				$success= $this->vps_model->updateVps($data, $params_where);
@@ -111,61 +107,7 @@ class Vps extends CI_Controller
 	}
 	
 	
-	function getlist()
-	{
-		require_once APPPATH.'third_party/virtualizor/sdk/admin.php';
-		
-		$key =  'yvpuctwv6sdyymgagxsga4pedom1rwte';
-		$pass = 'igrdzwnadpxzx18xevlmktw178ybrksc';
-		$ip = '46.166.139.241';
-		
-		$admin = new Virtualizor_Admin_API($ip, $key, $pass);
-
-		$output = $admin->status(1002);
-		
-		if($output == 1){
-			 echo 'VPS is currently running';
-		}
-	}
 	
-	
-	function restart($id)
-	{
-		$id1= $id;
-		$params_where= array('id' => $id1);
-		$result= $this->vps_model->findVps($params_where);
-		$ip= $result->ip;
-		$key= $result->svkey;
-		$pass= $result->svpass;
-		$output= sv_restart($ip, $key, $pass);
-		redirect('vps/lists');
-	}
-	
-	
-	function stop($id)
-	{
-		$id1= $id;
-		$params_where= array('id' => $id1);
-		$result= $this->vps_model->findVps($params_where);
-		$ip= $result->ip;
-		$key= $result->svkey;
-		$pass= $result->svpass;
-		$output= sv_stop($ip, $key, $pass);
-		redirect('vps/lists');
-	}
-	
-	
-	function start($id)
-	{
-		$id1= $id;
-		$params_where= array('id' => $id1);
-		$result= $this->vps_model->findVps($params_where);
-		$ip= $result->ip;
-		$key= $result->svkey;
-		$pass= $result->svpass;
-		$output= sv_start($ip, $key, $pass);
-		redirect('vps/lists');
-	}
 	
 	
 	
@@ -190,7 +132,7 @@ class Vps extends CI_Controller
 			$data['vps_ip']= $this->input->post('key');
 			$data['space']= $this->input->post('space');
 			$data['ram']= $this->input->post('ram');
-			$data['cuid']= $this->session->userdata('user_id');
+			$data['cid']= $this->session->userdata('user_id');
 			
 			
 			$result= $this->vps_model->addVps($data);
@@ -211,9 +153,9 @@ class Vps extends CI_Controller
 	} 
 	
 	
-	function deleteVps($uid)
+	function delete($id)
 	{
-		$params_where= array('id'=> $uid);
+		$params_where= array('id'=> $id);
 		$result= $this->vps_model->deleteVps($params_where);
 		
 		if ($result == 1)
@@ -227,5 +169,67 @@ class Vps extends CI_Controller
 		redirect('vps');
 			
 	}
+	
+	
+	
+	
+	
+	
+	
+	// function getlist()
+	// {
+		// require_once APPPATH.'third_party/virtualizor/sdk/admin.php';
+		
+		// $key =  'yvpuctwv6sdyymgagxsga4pedom1rwte';
+		// $pass = 'igrdzwnadpxzx18xevlmktw178ybrksc';
+		// $ip = '46.166.139.241';
+		
+		// $admin = new Virtualizor_Admin_API($ip, $key, $pass);
+
+		// $output = $admin->status(1002);
+		
+		// if($output == 1){
+			 // echo 'VPS is currently running';
+		// }
+	// }
+	
+	
+	// function restart($id)
+	// {
+		// $id1= $id;
+		// $params_where= array('id' => $id1);
+		// $result= $this->vps_model->findVps($params_where);
+		// $ip= $result->ip;
+		// $key= $result->svkey;
+		// $pass= $result->svpass;
+		// $output= sv_restart($ip, $key, $pass);
+		// redirect('vps/lists');
+	// }
+	
+	
+	// function stop($id)
+	// {
+		// $id1= $id;
+		// $params_where= array('id' => $id1);
+		// $result= $this->vps_model->findVps($params_where);
+		// $ip= $result->ip;
+		// $key= $result->svkey;
+		// $pass= $result->svpass;
+		// $output= sv_stop($ip, $key, $pass);
+		// redirect('vps/lists');
+	// }
+	
+	
+	// function start($id)
+	// {
+		// $id1= $id;
+		// $params_where= array('id' => $id1);
+		// $result= $this->vps_model->findVps($params_where);
+		// $ip= $result->ip;
+		// $key= $result->svkey;
+		// $pass= $result->svpass;
+		// $output= sv_start($ip, $key, $pass);
+		// redirect('vps/lists');
+	// }
 	
 }

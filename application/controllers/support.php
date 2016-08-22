@@ -8,6 +8,7 @@ class Support extends CI_Controller
 		parent::__construct();
 		vkt_checkAuth();
 		$this->load->model('support_model');
+		$this->load->model('vps_model');
 		date_default_timezone_set('Asia/Ho_Chi_Minh');
 	}
 	
@@ -24,7 +25,6 @@ class Support extends CI_Controller
 		$param['c.uid']= $id;
 		$filterData= vst_filterData(array('filter_title'));
 		
-		$this->load->library('pagination');
 		
 		$total= $this->support_model->totalTicket($filterData, $param);
 		$config= vst_Pagination($total);
@@ -44,16 +44,17 @@ class Support extends CI_Controller
 	
 	function addnew()
 	{
-		$this->form_validation->set_rules('ticket-subject', 'Subject', 'required|min_length[3]|xss_clean');
-		$this->form_validation->set_rules('ticket-message', 'Message', 'required|min_length[3]|xss_clean');
+		$this->form_validation->set_rules('ticket-subject', 'Subject', 'required|min_length[3]');
+		$this->form_validation->set_rules('ticket-message', 'Message', 'required|min_length[3]');
+		$this->form_validation->set_rules('vpsid', 'VPS ID', 'required');
+		$this->form_validation->set_rules('ticket-type', 'Type', 'required');
 		
 		if ($this->form_validation->run() == false)
 		{
-			$param_where= array('name' => 'Billing');
-			$param_where2= array('name' => 'General');
-			$data['billing']= $this->support_model->getCategory($param_where);
-			$data['general']= $this->support_model->getCategory($param_where2);
-			//print_r($data['general']);die;
+			$cid= $this->session->userdata('user_id');
+			$param_where= array('cid' => $cid);
+			$data['cat']= $this->support_model->getCategory(null, true);
+			$data['vps']= $this->vps_model->findVps($param_where, true);
 			$this->load->view('support/addnew_ticket_view', $data);
 		}
 		else
@@ -67,11 +68,22 @@ class Support extends CI_Controller
 			$openingdate= date('Y-m-d H:i:s');
 			$status= 1;
 			$category= $this->input->post('ticket-type');
+			$vpsid= $this->input->post('vpsid');
 			
-			$data = array('uid'=>$uid, 'title'=>$subject, 'message'=>$message, 'openingdate'=>$openingdate, 'status'=>$status, 'caid'=> $category);
+			$data = array(
+						'uid'=> $uid, 
+						'title'=> $subject, 
+						'message'=> $message, 
+						'openingdate'=> $openingdate, 
+						'status'=> $status, 
+						'caid'=> $category,
+						'vpsid' => $vpsid
+					);
+			
 			$result = $this->support_model->addTicket($data);
 			$kq = $result['lists']; 
 			$insert_id= $result['insert_id'];
+			echo 1; die;
 			
 			/*----------------Add first message---------------------*/
 			

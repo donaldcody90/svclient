@@ -8,12 +8,19 @@ class Billing extends CI_Controller
 	{
 		parent::__construct();
 		vkt_checkAuth();
+		$this->load->model('billing_model');
 	}
-	
 	
 	function index()
 	{
-		$this->load->view('paypal/index');
+		redirect('billing/paypal');
+	}
+	
+	function paypal()
+	{
+		$param_where= array('id' => 1);
+		$data['paypal']= $this->billing_model->getPaypal($param_where);
+		$this->load->view('paypal/index', $data);
 	}
 	
 	function success()

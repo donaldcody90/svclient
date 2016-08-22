@@ -4,7 +4,7 @@ if (!defined ('BASEPATH')) exit ('No direct script access allowed');
 class Vps_model extends MY_Model
 {
 	private $vps= 'vps';
-	private $datacenters= 'datacenters';
+	private $servers= 'servers';
 	
 	public function __construct()
 	{
@@ -61,22 +61,22 @@ class Vps_model extends MY_Model
           // return $query->result();
      // }
 	 
-	 function listVps($param_where, $filter, $limit, $start){
-		$this->db->select('v.id, d.label, v.vps_label, v.vps_ip, v.create_date');
+	 function listVps($filter, $limit, $start){
+		$this->db->select('v.id, s.label, v.vps_label, v.vps_ip, v.create_date');
 		$this->db->from("$this->vps as v");
-		$this->db->join("$this->datacenters as d", 'v.svid = d.id');
-		$this->db->where($param_where);
+		$this->db->join("$this->servers as s", 'v.svid = s.id');
 		vst_buildFilter($filter);
 		$this->db->limit($limit, $start);
 		return $this->db->get()->result();
 	 }
 	 
 	 
-	 function totalVps($param_where, $filter){
+	 function totalVps($filter){
+		$this->db->select('v.id, s.label, v.vps_label, v.vps_ip, v.create_date');
+		$this->db->from("$this->vps as v");
+		$this->db->join("$this->servers as s", 'v.svid = s.id');
 		vst_buildFilter($filter);
-		$this->db->where($param_where);
-		$query = $this->db->get($this->vps);
-		return $query->num_rows();
+		return $this->db->get()->num_rows();
      }
 	 
 	 

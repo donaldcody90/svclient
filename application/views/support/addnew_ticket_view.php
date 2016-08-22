@@ -9,27 +9,23 @@
 				<?php echo form_open(base_url().'support/addnew'); ?>
 				
 					<div class="button1">
-						<?php if($general['status'] == 1) 
+						<?php foreach($cat as $value)
 						{
-							echo '<label>
-									<input type="radio" name="ticket-type" value="'.$general['id'].'" checked />
-									<div>General Support</div>
+							if($value['status'] == 1)
+							{	echo '<label>
+									<input type="radio" name="ticket-type" value="'.$value['id'].'" />
+									<div>'.$value['name'].'</div>
 								</label>';
-						}
-						if($billing['status'] == 1)
-						{
-							echo '<label>
-									<input type="radio" name="ticket-type" value="'.$billing['id'].'" />
-									<div>Billing Questions</div>
-								</label>';
+							}
 						}
 						?>
 					</div>
 				
-					<select>
+					<select name="vpsid">
 						<option value="">None</option>
-						<option value=""></option>
-						<option value=""></option>
+						<?php foreach($vps as $value){ ?>
+							<option value="<?php echo $value['id']; ?>"><?php echo $value['vps_label']; ?></option>
+						<?php } ?>
 					</select>
 					
 					<input type="text" class="subject" name="ticket-subject" placeholder="Subject" />

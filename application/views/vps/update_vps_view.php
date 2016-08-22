@@ -13,31 +13,31 @@
 					
 					<tr class="zhang3">
                         <td class="zcot1">IP Address</td>
-                        <td class="zcot2"><?php echo $row->ip; ?></td>
+                        <td class="zcot2"><?php echo $row['vps_ip']; ?></td>
                         <td class="zcot3"><input type="text" name="edit_ip" placeholder="Change IP Address" /></td>
                     </tr>
 					<?php echo form_error('edit_ip', '<div class="error">', '</div>'); ?>
 					
 					<tr class="zhang4">
-                        <td class="zcot1">Key</td>
-                        <td class="zcot2"><?php echo $row->svkey; ?></td>
-                        <td class="zcot3"><input type="text" name="edit_key" placeholder="Change Key" /></td>
+                        <td class="zcot1">Label</td>
+                        <td class="zcot2"><?php echo $row['vps_label']; ?></td>
+                        <td class="zcot3"><input type="text" name="edit_label" placeholder="Change Label" /></td>
                     </tr>
-					<?php echo form_error('edit_key', '<div class="error">', '</div>'); ?>
+					<?php echo form_error('edit_label', '<div class="error">', '</div>'); ?>
 					
 					<tr class="zhang5">
-                        <td class="zcot1">Password</td>
-                        <td class="zcot2"><?php echo $row->svpass; ?></td>
-                        <td class="zcot3"><input type="text" name="edit_password" class="edit_user_form" placeholder="Change Password" /></td>
+                        <td class="zcot1">Rootpass</td>
+                        <td class="zcot2"><?php echo $row['rootpass']; ?></td>
+                        <td class="zcot3"><input type="text" name="edit_rootpass" class="edit_user_form" placeholder="Change Rootpass" /></td>
                     </tr>
-					<?php echo form_error('edit_password', '<div class="error">', '</div>'); ?>
+					<?php echo form_error('edit_rootpass', '<div class="error">', '</div>'); ?>
 					
 					<tr class="zhang6">
                         <td class="zcot1"></td>
                         <td class="zcot2"></td>
                         <td class="zcot3"><div class="button">
 							<button>Confirm</button>
-							<a href="<?php echo site_url().'vps/lists/'.$row['cuid']; ?>" ><div class="cancel"><center>Cancel</center></div></a>
+							<a href="<?php echo site_url().'vps/lists/'.$row['cid']; ?>" ><div class="cancel"><center>Cancel</center></div></a>
 						</div></td>
                     </tr>
                     

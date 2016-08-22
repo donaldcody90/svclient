@@ -8,7 +8,7 @@
 					
 					<div class="search">
 						<?php echo form_open(base_url().'vps/lists', 'method= "GET"'); ?>
-							<input type="search" value="<?php echo $this->input->get('filter_ip') ?>" name="filter_ip" placeholder="Search by IP" />
+							<input type="search" value="<?php echo $this->input->get('filter_vps_ip') ?>" name="filter_vps_ip" placeholder="Search by IP" />
 						<?php echo form_close() ?>
 					</div>
 				</div>
@@ -48,7 +48,7 @@
 							<td><?php echo $row->label; ?></td>
 							<td><?php echo $row->create_date; ?></td>
 							<td class="cot7"><a href="<?php echo base_url() . 'vps/update/' . $row->id; ?>" >Edit</a></td>
-							<td class="cot8"><a href="<?php echo base_url() . 'vps/deleteVps/' . $row->id; ?>" onclick="return confirm('Are you sure you want to delete?')">Delete</a></td>
+							<td class="cot8"><a href="<?php echo base_url() . 'vps/delete/' . $row->id; ?>" onclick="return confirm('Are you sure you want to delete?')">Delete</a></td>
 						</tr>
 						<?php } ?>
 						

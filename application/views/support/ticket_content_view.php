@@ -10,7 +10,8 @@
 									echo 'closed (If your issue is not resolved, you can reopen by adding a reply)';
 								}else{
 									echo 'opening';
-									} ?>
+								} 
+							?>
 				</p>
 			</div>
 			
