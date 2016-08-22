@@ -136,7 +136,7 @@ class Support_model extends My_Model
 	
 	
 	
-	function getCategory($param_where, $is_list= false)
+	/*function getCategory($param_where, $is_list= false)
 	{
 		return $this->_general(array(
 					'select'=> '*',
@@ -147,8 +147,15 @@ class Support_model extends My_Model
 					'start' => null,
 					'list' => $is_list
 		));
-	}
+	}*/
 	
+	function getCategory($params_where, $is_list=false){
+		 return  $this->_getwhere(array(
+                    'table'        => $this->categories,
+                    'param_where'  => $params_where,
+                    'list'         => $is_list
+        ));
+	}
 	
 	
 	

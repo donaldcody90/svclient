@@ -1,6 +1,5 @@
-<?php
+﻿<?php
 	$this->output->enable_profiler(TRUE);
-
 ?>
 <!DOCTYPE html>
 <html>

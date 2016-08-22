@@ -4,7 +4,7 @@ if (!defined ('BASEPATH')) exit ('No direct script access allowed');
 class Vps_model extends MY_Model
 {
 	private $vps= 'vps';
-	private $datacenters= 'datacenters';
+	private $datacenters= 'servers';
 	
 	public function __construct()
 	{
@@ -62,6 +62,7 @@ class Vps_model extends MY_Model
      // }
 	 
 	 function listVps($param_where, $filter, $limit, $start){
+		
 		$this->db->select('v.id, d.label, v.vps_label, v.vps_ip, v.create_date');
 		$this->db->from("$this->vps as v");
 		$this->db->join("$this->datacenters as d", 'v.svid = d.id');
@@ -73,6 +74,7 @@ class Vps_model extends MY_Model
 	 
 	 
 	 function totalVps($param_where, $filter){
+		 var_dump($filter); die;
 		vst_buildFilter($filter);
 		$this->db->where($param_where);
 		$query = $this->db->get($this->vps);

@@ -14,19 +14,22 @@ class Vps extends CI_Controller
 	
 	function index()
 	{
-		redirect('vps/lists/'.$this->session->userdata('user_id'));
+		//redirect('vps/lists/'.$this->session->userdata('user_id'));
+		redirect('vps/lists/');
 	}
 	
-	function lists($uid)
+	function lists()
 	{	
-		
+		$uid=$this->session->userdata('user_id');
 		$filterData= vst_filterData(array(
 					array('filter_ip'),
 					array(),
 					array('ip'=> 'v')
 		));
 		$param_where= array('cuid'=> $uid);	
-				
+		$filterData['cuid']=array('value'=>$uid,'condition'=>'where','tblalias'=>'cccccc');
+		echo "<pre>";
+		print_r($filterData); die;		
 		$this->load->library('pagination');
 		$total= $this->vps_model->totalVps($param_where, $filterData);
 			
@@ -34,8 +37,8 @@ class Vps extends CI_Controller
 		$this->pagination->initialize($config);
 			
 		$start = $this->input->get('page');
-		$limit= $config['per_page'];
-			
+		$limit= $config['per_page'];			
+		
 		$data['result']= $this->vps_model->listVps($param_where, $filterData, $limit, $start);
 		$data['link']= $this->pagination->create_links();
 		$this->load->view('vps/list_vps_view', $data);

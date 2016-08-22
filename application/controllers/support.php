@@ -8,7 +8,8 @@ class Support extends CI_Controller
 		parent::__construct();
 		vkt_checkAuth();
 		$this->load->model('support_model');
-		date_default_timezone_set('Asia/Ho_Chi_Minh');
+	
+	
 	}
 	
 	
@@ -46,14 +47,21 @@ class Support extends CI_Controller
 	{
 		$this->form_validation->set_rules('ticket-subject', 'Subject', 'required|min_length[3]|xss_clean');
 		$this->form_validation->set_rules('ticket-message', 'Message', 'required|min_length[3]|xss_clean');
-		
+		//$listCategories=$this->support_model->getCategory(array('status'=>1),true);
+		//print_r($listCategories);
 		if ($this->form_validation->run() == false)
 		{
+		
 			$param_where= array('name' => 'Billing');
 			$param_where2= array('name' => 'General');
 			$data['billing']= $this->support_model->getCategory($param_where);
 			$data['general']= $this->support_model->getCategory($param_where2);
-			//print_r($data['general']);die;
+			$data['categories']=$this->support_model->getCategory(array('status'=>1),true);
+			$this->load->model('vps_model');
+			$id= $this->session->userdata('user_id');
+			
+			$data['VPS']=$this->vps_model->findVps(array('cuid'=>$id),true);
+		
 			$this->load->view('support/addnew_ticket_view', $data);
 		}
 		else
