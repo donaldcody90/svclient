@@ -393,6 +393,20 @@ if(!function_exists('vst_sendmail')){
 		
 	}
 }
+
+if(!function_exists('RandomString'))
+{
+	function RandomString($length) {
+		$characters = '0123456789abcdefghijklmnopqrstuvwxyz';
+		$charactersLength = strlen($characters);
+		$randomString = '';
+		$stringlength= $length;
+		for ($i = 0; $i < $stringlength; $i++) {
+			$randomString .= $characters[rand(0, $charactersLength - 1)];
+		}
+		return $randomString;
+	}
+}
 		
 		
 		

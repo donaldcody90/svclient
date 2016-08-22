@@ -94,13 +94,13 @@ class Vps extends CI_Controller
 				$success= $this->vps_model->updateVps($data, $params_where);
 				if ($success == 1)
 				{
-					$this->session->set_flashdata('success', TRUE);
+					message_flash('Updated Successfully');
 				}
 				else
 				{
-					$this->session->set_flashdata('error', TRUE);
+					message_flash('Can not update at this time.', 'error');
 				}
-				redirect('vps/lists/'.$this->session->userdata('user_id'));
+				redirect('vps/lists');
 			}
 		}
 		
@@ -114,37 +114,40 @@ class Vps extends CI_Controller
 	function add()
 	{
 		
-		$this->form_validation->set_rules('label', 'Label', 'required|trim|xss_clean');
-		$this->form_validation->set_rules('ip', 'IP Address', 'required|valid_ip|is_unique[vps.ip]|trim|xss_clean');
-		$this->form_validation->set_rules('space', 'Space', 'required|numeric|trim|xss_clean');
-		$this->form_validation->set_rules('ram', 'Ram', 'required|numeric|trim|xss_clean');
+		$this->form_validation->set_rules('label', 'Label', 'required|trim');
+		$this->form_validation->set_rules('ip', 'IP Address', 'required|valid_ip|is_unique[vps.vps_ip]|trim');
+		$this->form_validation->set_rules('space', 'Space', 'required|numeric|trim');
+		$this->form_validation->set_rules('ram', 'Ram', 'required|numeric|trim');
 		
 		$this->form_validation->set_message('is_unique', 'This %s is already registered.');
-		//$this->form_validation->set_message('matches', 'That is not the same password as the first one.');
 		
 		if ($this->form_validation->run() == false)
 		{
-			$this->load->view('vps/add_vps_view');
+			$data['servers']= $this->vps_model->findSV(array(),true);
+			$this->load->view('vps/add_vps_view', $data);
 		}
 		else
 		{
-			$data['vps_label']= $this->input->post('ip');
-			$data['vps_ip']= $this->input->post('key');
+			$data['cid']= $this->session->userdata('user_id');
+			$data['svid']= $this->input->post('servers');
+			$data['vps_label']= $this->input->post('label');
+			$data['vps_ip']= $this->input->post('ip');
+			$data['rootpass']= RandomString(30);
+			$data['create_date']= date('Y-m-d H:i:s');
 			$data['space']= $this->input->post('space');
 			$data['ram']= $this->input->post('ram');
-			$data['cid']= $this->session->userdata('user_id');
-			
+			//print_r($data); die;
 			
 			$result= $this->vps_model->addVps($data);
 			
 			if ($result == TRUE)
 			{
-				$this->session->set_flashdata('success', true);
+				message_flash('Added Successfully!');
 				redirect('vps/lists');
 			}
 			if($result == FALSE)
 			{
-				$this->session->set_flashdata('error', true);
+				message_flash('Can not add at this time.', 'error');
 				redirect('vps/add');
 			}
 		}
@@ -160,11 +163,11 @@ class Vps extends CI_Controller
 		
 		if ($result == 1)
 		{
-			$this->session->set_flashdata('success', true);
+			message_flash('Deleted Successfully!');
 		}
 		else
 		{
-			$this->session->set_flashdata('error', true);
+			message_flash('Can not delete.', 'error');
 		}
 		redirect('vps');
 			

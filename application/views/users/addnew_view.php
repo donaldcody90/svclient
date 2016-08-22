@@ -1,6 +1,8 @@
 <?php $this->load->view('_base/header'); ?>
 			
             <div class="title">Add New User</div>
+			
+			<?php $this->load->view('_base/message'); ?>
 
             <div class="addnew-view">
 			

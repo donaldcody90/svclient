@@ -2,23 +2,8 @@
 			
             <div class="title">User Information</div>
             
-            <!--<div class="tabs">
-                <table>
-                    <tr>
-                        <td>
-                            <ul>
-								<?php
-									//if($this->session->userdata('access') == 'Administrator')
-									//{	echo '<li class="tab-link"><a href="http://localhost/vultr/users/list_user" >User List</a></li>';	}
-								?>
-								<li class="tab-link"><a href="<?php //echo base_url().'users/profile/'.$row->id; ?>" >Profile</a></li>
-                                <li class="tab-link current" data-tab="#zTickets">Edit User</li>
-                            </ul>
-                        </td>
-                    </tr>
-                </table>
-            </div>-->
-
+			<?php $this->load->view('_base/message'); ?>
+			
             <div class="edit-view">
 			<?php echo form_open(base_url().'users/update/'.$row['id']); ?>
                 <table class="main-content">

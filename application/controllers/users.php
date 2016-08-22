@@ -54,13 +54,13 @@ class Users extends CI_Controller
 			$this->load->view('users/update_view', $data);
 
 			
-			$this->form_validation->set_rules('edit_username', 'Username', 'alpha_numeric|min_length[3]|max_length[20]|is_unique[users.username]|trim|xss_clean');
-			$this->form_validation->set_rules('edit_fullname', 'First name', 'min_length[2]|max_length[20]|trim|xss_clean');
-			$this->form_validation->set_rules('edit_password', 'Password', 'min_length[6]|trim|xss_clean');
-			$this->form_validation->set_rules('edit_email', 'Email', 'valid_email|is_unique[users.email]|trim|xss_clean');
+			$this->form_validation->set_rules('edit_username', 'Username', 'alpha_numeric|min_length[3]|max_length[20]|is_unique[users.username]|trim');
+			$this->form_validation->set_rules('edit_fullname', 'First name', 'min_length[2]|max_length[20]|trim');
+			$this->form_validation->set_rules('edit_password', 'Password', 'min_length[6]|trim');
+			$this->form_validation->set_rules('edit_email', 'Email', 'valid_email|is_unique[users.email]|trim');
 			
 			if ($this->form_validation->run() == true)
-			{
+			{	
 				$params_where= array('id' => $uid);
 				$data = array();
 				$username = $this->input->post('edit_username');
@@ -83,13 +83,15 @@ class Users extends CI_Controller
 					$success= $this->users_model->updateUser($data, $params_where);
 					if ($success == TRUE)
 					{
-						$this->session->set_flashdata('success', TRUE);
+						message_flash('Updated successfully!');
+						redirect("users/profile/$uid");
 					}
 					else
 					{
-						$this->session->set_flashdata('error', TRUE);
+						message_flash('Updated failed.', 'error');
+						redirect("users/update/$uid");
 					}
-					redirect("users/update/$uid");
+					
 				}
 			}
 		}

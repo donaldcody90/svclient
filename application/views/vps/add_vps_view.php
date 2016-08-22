@@ -1,6 +1,8 @@
 <?php $this->load->view('_base/header'); ?>
 			
             <div class="title">Add New Data Center</div>
+			
+			<?php $this->load->view('_base/message'); ?>
 
             <div class="addnew-view">
 			
@@ -9,6 +11,17 @@
 						<tr class="zhang1">
 							<td class="zcot1">Properties</td>
 							<td class="zcot2">Values</td>
+						</tr>
+						
+						<tr class="zhang2">
+							<td class="zcot1">Datacenter</td>
+							<td class="zcot2">
+								<select name="servers" class="edit_user_form">
+									<?php foreach($servers as $value){ ?>
+										<option value="<?php echo $value['id']; ?>"><?php echo $value['label']; ?></option>
+									<?php } ?>
+								</select>
+							</td>
 						</tr>
 						
 						<tr class="zhang2">

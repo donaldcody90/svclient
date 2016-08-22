@@ -1,5 +1,7 @@
 <?php $this->load->view('_base/header'); ?>
             <div class="title">Administrator</div>
+			
+			<?php $this->load->view('_base/message'); ?>
             
 			<div class="list-user">
 				<div>
@@ -9,7 +11,7 @@
 				
 					<a href="<?php echo base_url().'users/add_new_user'; ?>"><button>Add new user</button></a> 
 				</div>
-				
+				<?php $this->load->view('_base/message'); ?>
 				<div>
 					<center><?php 
 						if ($this->session->flashdata('success'))

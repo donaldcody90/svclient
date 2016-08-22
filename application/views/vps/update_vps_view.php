@@ -1,6 +1,8 @@
 <?php $this->load->view('_base/header'); ?>
 			
             <div class="title">Data Center Information</div>
+			
+			<?php $this->load->view('_base/message'); ?>
 
             <div class="edit-view">
 			<?php echo form_open(base_url().'vps/update/'.$row['id']); ?>

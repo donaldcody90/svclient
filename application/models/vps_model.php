@@ -53,13 +53,7 @@ class Vps_model extends MY_Model
      }
 	  
 	  
-	 // function listVps($param_where, $filter, $limit, $start){
-          // vst_buildFilter($filter);
-		  // $this->db->where($param_where);
-          // $this->db->limit($limit, $start);
-          // $query = $this->db->get($this->vps);
-          // return $query->result();
-     // }
+	 
 	 
 	 function listVps($filter, $limit, $start){
 		$this->db->select('v.id, s.label, v.vps_label, v.vps_ip, v.create_date');
@@ -80,7 +74,13 @@ class Vps_model extends MY_Model
      }
 	 
 	 
-	 
+	 function findSV($params_where= null,$is_list=false){
+		 return $this->_getwhere(array(
+							'table'        => $this->servers,
+							'param_where'  => $params_where,
+							'list'         => $is_list
+				));
+		}
 	 
 	 
 	 
