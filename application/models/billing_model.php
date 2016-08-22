@@ -4,7 +4,7 @@ if (!defined ('BASEPATH')) exit ('No direct script access allowed');
 class Billing_model extends MY_Model
 {
 	private $billing= 'billing';
-	private $paymentaccounts= 'paymentaccounts';
+	private $settings= 'settings';
 	
 	public function __construct()
 	{
@@ -25,7 +25,7 @@ class Billing_model extends MY_Model
 	function getPaypal($param_where)
 	{
 		return $this->_getwhere(array(
-				'table'				=>	$this->paymentaccounts,
+				'table'				=>	$this->settings,
 				'param_where'		=>	$param_where
 		));
 	}
