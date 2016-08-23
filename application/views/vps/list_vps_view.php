@@ -1,6 +1,6 @@
 <?php $this->load->view('_base/header'); ?>
 			
-            <div class="title">List of Data centers</div>
+            <div class="title">List of VPS</div>
 			
 			<?php $this->load->view('_base/message'); ?>
             

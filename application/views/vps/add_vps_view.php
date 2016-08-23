@@ -1,6 +1,6 @@
 <?php $this->load->view('_base/header'); ?>
 			
-            <div class="title">Add New Data Center</div>
+            <div class="title">Add New VPS</div>
 			
 			<?php $this->load->view('_base/message'); ?>
 
@@ -41,7 +41,7 @@
 						</tr>
 						
 						<tr class="zhang4">
-							<td class="zcot1">Space</td>
+							<td class="zcot1">Space (GB)</td>
 							<td class="zcot2">
 								<input type="text" name="space" class="edit_user_form" value="" />
 								<?php echo form_error('space', '<div class="error">', '</div>'); ?>
@@ -49,7 +49,7 @@
 						</tr>
 						
 						<tr class="zhang5">
-							<td class="zcot1">Ram</td>
+							<td class="zcot1">Ram (MB)</td>
 							<td class="zcot2">
 								<input type="text" name="ram" class="edit_user_form" value="" />
 								<?php echo form_error('ram', '<div class="error">', '</div>'); ?>
@@ -59,7 +59,7 @@
 						<tr class="zhang6">
 							<td class="zcot1"></td>
 							<td class="zcot2"><div class="button">
-								<button>Add</button>
+								<input type="submit" class="save" name="save" value="Add" />
 								<a href="<?php echo base_url().'vps/lists'; ?>">
 									<div class="cancel"><center>Cancel</center></div>
 								</a>

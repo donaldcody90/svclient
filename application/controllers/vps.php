@@ -61,19 +61,7 @@ class Vps extends CI_Controller
 	function update($uid)
 	{
 		
-		//$this->form_validation->set_rules('edit_id', 'ID', 'numeric|max_length[20]|is_unique[vps.id]|trim|xss_clean');
-		$this->form_validation->set_rules('edit_ip', 'IP Address', 'valid_ip|is_unique[vps.vps_ip]|trim|xss_clean');
-		$this->form_validation->set_rules('edit_label', 'Label', 'min_length[6]|trim|xss_clean');
-		$this->form_validation->set_rules('edit_rootpass', 'Rootpass', 'min_length[6]|trim|xss_clean');
-		
-		if ($this->form_validation->run() == false)
-		{
-			$params_where= array('id'=> $uid);
-			$data['row']= $this->vps_model->findVps($params_where);
-			
-			$this->load->view('vps/update_vps_view', $data);
-		}
-		if ($this->form_validation->run() == true)
+		if ($this->input->post('save'))
 		{
 			$params_where= array('id' => $uid);
 			$data = array();
@@ -98,10 +86,20 @@ class Vps extends CI_Controller
 				}
 				else
 				{
-					message_flash('Can not update at this time.', 'error');
+					message_flash('VPS update failed.', 'error');
 				}
 				redirect('vps/lists');
 			}
+		}
+		
+		$params_where= array('id'=> $uid);
+		$data['row']= $this->vps_model->findVps($params_where);
+		if($data['row'])
+		{
+			$this->load->view('vps/update_vps_view', $data);
+		}
+		else{
+			message_flash('VPS not found.', 'error');
 		}
 		
 	}
@@ -114,19 +112,7 @@ class Vps extends CI_Controller
 	function add()
 	{
 		
-		$this->form_validation->set_rules('label', 'Label', 'required|trim');
-		$this->form_validation->set_rules('ip', 'IP Address', 'required|valid_ip|is_unique[vps.vps_ip]|trim');
-		$this->form_validation->set_rules('space', 'Space', 'required|numeric|trim');
-		$this->form_validation->set_rules('ram', 'Ram', 'required|numeric|trim');
-		
-		$this->form_validation->set_message('is_unique', 'This %s is already registered.');
-		
-		if ($this->form_validation->run() == false)
-		{
-			$data['servers']= $this->vps_model->findSV(array(),true);
-			$this->load->view('vps/add_vps_view', $data);
-		}
-		else
+		if($this->input->post('save'))
 		{
 			$data['cid']= $this->session->userdata('user_id');
 			$data['svid']= $this->input->post('servers');
@@ -136,7 +122,6 @@ class Vps extends CI_Controller
 			$data['create_date']= date('Y-m-d H:i:s');
 			$data['space']= $this->input->post('space');
 			$data['ram']= $this->input->post('ram');
-			//print_r($data); die;
 			
 			$result= $this->vps_model->addVps($data);
 			
@@ -147,12 +132,13 @@ class Vps extends CI_Controller
 			}
 			if($result == FALSE)
 			{
-				message_flash('Can not add at this time.', 'error');
+				message_flash('VPS addition failed.', 'error');
 				redirect('vps/add');
 			}
 		}
 		
-		
+		$data['servers']= $this->vps_model->findSV(array(),true);
+		$this->load->view('vps/add_vps_view', $data);
 	} 
 	
 	

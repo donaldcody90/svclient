@@ -21,9 +21,9 @@
 						echo '<center><div class="signup-success">Registration Successful. Login now!</div></center>';
 					}
 				?>
-				<input type="text" name="username" placeholder="Username" />
+				<input type="text" name="username" placeholder="Username" required />
 				<?php echo form_error('username', '<div class="error">', '</div>'); ?>
-				<input type="password" name="password" placeholder="Password" />
+				<input type="password" name="password" placeholder="Password" required />
 				<?php
 					if ($this->session->flashdata('login_error'))
 					{

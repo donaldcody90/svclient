@@ -25,7 +25,6 @@ class Support extends CI_Controller
 		$param['c.uid']= $id;
 		$filterData= vst_filterData(array('filter_title'));
 		
-		
 		$total= $this->support_model->totalTicket($filterData, $param);
 		$config= vst_Pagination($total);
 		$this->pagination->initialize($config);
@@ -44,20 +43,8 @@ class Support extends CI_Controller
 	
 	function addnew()
 	{
-		$this->form_validation->set_rules('ticket-subject', 'Subject', 'required|min_length[3]');
-		$this->form_validation->set_rules('ticket-message', 'Message', 'required|min_length[3]');
-		$this->form_validation->set_rules('vpsid', 'VPS ID', 'required');
-		$this->form_validation->set_rules('ticket-type', 'Type', 'required');
 		
-		if ($this->form_validation->run() == false)
-		{
-			$cid= $this->session->userdata('user_id');
-			$param_where= array('cid' => $cid);
-			$data['cat']= $this->support_model->getCategory(null, true);
-			$data['vps']= $this->vps_model->findVps($param_where, true);
-			$this->load->view('support/addnew_ticket_view', $data);
-		}
-		else
+		if($this->input->post('open'))
 		{
 			
 			/*-----------------Add new ticket---------------------*/
@@ -112,22 +99,19 @@ class Support extends CI_Controller
 				redirect('support/addnew');
 			}
 		}
-			
+		
+		$cid= $this->session->userdata('user_id');
+		$param_where= array('cid' => $cid);
+		$data['cat']= $this->support_model->getCategory(null, true);
+		$data['vps']= $this->vps_model->findVps($param_where, true);
+		$this->load->view('support/addnew_ticket_view', $data);
 	}
 	
 	
 	function ticket($insert_id)
 	{
-		$this->form_validation->set_rules('reply', 'Reply', 'required|max_length[1000]|trim|xss_clean');
 		
-		if ($this->form_validation->run() == false)
-		{
-			$param_where2= array('cid'=> $insert_id);
-			$message['info']= $this->support_model->getConversationinfo($param_where2);
-			$message['result']= $this->support_model->getMessage($insert_id);
-			$this->load->view('support/ticket_content_view', $message);
-		}
-		if ($this->form_validation->run() == true)
+		if ($this->input->post('reply'))
 		{
 			$data['uid']= $this->session->userdata('user_id');
 			$data['cid']= $insert_id;
@@ -164,7 +148,10 @@ class Support extends CI_Controller
 			}
 		}
 		
-		
+		$param_where2= array('cid'=> $insert_id);
+		$message['info']= $this->support_model->getConversationinfo($param_where2);
+		$message['result']= $this->support_model->getMessage($insert_id);
+		$this->load->view('support/ticket_content_view', $message);
 	
 	}
 	

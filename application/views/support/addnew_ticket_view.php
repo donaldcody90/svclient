@@ -36,7 +36,7 @@
 						<input type="file" name="" />
 					</div>
 					
-					<button class="button3">Open Ticket</button>
+					<input class="button3" type="submit" value="Open Ticket" name="open">
 				<?php echo form_close(); ?>
 				
 			</div>

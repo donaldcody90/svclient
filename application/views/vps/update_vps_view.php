@@ -1,6 +1,6 @@
 <?php $this->load->view('_base/header'); ?>
 			
-            <div class="title">Data Center Information</div>
+            <div class="title">VPS Information</div>
 			
 			<?php $this->load->view('_base/message'); ?>
 
@@ -38,7 +38,7 @@
                         <td class="zcot1"></td>
                         <td class="zcot2"></td>
                         <td class="zcot3"><div class="button">
-							<button>Confirm</button>
+							<input type="submit" class="save" value="Confirm" name="save" />
 							<a href="<?php echo site_url().'vps/lists/'.$row['cid']; ?>" ><div class="cancel"><center>Cancel</center></div></a>
 						</div></td>
                     </tr>

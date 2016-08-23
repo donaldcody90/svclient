@@ -18,41 +18,30 @@ class Auth extends CI_Controller {
 	
 	function login()
 	{
-		$username = $this->input->post("username");
-        $password = $this->input->post("password");
-		$this->form_validation->set_rules('username', 'Username', 'required|trim|max_length[50]');
-		$this->form_validation->set_rules('password', 'Password', 'required|trim|max_length[50]');
+		$username = $this->input->post('username');
+        $password = $this->input->post('password');
 		
-		if ($this->form_validation->run() == FALSE)
+		if ($this->input->post('btn_login'))
 		{
-			$this->load->view('auth/login_view');
+			$data= $this->users_model->findUser( array('username'=> $username, 'password'=> vst_password($password)) );
+			if(count($data)){
+				$user_id= $data['id'];
+				$this->session->set_userdata(array(
+								'logged_in'=> true,
+								'user_id' => $user_id,
+								'username' => $username
+							));
+				redirect('users');
+			}
+			else{
+				$this->session->set_flashdata('login_error', TRUE);
+				redirect(site_url('auth/login'));
+			}  				
+	  
 		}
-		else
-		{
-			if ($this->input->post('btn_login'))
-		    {
-				$data= $this->users_model->findUser( array('username'=> $username, 'password'=> vst_password($password)) );
-				if(count($data)){
-					$user_id= $data['id'];
-					$this->session->set_userdata(array(
-									'logged_in'=> true,
-									'user_id' => $user_id,
-									'username' => $username
-								));
-					redirect('users');
-				}
-				else{
-					$this->session->set_flashdata('login_error', TRUE);
-					redirect(site_url('auth/login'));
-				}  				
-		  
-		    }
-			else
-			{
-			   redirect(site_url('auth/login'));
-		    }
-			
-		}
+		
+		$this->load->view('auth/login_view');
+	
 	}
 	
 	
@@ -76,10 +65,10 @@ class Auth extends CI_Controller {
 		}
 		else
 		{
-			$data['fullname']= $_POST['fullname'];
-			$data['username']= $_POST['username'];
-			$data['password']= vst_password($_POST['password']);
-			$data['email']= $_POST['email'];
+			$data['fullname']= $this->input->post('fullname');
+			$data['username']= $this->input->post('username');
+			$data['password']= vst_password($this->input->post('password'));
+			$data['email']= $this->input->post('email');
 			
 			$result= $this->auth_model->addUser($data);
 			

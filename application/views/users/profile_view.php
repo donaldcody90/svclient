@@ -33,7 +33,7 @@
                     
                     <tr class="zhang-cuoi">
                         <td></td>
-                        <td><a href="<?php echo base_url().'users/update/'. $row['id']; ?>"><button>Edit</button></a></td>
+                        <td><a href="<?php echo base_url().'users/update/'. $row['id']; ?>"><button class="edit">Edit</button></a></td>
                     </tr>
                 </table>
             </div>

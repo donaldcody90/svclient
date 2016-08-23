@@ -16,7 +16,7 @@
                     <tr class="zhang2">
                         <td class="zcot1">Username</td>
                         <td class="zcot2"><?php echo $row['username']; ?></td>
-                        <td class="zcot3"><input type="text" name="edit_username" placeholder="Change username" /></td>
+                        <!--<td class="zcot3"><input type="text" name="edit_username" placeholder="Change username" /></td>-->
                     </tr>
 					<?php echo form_error('edit_username', '<div class="error">', '</div>'); ?>
 					
@@ -30,7 +30,7 @@
 					<tr class="zhang5">
                         <td class="zcot1">Email</td>
                         <td class="zcot2"><?php echo $row['email']; ?></td>
-                        <td class="zcot3"><input type="text" name="edit_email" placeholder="Change email" /></td>
+                        <!--<td class="zcot3"><input type="email" name="edit_email" placeholder="Change email" /></td>-->
                     </tr>
 					<?php echo form_error('edit_email', '<div class="error">', '</div>'); ?>
 					
@@ -51,7 +51,7 @@
                         <td class="zcot1"></td>
                         <td class="zcot2"></td>
                         <td class="zcot3"><div class="button">
-							<button>Confirm</button>
+							<input name="save" class="save" type="submit" value="Confirm" />
 							<a href="<?php echo site_url().'users/profile/'.$row['id']; ?>"><div class="cancel"><center>Cancel</center></div></a>
 						</div></td>
                     </tr>

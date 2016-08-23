@@ -52,7 +52,7 @@ li{ margin: 0px; padding: 0px; list-style: none;}
 	font-size: 12px;
 }
 
-.login-form .btn_login{
+.login-form .btn_login,.login-page button{
     background: #1E88E5;
     width: 330px;
     border: 0;
@@ -140,7 +140,7 @@ li{ margin: 0px; padding: 0px; list-style: none;}
 	margin-bottom: 15px;
 }
 
-.signup-form button{
+.signup-form .btn_signup{
 	background: #1E88E5;
     width: 330px;
     border: 0;
@@ -581,15 +581,16 @@ li{ margin: 0px; padding: 0px; list-style: none;}
     height: 30px;
 }
 
-.edit-view button{
-	
+.edit-view .save, .edit-view .edit,.edit-view button{
+	height: 45px;
 	background: #1566B6;
 	width: 125px;
 	border: none;
 	border-radius: 3px;
-	padding: 15px 0px;
+	padding: 15px;
 	margin-right: 15px;
 	color: white;
+	cursor: pointer;
 }
 
 .edit-view .cancel{
@@ -642,7 +643,8 @@ li{ margin: 0px; padding: 0px; list-style: none;}
 	height: 30px;
 }
 
-.addnew-view button{
+.addnew-view button, .addnew-view .save{
+	height: 45px;
 	background: #1566B6;
 	width: 125px;
 	border: none;
@@ -704,15 +706,15 @@ li{ margin: 0px; padding: 0px; list-style: none;}
 }
 
 .list-DC .cot3{
-	width: 300px;
+	width: 200px;
 }
 
 .list-DC .cot4{
-	width: 250px;
+	width: 200px;
 }
 
 .list-DC .cot5{
-	width: 100px;
+	width: 200px;
 }
 
 .list-DC .cot6{

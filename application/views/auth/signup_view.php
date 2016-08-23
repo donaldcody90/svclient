@@ -35,7 +35,7 @@
 					echo form_error('email', '<div class="error">', '</div>'); 
 				?>
 				
-				<button>Sign Up</button>
+				<input class="btn_signup" name="btn_signup" value="Sign Up" type="submit" />
 				<center><div class="message">Already a member? <a href="<?php echo base_url() . 'auth/login'; ?>">Log In</a></div></center>
 			<?php echo form_close(); ?>
         </div>

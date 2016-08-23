@@ -48,18 +48,8 @@ class Users extends CI_Controller
 		}
 		else
 		{
-			$params_where= array('id'=> $uid);
-			$data['row']= $this->users_model->findUser($params_where);
 			
-			$this->load->view('users/update_view', $data);
-
-			
-			$this->form_validation->set_rules('edit_username', 'Username', 'alpha_numeric|min_length[3]|max_length[20]|is_unique[users.username]|trim');
-			$this->form_validation->set_rules('edit_fullname', 'First name', 'min_length[2]|max_length[20]|trim');
-			$this->form_validation->set_rules('edit_password', 'Password', 'min_length[6]|trim');
-			$this->form_validation->set_rules('edit_email', 'Email', 'valid_email|is_unique[users.email]|trim');
-			
-			if ($this->form_validation->run() == true)
+			if ($this->input->post('save'))
 			{	
 				$params_where= array('id' => $uid);
 				$data = array();
@@ -73,7 +63,7 @@ class Users extends CI_Controller
 				}
 				$password = $this->input->post('edit_password');
 				if($password!=''){
-					$data['password'] = hash('sha512', $this->input->post('edit_password'));
+					$data['password'] = vst_password($this->input->post('edit_password'));
 				}
 				$email = $this->input->post('edit_email');
 				if($email!=''){
@@ -93,6 +83,16 @@ class Users extends CI_Controller
 					}
 					
 				}
+			}
+			
+			$params_where= array('id'=> $uid);
+			$data['row']= $this->users_model->findUser($params_where);
+			if($data['row'])
+			{
+				$this->load->view('users/update_view', $data);
+			}
+			else{
+				message_flash('Can not found user information.','error');
 			}
 		}
 		

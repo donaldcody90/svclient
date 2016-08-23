@@ -1,6 +1,6 @@
 <?php $this->load->view('_base/header'); ?>
 			
-            <div class="title">User Information</div>
+            <div class="title">VPS Information</div>
 			
 			<?php $this->load->view('_base/message'); ?>
 
