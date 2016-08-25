@@ -17,10 +17,10 @@
 							<label>
 								<input type="radio" name="server" value="<?php echo $value['id']; ?>" />
 								<div class="detail">
-									<img src="<?php echo site_url().'static/images/flag_'.$value['description'].'.png'; ?>" />
+									<img src="<?php echo site_url().'static/images/flag_'.$value['location'].'.png'; ?>" />
 									<div>
 										<span class="label"><?php echo $value['label']; ?></span><br>
-										<span class="description"><?php echo $value['description']; ?></span>
+										<span class="location"><?php echo $value['location']; ?></span>
 									</div>
 								</div>
 							</label>
@@ -39,13 +39,13 @@
 							
 							<label>
 								<input type="radio" name="plan" value="<?php echo $value['id']; ?>" />
-								<div class="detail2">
-									<div class="detail21">
+								<div class="vps">
+									<div class="vps_detail">
 										<span><?php echo '<span class="name">'.$value['name'].'</span>'; ?></span><br>
 										<span><?php echo '<span class="price"><span class="price_value">$'.$value['price'].'</span>/mo</span>'; ?></span><br>
 										<span><?php echo '<div class="value division">$'.vst_DivisionMonthtoHour($value['price']).'/hr</div>'; ?></span>
 									</div>
-									<div class="detail22">
+									<div class="vps_detail2">
 										<span><?php echo '<span class="value"><b>'.$value['cpu_core'].'</b> CPU</span>'; ?></span><br>
 										<span><?php echo '<span class="value"><b>'.$value['ram'].'MB</b> Memory</span>'; ?></span><br>
 										<span><?php echo '<span class="value"><b>'.$value['bandwidth'].'</b> Bandwidth</span>'; ?></span>

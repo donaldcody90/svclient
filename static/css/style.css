@@ -813,7 +813,7 @@ li{ margin: 0px; padding: 0px; list-style: none;}
 	font-weight: bold;
 }
 
-.deploy_body label .detail div .description{
+.deploy_body label .detail div .location{
 	font-size: 13px;
 }
 
@@ -835,6 +835,7 @@ li{ margin: 0px; padding: 0px; list-style: none;}
 	border-radius: 3px;
 	padding: 25px 20px;
 	cursor: pointer;
+	box-shadow: 3px 5px 25px -3px #888888;
 }
 
 .deploy_body label > input + .detail:hover{
@@ -848,22 +849,33 @@ li{ margin: 0px; padding: 0px; list-style: none;}
 
 
 
-.deploy_body label .detail21{
+.deploy_body label .vps .vps_detail{
 	border-bottom: 1px solid #DCDEE0;
 	padding: 25px 0;
 	text-align: center;
 }
 
-.deploy_body label .detail22{
+.deploy_body label .vpsactive .vps_detail{
+	border-bottom: 1px solid #176ab3;
 	padding: 25px 0;
 	text-align: center;
 }
 
-.deploy_body .detail2 span{
+.deploy_body label .vps .vps_detail2{
+	padding: 25px 0;
 	text-align: center;
 }
 
-.deploy_body label > input + .detail2{
+.deploy_body label .vpsactive .vps_detail2{
+	padding: 25px 0;
+	text-align: center;
+}
+
+.deploy_body .vps span{
+	text-align: center;
+}
+
+.deploy_body label .vps{
 	width: 240px; 
 	height: auto;
 	border: 1px solid #DCDEE0;
@@ -871,7 +883,7 @@ li{ margin: 0px; padding: 0px; list-style: none;}
 	cursor: pointer;
 }
 
-.deploy_body label > input:checked + .detail2{
+.deploy_body label .vpsactive{
 	width: 240px; 
 	height: auto;
 	border: 1px solid #2088e3;
@@ -879,27 +891,50 @@ li{ margin: 0px; padding: 0px; list-style: none;}
 	color: white;
 	border-radius: 3px;
 	cursor: pointer;
+	box-shadow: 3px 5px 25px -3px #888888;
 }
 
-.server-size .detail2 .name{
+.server-size .vps .name{
 	font-size: 16px;
 	font-weight: bold;
 	line-height: 35px;
 }
 
-.server-size .detail2 .price{
+.server-size .vps .price{
 	font-size: 23px;
 	color: #2088e3;
 }
 	
-.server-size .detail2 .price_value{
+.server-size .vps .price_value{
 	font-size: 30px;
 	font-weight: strong;
 }
 
-.server-size .detail2 .value{
+.server-size .vps .value{
 	font-size: 16px;
 	color: #727578;
+	line-height: 25px;
+}
+
+.server-size .vpsactive .name{
+	font-size: 16px;
+	font-weight: bold;
+	line-height: 35px;
+}
+
+.server-size .vpsactive .price{
+	font-size: 23px;
+	color: white;
+}
+	
+.server-size .vpsactive .price_value{
+	font-size: 30px;
+	font-weight: strong;
+}
+
+.server-size .vpsactive .value{
+	font-size: 16px;
+	color: #a5cef2;
 	line-height: 25px;
 }
 
