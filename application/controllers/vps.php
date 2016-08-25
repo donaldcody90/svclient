@@ -112,17 +112,17 @@ class Vps extends CI_Controller
 	function add()
 	{
 		
-		if($this->input->post('save'))
+		if($this->input->post('deploy'))
 		{
 			$data['cid']= $this->session->userdata('user_id');
-			$data['svid']= $this->input->post('servers');
+			$data['pid']= $this->input->post('plan');
+			$data['svid']= $this->input->post('server');
 			$data['vps_label']= $this->input->post('label');
 			$data['vps_ip']= $this->input->post('ip');
 			$data['rootpass']= RandomString(30);
 			$data['create_date']= date('Y-m-d H:i:s');
-			$data['space']= $this->input->post('space');
-			$data['ram']= $this->input->post('ram');
-			
+			// $data['space']= $this->input->post('space');
+			// $data['ram']= $this->input->post('ram');
 			$result= $this->vps_model->addVps($data);
 			
 			if ($result == TRUE)
@@ -138,7 +138,8 @@ class Vps extends CI_Controller
 		}
 		
 		$data['servers']= $this->vps_model->findSV(array(),true);
-		$this->load->view('vps/add_vps_view', $data);
+		$data['plans']= $this->vps_model->findPlan(null, true);
+		$this->load->view('vps/add', $data);
 	} 
 	
 	

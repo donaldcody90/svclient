@@ -12,3 +12,13 @@ $(document).ready(function () {
       $(".credit_card li:first").addClass("selected");
    }
 });
+
+$(document).ready(function () {
+	$(".deploy_body label .detail2").click(function(){
+		var text1= $(".price", this).text();
+		var text2= '(' + $(".division", this).text() + ')';
+		$(".deploy .consequence .order_total").text(text1);
+		$(".deploy .consequence .order_total_hr").text(text2);
+	});
+	
+});

@@ -4,7 +4,7 @@
 			
 			<div class="addnew-ticket">
 				
-				<span class="addticket-title">Create Ticket</span>
+				<div class="addticket-title">Create Ticket</div>
 				
 				<?php echo form_open(base_url().'support/addnew'); ?>
 				

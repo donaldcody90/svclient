@@ -407,6 +407,15 @@ if(!function_exists('RandomString'))
 		return $randomString;
 	}
 }
+
+if(!function_exists('vst_DivisionMonthtoHour'))
+{
+	function vst_DivisionMonthtoHour($data) {
+		$division= ($data / 30) / 24;
+		$result= substr($division, 0, 5);
+		return $result;
+	}
+}
 		
 		
 		

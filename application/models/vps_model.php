@@ -5,6 +5,7 @@ class Vps_model extends MY_Model
 {
 	private $vps= 'vps';
 	private $servers= 'servers';
+	private $plans= 'plans';
 	
 	public function __construct()
 	{
@@ -81,7 +82,14 @@ class Vps_model extends MY_Model
 							'list'         => $is_list
 				));
 		}
-	 
+	
+	function findPlan($params_where= null, $is_list=false){
+		return $this->_getwhere(array(
+							'table'			=> $this->plans,
+							'param_where'  	=> $params_where,
+							'list'         	=> $is_list
+		));
+	}
 	 
 	 
 	 

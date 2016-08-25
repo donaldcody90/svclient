@@ -196,6 +196,7 @@ li{ margin: 0px; padding: 0px; list-style: none;}
     font-family: Tahoma;
     font-weight: bold;
 	position: fixed;
+	z-index: 2;
 }
 
 .main-menu ul li{
@@ -670,7 +671,7 @@ li{ margin: 0px; padding: 0px; list-style: none;}
 	float: left;
 }
 
-/*----------------------ListDC-------------------*/
+/*----------------------ListVPS-------------------*/
 
 
 .list-DC button{
@@ -737,6 +738,232 @@ li{ margin: 0px; padding: 0px; list-style: none;}
 	color: red;
 }
 
+
+/*--------------Add new VPS-----------------*/
+
+
+.deploy_division{
+	width: 900px;
+	height: auto;
+	margin: 0 0 100px 175px;
+}
+
+.deploy_title{
+	width: 800px;
+	height: 50px;
+}
+
+.deploy_title div, .deploy_title span{
+	float: left;
+}
+
+.deploy_title > div{
+	width: 30px;
+	border: 1px solid #DCDEE0;
+	border-radius: 50%;
+	text-align: center;
+	padding: 10px 5px 10px 5px;
+	color: #616366;
+	font-weight: bold;
+}
+
+.deploy_title span{
+	font-size: 19px;
+	font-weight: strong;
+	margin: 8px 0 0 15px;
+}
+
+.deploy_body1{
+	width: 1100px;
+	height: 200px;
+	margin: 0 0 0 50px;
+}
+
+.deploy_body2{
+	width: 1100px;
+	height: 560px;
+	margin: 0 0 0 50px;
+}
+
+.deploy_body3{
+	width: 1100px;
+	height: 100px;
+	margin: 0 0 0 50px;
+}
+
+.deploy_body label{
+	float: left;
+	margin: 30px 20px 0 0;
+}
+
+.deploy_body label > input{
+	visibility: hidden;
+	position: absolute;
+}
+
+.deploy_body label .detail img, .deploy_body label .detail div{
+	float: left;
+}
+
+.deploy_body label .detail div{
+	margin: 0 0 0 10px;
+}
+
+.deploy_body label .detail div .label{
+	font-weight: bold;
+}
+
+.deploy_body label .detail div .description{
+	font-size: 13px;
+}
+
+.deploy_body label > input + .detail{
+	width: 200px; 
+	height: 35px;
+	border: 1px solid #DCDEE0;
+	border-radius: 3px;
+	padding: 25px 20px;
+	cursor: pointer;
+}
+
+.deploy_body label > input:checked + .detail{
+	width: 200px; 
+	height: 35px;
+	border: 1px solid #2088e3;
+	background: #2088e3;
+	color: white;
+	border-radius: 3px;
+	padding: 25px 20px;
+	cursor: pointer;
+}
+
+.deploy_body label > input + .detail:hover{
+	width: 200px; 
+	height: 35px;
+	border: 1px solid #2088e3;
+	border-radius: 3px;
+	padding: 25px 20px;
+	cursor: pointer;
+}
+
+
+
+.deploy_body label .detail21{
+	border-bottom: 1px solid #DCDEE0;
+	padding: 25px 0;
+	text-align: center;
+}
+
+.deploy_body label .detail22{
+	padding: 25px 0;
+	text-align: center;
+}
+
+.deploy_body .detail2 span{
+	text-align: center;
+}
+
+.deploy_body label > input + .detail2{
+	width: 240px; 
+	height: auto;
+	border: 1px solid #DCDEE0;
+	border-radius: 3px;
+	cursor: pointer;
+}
+
+.deploy_body label > input:checked + .detail2{
+	width: 240px; 
+	height: auto;
+	border: 1px solid #2088e3;
+	background: #2088e3;
+	color: white;
+	border-radius: 3px;
+	cursor: pointer;
+}
+
+.server-size .detail2 .name{
+	font-size: 16px;
+	font-weight: bold;
+	line-height: 35px;
+}
+
+.server-size .detail2 .price{
+	font-size: 23px;
+	color: #2088e3;
+}
+	
+.server-size .detail2 .price_value{
+	font-size: 30px;
+	font-weight: strong;
+}
+
+.server-size .detail2 .value{
+	font-size: 16px;
+	color: #727578;
+	line-height: 25px;
+}
+
+
+
+.server-hnandlb input{
+	width: 490px;
+	padding: 15px;
+	font-size: 15px;
+	border-radius: 3px;
+	border: 1px solid #DCDEE0;
+	margin: 0 20px 0 0;
+}
+
+
+.deploy .submit{
+	margin: 0 0 0 300px;
+}
+
+.deploy .consequence{
+	width: 100%;
+	height: 90px;
+	position: fixed;
+	bottom: 0px;
+	background: white;
+	box-shadow: 0px 0px 10px 0 #22b3e3;
+	z-index: 1;
+}
+
+.deploy .consequence .total{
+	margin: 10px 0 0 175px;
+	float: left;
+}
+
+.deploy .consequence .total .summary{
+	font-size: 12px;
+	color: #727578;
+	line-height: 30px;
+}
+
+.deploy .consequence .total .order_total{
+	font-size: 25px;
+	color: #2088e3;
+}
+
+.deploy .consequence .total .order_total_hr{
+	font-size: 18px;
+	color: #727578;
+}
+
+.deploy .consequence .submit{
+	width: 350px;
+	height: 50px;
+	border: 1px solid #2088e3;
+	background: #2088e3;
+	color: white;
+	border-radius: 3px;
+	cursor: pointer;
+	font-size: 15px;
+	font-weight: bold;
+	float: right;
+	margin: 20px 30px 0 0
+}
+
 /*--------------------Ticket_list-----------*/
 
 
@@ -792,6 +1019,7 @@ li{ margin: 0px; padding: 0px; list-style: none;}
 
 .addticket-title{
 	font-size: 23px;
+	margin: 0 0 50px 0;
 }
 
 .addnew-ticket .button1 label > input{
@@ -800,7 +1028,6 @@ li{ margin: 0px; padding: 0px; list-style: none;}
 }
 
 .addnew-ticket .button1 label{
-	margin: 40px 0 15px 0;
 	float: left;
 }
 
@@ -811,6 +1038,19 @@ li{ margin: 0px; padding: 0px; list-style: none;}
 	cursor: pointer;
 	background: white;
 	border: 1px solid #DCDEE0;
+	color: black;
+	margin: 0 12px 20px 0;
+	padding: 15px 0;
+	text-align: center;
+}
+
+.addnew-ticket .button1 label > input + div:hover{
+	width: 210px;
+	font-size: 15px;
+	border-radius: 3px;
+	cursor: pointer;
+	background: white;
+	border: 1px solid #1566B6;
 	color: black;
 	margin-right: 12px;
 	padding: 15px 0;
@@ -823,7 +1063,7 @@ li{ margin: 0px; padding: 0px; list-style: none;}
 	border-radius: 3px;
 	cursor: pointer;
 	background: #1566B6;
-	border: none;
+	border: 1px solid #1566B6;
 	color: white;
 	margin-right: 12px;
 	text-align: center;
@@ -1124,6 +1364,11 @@ text-align:center;
     text-align: center;
     margin-top: 10px;
 }
+
+/*-------------------*/
+
+
+
 
 
 
