@@ -20,7 +20,7 @@ class Support_model extends My_Model
 		$this->db->select('c.cid, c.title, m.content, c.status');
 		$this->db->from("$this->message as m");
 		$this->db->join("$this->conversation as c", 'c.cid = m.cid', 'inner');
-		$this->db->join("$this->message as m2", "m.cid = m2.cid && m.mid < m2.mid", 'left');
+		$this->db->join("$this->message as m2", 'm.cid = m2.cid AND m.mid < m2.mid', 'left');
 		$this->db->where('m2.mid', NULL);
 		//vst_abc($param);
 		$this->db->where($param);
@@ -49,7 +49,7 @@ class Support_model extends My_Model
 		$this->db->select('c.cid, c.title, m.content, c.status');
 		$this->db->from("$this->message as m");
 		$this->db->join("$this->conversation as c", 'c.cid = m.cid', 'inner');
-		$this->db->join("$this->message as m2", "m.cid = m2.cid && m.mid < m2.mid", 'left');
+		$this->db->join("$this->message as m2", 'm.cid = m2.cid AND m.mid < m2.mid', 'left');
 		$this->db->where('m2.mid', NULL);
 		$this->db->where($param);
 		vst_buildFilter($filterData);

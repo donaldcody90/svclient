@@ -23,21 +23,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 | a PHP script and you can easily do that on your own.
 |
 */
-switch (ENVIRONMENT)
-{
-	case 'development':
-		$config['base_url'] = 'http://localhost/server/svclient/';
-		break;
-	case 'testing';
-		$config['base_url'] = '';
-		break;
-	case 'production';
-		$config['base_url'] = '';
-		break;
-	default:
-		$config['base_url'] = '';
-		break;
-}
+$config['base_url'] = 'http://localhost/server/svclient/';
 
 /*
 |--------------------------------------------------------------------------
@@ -150,7 +136,7 @@ $config['subclass_prefix'] = 'MY_';
 | Note: This will NOT disable or override the CodeIgniter-specific
 |	autoloading (application/config/autoload.php)
 */
-$config['composer_autoload'] = TRUE;
+$config['composer_autoload'] = FALSE;
 
 /*
 |--------------------------------------------------------------------------
@@ -199,8 +185,6 @@ $config['permitted_uri_chars'] = 'a-z 0-9~%.:_\-';
 | use segment based URLs.
 |
 */
-$config['query_string_segment']	= 'p';	
-$config['page_query_string']=true;
 $config['allow_get_array'] = TRUE;
 $config['enable_query_strings'] = FALSE;
 $config['controller_trigger'] = 'c';
