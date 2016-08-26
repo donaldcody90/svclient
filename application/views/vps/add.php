@@ -61,7 +61,7 @@
 					<div class="server-hnandlb deploy_division">
 						<div class="deploy_title">
 							<div>3</div>
-							<span>Server Hostname & Label</span>
+							<span>Server IP & Label</span>
 						</div>
 						<div class="deploy_body deploy_body3">
 							<input class="ip" type="text" placeholder="Enter server ip" name="ip" />

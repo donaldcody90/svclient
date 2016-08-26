@@ -1,12 +1,12 @@
 <?php $this->load->view('_base/header'); ?>
 			
-            <div class="title">List of VPS</div>
+            <div class="title">VPS List</div>
 			
 			<?php $this->load->view('_base/message'); ?>
             
 			<div class="list-DC">
 				<div>
-					<a href="<?php echo base_url().'vps/add'; ?>"><button>Add new Data Centers</button></a>
+					<a href="<?php echo base_url().'vps/add'; ?>"><button>Add new Server</button></a>
 					
 					<div class="search">
 						<?php echo form_open(base_url().'vps/lists', 'method= "GET"'); ?>

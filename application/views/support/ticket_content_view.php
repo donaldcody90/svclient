@@ -1,4 +1,4 @@
-﻿<?php $this->load->view('_base/header'); ?>
+<?php $this->load->view('_base/header'); ?>
 
 			<div class="title">
 				<?php echo $info['title']; ?><br>

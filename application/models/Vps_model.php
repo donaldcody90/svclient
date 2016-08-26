@@ -6,6 +6,7 @@ class Vps_model extends MY_Model
 	private $vps= 'vps';
 	private $servers= 'servers';
 	private $plans= 'plans';
+	private $customers= 'customers';
 	
 	public function __construct()
 	{
@@ -25,7 +26,19 @@ class Vps_model extends MY_Model
 							'list'         => $is_list
 				));
 	}
-	  
+	 
+
+	function getVps($params_where){
+		$this->db->select('v.id, v.cid, s.location, s.label, v.vps_ip, c.username, v.rootpass, p.cpu_core, p.ram, p.disk_space, p.bandwidth, v.vps_label');
+		$this->db->from("$this->vps as v");
+		$this->db->join("$this->customers as c", 'c.id = v.cid');
+		$this->db->join("$this->plans as p", 'p.id = v.pid');
+		$this->db->join("$this->servers as s", 's.id = v.svid');
+		$this->db->where($params_where);
+		$result= $this->db->get();
+		return $result->row_array();
+	}
+	
 	
 	
 	function updateVps($data, $params_where){

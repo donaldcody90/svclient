@@ -1,4 +1,4 @@
-﻿<?php $this->load->view('_base/header'); ?>
+<?php $this->load->view('_base/header'); ?>
 
 			<div class="title">Support</div>
 			
@@ -27,7 +27,7 @@
 					
 					<?php foreach($result as $row){ ?>
 						<tr>
-							<td><a href="<?php echo base_url().'support/ticket/'.$row->cid; ?>"><?php echo $row->title.'<br>'.$row->cid; ?></a></td>
+							<td><a href="<?php echo base_url().'support/ticket/'.$row->cid; ?>"><?php echo $row->title; ?></a><br><?php echo $row->cid; ?></td>
 							<td><?php echo substr($row->content, 0, 20); ?></td>
 							<td><?php echo getStatusConversation($row->status); ?></td>
 							<td><img src="<?php echo base_url().'static/images/logo17.png'; ?>" /></td>

@@ -13,15 +13,9 @@ $(document).ready(function () {
    }
 });
 
-// $(document).ready(function(){
-	// $(".server-size .deploy_body label input:radio[name=plan]:first").attr('checked', true);
-	// var check= $(".server-size .deploy_body label input").attr("checked");
-	// if(check=="checked")
-	// {
-		// $(".server-size .deploy_body label div").removeClass();
-		// $(".server-size .deploy_body label div").addClass("vpsactive");
-	// }
-// });
+$(document).ready(function(){
+	$(".addnew-ticket .button1 label input:radio[name=ticket-type]:first").attr('checked', true);
+});
 
 $(document).ready(function () {
 	$(".server-size .deploy_body label .vps").click(function(){

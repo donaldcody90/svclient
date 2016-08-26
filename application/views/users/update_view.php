@@ -1,6 +1,6 @@
 <?php $this->load->view('_base/header'); ?>
 			
-            <div class="title">User Information</div>
+            <div class="title">Edit User Information</div>
             
 			<?php $this->load->view('_base/message'); ?>
 			
@@ -16,6 +16,7 @@
                     <tr class="zhang2">
                         <td class="zcot1">Username</td>
                         <td class="zcot2"><?php echo $row['username']; ?></td>
+						<td></td>
                         <!--<td class="zcot3"><input type="text" name="edit_username" placeholder="Change username" /></td>-->
                     </tr>
 					<?php echo form_error('edit_username', '<div class="error">', '</div>'); ?>
@@ -30,6 +31,7 @@
 					<tr class="zhang5">
                         <td class="zcot1">Email</td>
                         <td class="zcot2"><?php echo $row['email']; ?></td>
+						<td></td>
                         <!--<td class="zcot3"><input type="email" name="edit_email" placeholder="Change email" /></td>-->
                     </tr>
 					<?php echo form_error('edit_email', '<div class="error">', '</div>'); ?>

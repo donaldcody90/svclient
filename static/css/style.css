@@ -363,8 +363,8 @@ li{ margin: 0px; padding: 0px; list-style: none;}
 
 .title{
     font-size: 25px;
-    font-weight: bold;
-    margin: 70px 0 60px 185px;
+    font-weight: strong;
+    margin: 40px 300px 60px 185px;
 }
 
 /*-------------------------------------------------
@@ -698,6 +698,10 @@ li{ margin: 0px; padding: 0px; list-style: none;}
 	float: right;
 }
 
+.list-DC table a{
+	font-weight: bold;
+}
+
 .list-DC .cot1{
 	width: 30px;
 }
@@ -999,6 +1003,114 @@ li{ margin: 0px; padding: 0px; list-style: none;}
 	margin: 20px 30px 0 0
 }
 
+/*------------------VPS Profile-------------*/
+
+
+.vps_profile_title{
+	height: 70px;
+	width: 800px;
+}
+
+.vps_profile_title img{
+	margin: 5px 20px 0 0;
+}
+
+.vps_profile_title img, .title > div{
+	float: left;
+}
+
+.vps_profile_title .vps_quick_info{
+	font-size: 14px;
+	color: #cca79f;
+}
+
+.vps_profile_icon{
+	height: 30px;
+	width: 300px;
+	position: absolute;
+	top: 70px; 
+	right: 20px;
+}
+
+.vps_profile_icon a{
+	margin: 0 30px 0 0;
+}
+
+
+.vps_profile{
+	margin: 50px 0 0 200px;
+	width: 1200px;
+	height: 400px;
+}
+
+.vps_profile .column{
+	width: 330px;
+	height: 300px;
+	float: left;
+	margin: 0 35px 0 0;
+}
+
+.vps_profile .column .priority{
+	width: 330px;
+	height: 100px;
+	border: 1px solid #DCDEE0;
+	border-radius: 3px;
+}
+
+.vps_profile .column .priority div{
+	float: left;
+	margin: 12px 0 0 20px;
+}
+
+.vps_profile .column .priority img{
+	float: right;
+	margin: 20px 20px 0 0;
+}
+
+.vps_profile .column .priority .property{
+	font-size: 14px;
+	color: #cca79f;
+	line-height: 35px;
+}
+
+.vps_profile .column .priority .value{
+	font-size: 25px;
+	font-weight: strong;
+}
+
+.vps_profile .column .priority .value2{
+	font-size: 20px;
+	color: #cca79f;
+}
+
+.vps_profile .column .detail{
+	width: 320px;
+	height: 200px;
+	color: #786265;
+}
+
+.vps_profile .column .detail .detail_properties, .vps_profile .column .detail .detail_values{
+	float: left;
+	line-height: 30px;
+	margin-top: 20px;
+	font-weight: strong;
+}
+
+.vps_profile .column .detail .detail_properties{
+	margin-right: 50px;
+}
+
+.vps_profile .column .detail .detail_values .flag{
+	width: 25%;
+	height: 25%;
+}
+
+.vps_profile .column .detail .detail_values a{
+	color: #0085de;
+}
+
+
+
 /*--------------------Ticket_list-----------*/
 
 
@@ -1024,6 +1136,10 @@ li{ margin: 0px; padding: 0px; list-style: none;}
 
 .ticketlist .search{
 	float: right;
+}
+
+.ticketlist table a{
+	font-weight: bold;
 }
 
 .ticketlist .cot1{
@@ -1105,7 +1221,7 @@ li{ margin: 0px; padding: 0px; list-style: none;}
 }
 
 .addnew-ticket select{
-	width: 440px;
+	width: 436px;
 	height: 45px;
 	border-radius: 3px;
 	margin-bottom: 15px;
@@ -1114,7 +1230,7 @@ li{ margin: 0px; padding: 0px; list-style: none;}
 }
 
 .addnew-ticket .subject{
-	width: 440px;
+	width: 421px;
 	height: 45px;
 	border-radius: 3px;
 	border: 1px solid #DCDEE0;
@@ -1123,7 +1239,7 @@ li{ margin: 0px; padding: 0px; list-style: none;}
 }
 
 .addnew-ticket .message{
-	width: 440px;
+	width: 406px;
 	height: 150px;
 	border-radius: 3px;
 	border: 1px solid #DCDEE0;
@@ -1133,7 +1249,7 @@ li{ margin: 0px; padding: 0px; list-style: none;}
 }
 
 .addnew-ticket .upload{
-	width: 425px;
+	width: 421px;
 	height: 60px;
 	padding: 5px 0 0 15px;
 	border: 1px solid #DCDEE0;
@@ -1191,7 +1307,7 @@ li{ margin: 0px; padding: 0px; list-style: none;}
 }
 
 .ticket textarea{
-	width: 1080px;
+	width: 1040px;
 	height: 180px;
 	margin: 30px 75px 30px 185px;
 	padding: 10px 15px;
