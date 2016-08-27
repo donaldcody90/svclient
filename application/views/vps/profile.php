@@ -69,7 +69,7 @@
 							<span><?php echo $data['cpu_core'].' vCore'; ?></span><br>
 							<span><?php echo $data['ram'].' MB'; ?></span><br>
 							<span><?php echo $data['disk_space'].' GB SSD'; ?></span><br>
-							<span><?php echo '1.04 GB of '.$data['bandwidth'].' GB'; ?></span><br>
+							<span><?php echo '1.04 GB of '.$data['bandwidth'].' GB '.'(0%)'; ?></span><br>
 							<span>(<a href="#">Show details</a>)</span>
 						</div>
 					</div>

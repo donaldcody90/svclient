@@ -20,13 +20,13 @@ class Billing extends CI_Controller
 	{
 		$param_where= array('id' => 1);
 		$data['paypal']= $this->billing_model->getPaypal($param_where);
-		$this->load->view('paypal/index', $data);
+		$this->load->view('billing/paypal/index', $data);
 	}
 	
 	function success()
 	{
-		$result= $this->verifyWithPayPal ($_GET['tx']);
-		$this->load->view('paypal/success', $result);
+		$result= array(); //$this->verifyWithPayPal ($_GET['tx']);
+		$this->load->view('billing/paypal/success', $result);
 	}
 	
 	function ipn()
@@ -100,6 +100,11 @@ class Billing extends CI_Controller
 		}
 		return $keyarray;
 		
+	}
+	
+	function settings()
+	{
+		$this->load->view('billing/settings');
 	}
 	
 	

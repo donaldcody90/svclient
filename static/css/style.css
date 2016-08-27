@@ -7,12 +7,28 @@ a{ color: #4B4B4D; text-decoration: none; transition: color 0.15s ease-in-out 0s
 a:hover {text-decoration: none;color: #009345;}
 li{ margin: 0px; padding: 0px; list-style: none;}
 
+table tr{
+    border-bottom: 1px solid #EDEFF2;
+    line-height: 27px;
+    color: #616366;
+}
+
+table td{
+    padding: 10px;
+}
+
+
 
 /*---------------Login-------------------*/
 
+@font-face{
+	font-family: Raleway;
+    src: url("http://localhost/server/svclient/static/fonts/Raleway/Raleway-Regular.ttf") format('truetype');
+}
+
 .body{
     background: #1566B6;
-	font-family: Tahoma;
+	font-family: Raleway, sans-serif;
 }
 .login-page{
     width: 340px;
@@ -193,7 +209,7 @@ li{ margin: 0px; padding: 0px; list-style: none;}
     height: 30000px;
     background: #1566B6;
     padding: 0;
-    font-family: Tahoma;
+    font-family: Raleway, sans-serif;
     font-weight: bold;
 	position: fixed;
 	z-index: 2;
@@ -221,7 +237,7 @@ li{ margin: 0px; padding: 0px; list-style: none;}
     width: 100%;
     height: auto;
     background: white;
-    font-family: Tahoma;
+    font-family: Raleway, sans-serif;
 }
 
 /* DEMO 3 dropdown */
@@ -262,6 +278,7 @@ li{ margin: 0px; padding: 0px; list-style: none;}
     top: 90%;
     right: 0px;
 	width: 160px;
+	z-index: 1000;
 
     /* Styles */
     background: white;
@@ -290,7 +307,7 @@ li{ margin: 0px; padding: 0px; list-style: none;}
     right: 30px;
     border-width: 0 6px 6px 6px;
     border-style: solid;
-    border-color: #fff transparent;    
+    border-color: #fff transparent;
 }
 
 .wrapper-dropdown-3 .dropdown:before {
@@ -363,7 +380,7 @@ li{ margin: 0px; padding: 0px; list-style: none;}
 
 .title{
     font-size: 25px;
-    font-weight: strong;
+    font-weight: bold;
     margin: 40px 300px 60px 185px;
 }
 
@@ -390,7 +407,7 @@ li{ margin: 0px; padding: 0px; list-style: none;}
     display: inline-block;
     padding: 10px 15px;
     cursor: pointer;
-    font-family: Tahoma;
+    font-family: Raleway, sans-serif;
 }
 
 .tabs li.current{
@@ -773,7 +790,7 @@ li{ margin: 0px; padding: 0px; list-style: none;}
 
 .deploy_title span{
 	font-size: 19px;
-	font-weight: strong;
+	font-weight: 600;
 	margin: 8px 0 0 15px;
 }
 
@@ -911,7 +928,7 @@ li{ margin: 0px; padding: 0px; list-style: none;}
 	
 .server-size .vps .price_value{
 	font-size: 30px;
-	font-weight: strong;
+	font-weight: 600;
 }
 
 .server-size .vps .value{
@@ -933,7 +950,7 @@ li{ margin: 0px; padding: 0px; list-style: none;}
 	
 .server-size .vpsactive .price_value{
 	font-size: 30px;
-	font-weight: strong;
+	font-weight: 600;
 }
 
 .server-size .vpsactive .value{
@@ -1021,7 +1038,8 @@ li{ margin: 0px; padding: 0px; list-style: none;}
 
 .vps_profile_title .vps_quick_info{
 	font-size: 14px;
-	color: #cca79f;
+	color: #786265;
+	font-weight: 400;
 }
 
 .vps_profile_icon{
@@ -1068,14 +1086,14 @@ li{ margin: 0px; padding: 0px; list-style: none;}
 }
 
 .vps_profile .column .priority .property{
-	font-size: 14px;
+	font-size: 13px;
 	color: #cca79f;
 	line-height: 35px;
 }
 
 .vps_profile .column .priority .value{
-	font-size: 25px;
-	font-weight: strong;
+	font-size: 27px;
+	font-weight: 600;
 }
 
 .vps_profile .column .priority .value2{
@@ -1089,11 +1107,17 @@ li{ margin: 0px; padding: 0px; list-style: none;}
 	color: #786265;
 }
 
-.vps_profile .column .detail .detail_properties, .vps_profile .column .detail .detail_values{
+.vps_profile .column .detail .detail_properties{
 	float: left;
 	line-height: 30px;
 	margin-top: 20px;
-	font-weight: strong;
+	font-weight: 600;
+}
+
+.vps_profile .column .detail .detail_values{
+	float: left;
+	line-height: 30px;
+	margin-top: 20px;
 }
 
 .vps_profile .column .detail .detail_properties{
@@ -1101,8 +1125,8 @@ li{ margin: 0px; padding: 0px; list-style: none;}
 }
 
 .vps_profile .column .detail .detail_values .flag{
-	width: 25%;
-	height: 25%;
+	width: 17%;
+	height: 17%;
 }
 
 .vps_profile .column .detail .detail_values a{
@@ -1413,7 +1437,7 @@ li{ margin: 0px; padding: 0px; list-style: none;}
 
 .billing_form p {
 	font-size: 20px;
-	font-weight: strong;
+	font-weight: 600;
 	
 }
 
@@ -1440,13 +1464,27 @@ li{ margin: 0px; padding: 0px; list-style: none;}
 	float: left;
 }
 
+.billingprice label > input + div:hover{
+	width: 100px;
+	font-size: 15px;
+	border-radius: 3px;
+	cursor: pointer;
+	background: white;
+	border: 1px solid #1566B6;
+	color: black;
+	margin-right: 12px;
+	padding: 15px 0;
+	text-align: center;
+	float: left;
+}
+
 .billingprice label > input:checked + div{
 	width: 100px;
 	font-size: 15px;
 	border-radius: 3px;
 	cursor: pointer;
 	background: #1566B6;
-	border: none;
+	border: 1px solid #1566B6;
 	color: white;
 	margin-right: 12px;
 	text-align: center;
@@ -1475,6 +1513,128 @@ li{ margin: 0px; padding: 0px; list-style: none;}
 	border-radius: 3px;
 	font-weight: bold;
 }
+
+
+
+/*-----------------billing_history------------------*/
+
+
+
+.billing_settings{
+	width: 1100px;
+	margin: 0 0 0 185px;
+}
+
+.billing_settings .balance_description{
+	width: 1100px;
+	height: 150px;
+}
+
+.billing_settings .balance, .billing_settings .operator{
+	float: left;
+}
+
+.billing_settings .balance_description .balance{
+	width: 305px;
+	height: 120px;
+	padding: 20px 0 0 0;
+	border: 1px solid #DCDEE0;
+	border-radius: 3px;
+	text-align: center;
+	line-height: 45px;
+}
+
+.billing_settings .balance_description .balance .balance_value{
+	font-size: 20px;
+	font-weight: 600;
+	color: #7db347;
+}
+
+.billing_settings .balance_description .balance .charge{
+	color: #ff0000;
+}
+
+.billing_settings .balance_description .balance .balance_name{
+	font-size: 14px;
+}
+
+.billing_settings .balance_description .operator{
+	color: #626466;
+	font-weight: 500;
+	font-size: 40px;
+	margin: 45px 35px;
+}
+
+
+
+.billing_settings .detail{
+	margin: 20px 0 0 0;
+	font-size: 15px;
+	
+}
+
+.billing_settings .detail .c1{
+	width: 265px;
+}
+
+.billing_settings .detail .c2{
+	width: 200px;
+}
+
+.billing_settings .detail .c3{
+	width: 140px;
+}
+
+.billing_settings .detail .c4{
+	width: 140px;
+}
+
+.billing_settings .detail .c5{
+	width: 180px;
+}
+
+.billing_settings .detail .c6{
+	width: 50px;
+}
+
+
+.billing_settings .notification{
+	margin: 50px 0 0 0;
+}
+
+.billing_settings .notification span{
+	font-size: 19px;
+	font-weight: bold;
+}
+
+.billing_settings .notification select{
+	width: 300px;
+	padding: 15px 10px;
+	border: 1px solid #dcddde;
+	border-radius: 3px;
+	margin: 30px 25px 0 0;
+	font-size: 15px;
+	font-family: Raleway, sans-serif;
+    color: #616366;
+}
+
+.billing_settings .notification input{
+	width: 140px;
+	height: 50px;
+	background: #2088e3;
+	border: 1px solid #2088e3;
+	border-radius: 3px;
+	color: white;
+	font-size: 15px;
+	font-weight: bold;
+}
+
+
+
+
+
+
+
 
 
 /* style message  */
