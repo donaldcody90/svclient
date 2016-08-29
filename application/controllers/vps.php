@@ -58,12 +58,12 @@ class Vps extends CI_Controller
 	}
 	
 	
-	function update($uid)
+	function update($id)
 	{
 		
 		if ($this->input->post('save'))
 		{
-			$params_where= array('id' => $uid);
+			$params_where= array('id' => $id);
 			$data = array();
 			
 			$ip = $this->input->post('edit_ip');
@@ -92,7 +92,7 @@ class Vps extends CI_Controller
 			}
 		}
 		
-		$params_where= array('id'=> $uid);
+		$params_where= array('id'=> $id);
 		$data['row']= $this->vps_model->findVps($params_where);
 		if($data['row'])
 		{
@@ -105,7 +105,20 @@ class Vps extends CI_Controller
 	}
 	
 	
-	
+	function settings()
+	{
+		$params_where= array('v.id'=> 6);   // $id
+		$result['data']= $this->vps_model->getVps($params_where);
+		
+		if ($result['data']['cid']= $this->session->userdata('user_id'))
+		{
+			$this->load->view('vps/settings', $result);
+		}
+		else
+		{
+			redirect('auth/login');
+		}
+	}
 	
 	
 	

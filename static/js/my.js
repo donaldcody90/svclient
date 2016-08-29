@@ -1,6 +1,21 @@
 $(document).ready(function () {
    var location = window.location;
    var found = false;
+   $(".main-menu ul li p").each(function(){
+      var pclass = $(this).attr('class');
+      if(href=='menu2'){
+         $(this).parent().addClass("selected");
+         found = true;
+      }
+   });
+   if(!found){
+      $(".main-menu a li:first").addClass("selected");
+   }
+});
+
+$(document).ready(function () {
+   var location = window.location;
+   var found = false;
    $(".credit_card a").each(function(){
       var href = $(this).attr("href");
       if(href==location){
@@ -10,6 +25,36 @@ $(document).ready(function () {
    });
    if(!found){
       $(".credit_card li:first").addClass("selected");
+   }
+});
+
+$(document).ready(function () {
+   var location = window.location;
+   var found = false;
+   $(".nav a").each(function(){
+      var href = $(this).attr("href");
+      if(href==location){
+         $(this).parent().addClass("selected");
+         found = true;
+      }
+   });
+   if(!found){
+      $(".nav li:first").addClass("selected");
+   }
+});
+
+$(document).ready(function () {
+   var location = window.location;
+   var found = false;
+   $(".vps_modification a").each(function(){
+      var href = $(this).attr("href");
+      if(href==location){
+         $(this).parent().addClass("selected");
+         found = true;
+      }
+   });
+   if(!found){
+      $(".vps_modification li:first").addClass("selected");
    }
 });
 

@@ -7,6 +7,11 @@ a{ color: #4B4B4D; text-decoration: none; transition: color 0.15s ease-in-out 0s
 a:hover {text-decoration: none;color: #009345;}
 li{ margin: 0px; padding: 0px; list-style: none;}
 
+.main-body{
+	width: 1100px;
+	margin: 0 0 0 185px;
+}
+
 table tr{
     border-bottom: 1px solid #EDEFF2;
     line-height: 27px;
@@ -17,7 +22,59 @@ table td{
     padding: 10px;
 }
 
+.nav{
+	width: 100%;
+	height: 40px;
+	border-bottom: 1px solid #ebeef0;
+	padding: 0 0 1px 0;
+	margin: 0 0 50px 0;
+}
 
+.nav ul{
+	margin: 0 0 0 185px;
+}
+
+.nav ul li{
+	float: left;
+	margin: 0 40px 0px 0;
+	font-size: 15px;
+	color: #616366;
+	line-height: 40px;
+}
+
+.nav ul li:hover a{
+	color: #1566B6;
+}
+
+.nav ul li.selected{
+	border-bottom: 2px solid #1566B6;
+}
+
+.nav ul li.selected a{
+	color: #1566B6;
+}
+
+
+.deploy_new_server{
+	position: relative;
+	top: 15px;
+	left: 1240px;
+	text-align: center;
+	width: 50px;
+	height: 50px;
+	background: #2088e3;
+	border-radius: 50%;
+	font-size: 50px;
+	color: white;
+	font-weight: 100;
+	cursor: pointer;
+}
+
+.deploy_new_server span{
+	position: relative;
+	bottom: 46px;
+	
+}
 
 /*---------------Login-------------------*/
 
@@ -208,15 +265,15 @@ table td{
     width: 110px;
     height: 30000px;
     background: #1566B6;
-    padding: 0;
-    font-family: Raleway, sans-serif;
+    font-family: Tahoma;
     font-weight: bold;
+	font-size: 14px;
 	position: fixed;
 	z-index: 2;
 }
 
 .main-menu ul li{
-    padding-top: 35px;
+    margin-top: 40px;
     list-style: none;
 }
 
@@ -224,9 +281,40 @@ table td{
     color: #A1C8EE;
 }
 
-.logo{
-    padding-bottom: 15px;
+.main-menu .logo{
+    margin-bottom: 55px;
 }
+
+.main-menu .logo img{
+	width: 35%;
+	height: 35%;
+}
+
+
+/*
+.main-menu ul li.selected:after {
+    content: "";
+    width: 0;
+    height: 0;
+    position: absolute;
+    border-width: 6px 6px 6px 0;
+    border-style: solid;
+    border-color: yellow transparent;
+	z-index: 10000;
+}
+
+.main-menu ul li.selected:before {
+    content: "";
+    width: 0;
+    height: 0;
+    position: absolute;
+    border-width: 8px 8px 8px 0;
+    border-style: solid;
+    border-color: red transparent;    
+	z-index: 10000;
+}
+*/
+
 
 .menu2{
     color: white;
@@ -381,7 +469,7 @@ table td{
 .title{
     font-size: 25px;
     font-weight: bold;
-    margin: 40px 300px 60px 185px;
+    margin: 40px 300px 30px 185px;
 }
 
 /*-------------------------------------------------
@@ -1134,6 +1222,107 @@ table td{
 }
 
 
+/*-------------------VPS settings-----------*/
+
+
+.vps_settings .vps_modification{
+	float: left;
+	height: 600px;
+	line-height: 40px;
+	margin: 0 100px 0 0;
+}
+
+.vps_settings .vps_modification li{
+	font-size: 15px;
+	color: #626466;
+	cursor: pointer;
+	/*border-bottom: 2px solid #626466;*/
+	margin: 0 0 10px 0;
+}
+
+.vps_settings .vps_modification1{
+	width: 35px;
+}
+
+/*----*/
+.vps_settings .vps_modification ul li:hover a{
+	color: #1566B6;
+}
+
+.vps_settings .vps_modification ul li.selected{
+	border-bottom: 2px solid #1566B6;
+}
+
+.vps_settings .vps_modification ul li.selected a{
+	color: #1566B6;
+}
+/*----*/
+
+.vps_settings .vps_modification_title{
+	font-size: 20px;
+	font-weight: 600;
+	line-height: 60px;
+}
+
+.vps_settings .vps_modification_subtitle{
+	font-size: 15px;
+	line-height: 40px;
+}
+
+.vps_settings .modify1 a{
+	color: #2088e3;
+}
+
+.vps_settings .modify1 table .row1{
+	font-size: 13px;
+	color: #9da2a6;
+}
+
+.vps_settings .modify1 table .row2{
+	font-size: 15px;
+}
+
+.vps_settings .modify1 table .column1{
+	width: 170px;
+}
+
+.vps_settings .modify1 table .column2{
+	width: 200px;
+}
+
+.vps_settings .modify1 table .column3{
+	width: 140px;
+}
+
+.vps_settings .modify1 table .column4{
+	width: 170px;
+}
+
+.vps_settings .modify1 table .column5{
+	width: 120px;
+}
+
+.vps_settings .modify2{
+	margin: 30px 0 0 0;
+}
+
+.vps_settings .modify2 .show_details{
+	font-size: 15px;
+	color: #2088e3;
+	font-weight: 500; 
+}
+
+.vps_settings .modify2 button{
+	border: 1px solid #2088e3;
+	border-radius: 3px;
+	padding: 15px 25px;
+	color: #2088e3;
+	font-weight: 600;
+	font-size: 15px;
+	background: white;
+}
+
+
 
 /*--------------------Ticket_list-----------*/
 
@@ -1429,8 +1618,13 @@ table td{
 	color: #1566B6;
 }
 
-.credit_card ul li.selected, .credit_card ul li:hover{
+.credit_card ul li.selected{
 	border-bottom: 2px solid #1566B6;
+	margin: 8px 0;
+	width: 55px;
+}
+
+.credit_card ul li:hover{
 	margin: 8px 0;
 	width: 70px;
 }

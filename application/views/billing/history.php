@@ -1,7 +1,15 @@
 <?php $this->load->view('_base/header'); ?>
 			
             <div class="title">Billing</div>
-
+			
+			<div class="nav">
+				<ul>
+					<li><a href="<?php echo site_url('billing/paypal'); ?>">Add Funds</a></li>
+					<li><a href="<?php echo site_url('billing/history'); ?>">History</a></li>
+				</ul>
+				<a href="<?php echo site_url('deploynewserver'); ?>"><div class="deploy_new_server"><span>+</span></div></a>
+			</div>
+			
 			<div class="billing_settings">
 			
 				<div class="balance_description">

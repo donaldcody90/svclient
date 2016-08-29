@@ -102,9 +102,9 @@ class Billing extends CI_Controller
 		
 	}
 	
-	function settings()
+	function history()
 	{
-		$this->load->view('billing/settings');
+		$this->load->view('billing/history');
 	}
 	
 	

@@ -26,12 +26,12 @@
 		?>
 			<div class="main-menu">
 				<center><ul>
-					<li class="logo"><a href="#"><img src="<?php echo base_url(); ?>static/images/logo1.png"></a></li>
-					<li><a href="<?php echo site_url().'vps'; ?>"><img src="<?php echo base_url(); ?>static/images/logo12.png"><p <?php echo $cController == 'vps' ? 'class="menu2"':'class="menu1"'; ?> >Servers</p></a></li>
-					<li><a href="<?php echo site_url().'billing'; ?>"><img src="<?php echo base_url(); ?>static/images/logo3.png"><p <?php echo $cController == 'billing' ? 'class="menu2"':'class="menu1"'; ?> >Billing</p></a></li>
-					<li><a href="<?php echo site_url().'support/lists'; ?>"><img src="<?php echo base_url(); ?>static/images/logo4.png"><p <?php echo $cController == 'support' ? 'class="menu2"' : 'class="menu1"'; ?>>Support</p></a></li>
-					<li><a href="#"><img src="<?php echo site_url(); ?>static/images/logo5.png"><p class="menu1">Affiliate</p></a></li>
-					<li><a href="<?php echo site_url().'users'; ?>"><img src="<?php echo base_url(); ?>static/images/logo6.png"><p <?php echo $cController == 'users' ? 'class="menu2"':'class="menu1"'; ?> >Account</p></a></li>
+					<a href="#"><li class="logo"><img src="<?php echo base_url(); ?>static/images/logo1.png"></li></a>
+					<a href="<?php echo site_url().'vps'; ?>"><li><img src="<?php echo base_url(); ?>static/images/logo12.png"><p <?php echo $cController == 'vps' ? 'class="menu2"':'class="menu1"'; ?> >Servers</p></li></a>
+					<a href="<?php echo site_url().'billing'; ?>"><li><img src="<?php echo base_url(); ?>static/images/logo3.png"><p <?php echo $cController == 'billing' ? 'class="menu2"':'class="menu1"'; ?> >Billing</p></li></a>
+					<a href="<?php echo site_url().'support/lists'; ?>"><li><img src="<?php echo base_url(); ?>static/images/logo4.png"><p <?php echo $cController == 'support' ? 'class="menu2"' : 'class="menu1"'; ?>>Support</p></li></a>
+					<a href="#"><li><img src="<?php echo site_url(); ?>static/images/logo5.png"><p class="menu1">Affiliate</p></li></a>
+					<a href="<?php echo site_url().'users'; ?>"><li><img src="<?php echo base_url(); ?>static/images/logo6.png"><p <?php echo $cController == 'users' ? 'class="menu2"':'class="menu1"'; ?> >Account</p></li></a>
 				</ul></center>
 			</div>
 			

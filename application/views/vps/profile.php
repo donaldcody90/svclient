@@ -19,6 +19,15 @@
 				<a href=""><img src="<?php echo site_url('static/images').'/logo34.png'; ?>" /></a>
 				<a href=""><img src="<?php echo site_url('static/images').'/logo35.png'; ?>" /></a>
 			</div>
+			
+			<div class="nav">
+				<ul>
+					<li><a href="<?php echo site_url('vps/profile').'/'.$data['id']; ?>">Overview</a></li>
+					<li><a href="<?php echo site_url('vps/settings'); ?>">Settings</a></li>
+				</ul>
+				<a href="<?php echo site_url('deploynewserver'); ?>"><div class="deploy_new_server"><span>+</span></div></a>
+			</div>
+			
 			<?php $this->load->view('_base/message'); ?>
 			
             <div class="vps_profile">

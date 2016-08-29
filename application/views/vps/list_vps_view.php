@@ -6,7 +6,7 @@
             
 			<div class="list-DC">
 				<div>
-					<a href="<?php echo base_url().'vps/add'; ?>"><button>Add new Server</button></a>
+					<a href="<?php echo base_url().'deploynewserver'; ?>"><button>Add new Server</button></a>
 					
 					<div class="search">
 						<?php echo form_open(base_url().'vps/lists', 'method= "GET"'); ?>
