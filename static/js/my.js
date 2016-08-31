@@ -3,7 +3,7 @@ $(document).ready(function () {
    var found = false;
    $(".main-menu ul li p").each(function(){
       var pclass = $(this).attr('class');
-      if(href=='menu2'){
+      if(pclass=='menu2'){
          $(this).parent().addClass("selected");
          found = true;
       }
@@ -16,15 +16,15 @@ $(document).ready(function () {
 $(document).ready(function () {
    var location = window.location;
    var found = false;
-   $(".credit_card a").each(function(){
+   $(".billing_type a").each(function(){
       var href = $(this).attr("href");
-      if(href==location){
+      if(location==href){
          $(this).parent().addClass("selected");
-         found = true;
+		 found = true;
       }
    });
    if(!found){
-      $(".credit_card li:first").addClass("selected");
+      $(".billing_type li:first").addClass("selected");
    }
 });
 
@@ -75,3 +75,62 @@ $(document).ready(function () {
 	});
 	
 });
+
+$(document).ready(function () {
+	var location = window.location;
+	var action = false;
+	$(".billing_form .billingprice label input").click(function(){
+		var value= $(this).attr('value');
+		if(value)
+		{
+			$(".billing_form form").attr('action', location + '/' + value);
+			action= true;
+		}else{
+			$(".billing_form form").attr('action', location);
+			action= true;
+		}
+	});
+	if(!action){
+		var value= $(".billing_form .billingprice label input:first").attr('value');
+		if(value)
+		{
+			$(".billing_form form").attr('action', location + '/' + value);
+		}else{
+			$(".billing_form form").attr('action', location);
+		}
+	}
+	
+});
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

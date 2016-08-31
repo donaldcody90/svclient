@@ -13,7 +13,12 @@ class Billing extends CI_Controller
 	
 	function index()
 	{
-		redirect('billing/paypal');
+		redirect('billing/creditcard');
+	}
+	
+	function creditcard()
+	{
+		$this->load->view('billing/creditcard/index');
 	}
 	
 	function paypal()
@@ -99,6 +104,128 @@ class Billing extends CI_Controller
 			$keyarray['listProduct']= $this->getListProducts($keyarray);
 		}
 		return $keyarray;
+		
+	}
+	
+	function bitcoin($price= null)
+	{
+		if($this->input->post('submit') or $this->input->post('submit2'))
+		{
+			require_once APPPATH.'third_party\bitcoin\cryptobox.class.php';
+			
+			//$price= $this->input->post('amount_1');
+			$options = array( 
+				"public_key"  => "6026AANTIP1Bitcoin77BTCPUBDLgfBeavOlxvRE6pXaLOArYY",         // place your public key from gourl.io
+				"private_key" => "6026AANTIP1Bitcoin77BTCPRVexTOI8GIvYgL2FfiDcHcUPOj",         // place your private key from gourl.io
+				"webdev_key"  => "",        // optional, gourl affiliate program key
+				"orderID"     => "product1", // few your users can have the same orderID but combination 'orderID'+'userID' should be unique
+				"userID"      => "",        // optional; place your registered user id here (user1, user2, etc)
+						// for example, on premium page you can use for all visitors: orderID="premium" and userID="" (empty) 
+						// when userID value is empty - system will autogenerate unique identifier for every user and save it in cookies 
+				"userFormat"  => "COOKIE",   // save your user identifier userID in cookies. Available: COOKIE, SESSION, IPADDRESS, MANUAL
+				"amount"      => 0,         // amount in cryptocurrency or in USD below
+				"amountUSD"   => $price,         // price is 2 USD; it will convert to cryptocoins amount, using Live Exchange Rates
+											// For convert fiat currencies Euro/GBP/etc. to USD, use function convert_currency_live()
+				"period"      => "24 HOUR",  // payment valid period, after 1 day user need to pay again
+				"iframeID"    => "",         // optional; when iframeID value is empty - system will autogenerate iframe html payment box id
+				"language"    => "EN"       // text on EN - english, FR - french, please contact us and we can add your language
+				);  
+				
+			// Initialise Bitcoin Payment Class 
+			$box = new Cryptobox ($options);
+
+			// Display payment box with custom width = 560 px and big qr code / or successful result
+			$payment_box = $box->display_cryptobox(true, 560, 230, "border-radius:15px;border:1px solid #eee;padding:3px 6px;margin:10px;",
+							"display:inline-block;max-width:580px;padding:15px 20px;border:1px solid #eee;margin:7px;line-height:25px;"); 
+			$data['payment_box']= $payment_box;
+			// Log
+			$data['message'] = "";
+			
+			// A. Process Received Payment
+			if ($box->is_paid()) 
+			{
+				$data['message'] .= "A. User will see this message during 24 hours after payment has been made!";
+				
+				$data['message'] .= "<br>".$box1->amount_paid()." ".$box1->coin_label()."  received<br>";
+			//redirect('billing/bitcoin');
+				// Your code here to handle a successful cryptocoin payment/captcha verification
+				// For example, give user 24 hour access to your member pages
+				// ...
+			
+				// Please use IPN (instant payment notification) function cryptobox_new_payment() for update db records, etc
+				// Function cryptobox_new_payment($paymentID = 0, $payment_details = array(), $box_status = "") called every time 
+				// when a new payment from any user is received.
+				// IPN description: https://gourl.io/api-php.html#ipn 
+			}  
+			else 
+			{
+				$data['message'] .= "The payment has not been made yet";
+			//redirect('billing/bitcoin');
+			}
+			$this->load->view('billing/bitcoin/payment', $data);
+		}
+		else{
+			$param_where= array('id' => 1);
+			$data['paypal']= $this->billing_model->getPaypal($param_where);
+			$this->load->view('billing/bitcoin/index');
+		}
+	}
+	
+	function bitcoinpayment()
+	{
+		
+			require_once APPPATH.'third_party\bitcoin\cryptobox.class.php';
+			
+			$price= $this->input->post('amount_1');
+			$options = array( 
+				"public_key"  => "6026AANTIP1Bitcoin77BTCPUBDLgfBeavOlxvRE6pXaLOArYY",         // place your public key from gourl.io
+				"private_key" => "6026AANTIP1Bitcoin77BTCPRVexTOI8GIvYgL2FfiDcHcUPOj",         // place your private key from gourl.io
+				"webdev_key"  => "",        // optional, gourl affiliate program key
+				"orderID"     => "product1", // few your users can have the same orderID but combination 'orderID'+'userID' should be unique
+				"userID"      => "",        // optional; place your registered user id here (user1, user2, etc)
+						// for example, on premium page you can use for all visitors: orderID="premium" and userID="" (empty) 
+						// when userID value is empty - system will autogenerate unique identifier for every user and save it in cookies 
+				"userFormat"  => "COOKIE",   // save your user identifier userID in cookies. Available: COOKIE, SESSION, IPADDRESS, MANUAL
+				"amount"      => 0,         // amount in cryptocurrency or in USD below
+				"amountUSD"   => $price,         // price is 2 USD; it will convert to cryptocoins amount, using Live Exchange Rates
+											// For convert fiat currencies Euro/GBP/etc. to USD, use function convert_currency_live()
+				"period"      => "24 HOUR",  // payment valid period, after 1 day user need to pay again
+				"iframeID"    => "",         // optional; when iframeID value is empty - system will autogenerate iframe html payment box id
+				"language"    => "EN"       // text on EN - english, FR - french, please contact us and we can add your language
+				);  
+				
+			// Initialise Bitcoin Payment Class 
+			$box = new Cryptobox ($options);
+
+			// Display payment box with custom width = 560 px and big qr code / or successful result
+			$payment_box = $box->display_cryptobox(true, 560, 230, "border-radius:15px;border:1px solid #eee;padding:3px 6px;margin:10px;",
+							"display:inline-block;max-width:580px;padding:15px 20px;border:1px solid #eee;margin:7px;line-height:25px;"); 
+			$data['payment_box']= $payment_box;
+			// Log
+			$data2['message'] = "";
+			
+			// A. Process Received Payment
+			if ($box->is_paid()) 
+			{
+				$data2['message'] .= "A. User will see this message during 24 hours after payment has been made!";
+				
+				$data2['message'] .= "<br>".$box1->amount_paid()." ".$box1->coin_label()."  received<br>";
+				redirect('billing/bitcoin');
+				// Your code here to handle a successful cryptocoin payment/captcha verification
+				// For example, give user 24 hour access to your member pages
+				// ...
+			
+				// Please use IPN (instant payment notification) function cryptobox_new_payment() for update db records, etc
+				// Function cryptobox_new_payment($paymentID = 0, $payment_details = array(), $box_status = "") called every time 
+				// when a new payment from any user is received.
+				// IPN description: https://gourl.io/api-php.html#ipn 
+			}  
+			else 
+			{
+				$data2['message'] .= "The payment has not been made yet";
+				redirect('billing/bitcoin');
+			}
+			$this->load->view('billing/bitcoin/payment', $data);
 		
 	}
 	

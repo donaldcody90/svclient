@@ -22,22 +22,12 @@
 				</div>
 				
 				<div class="billing_form">
-					<form method="post" action="<?php echo $this->config->item('posturl'); ?>">
+					<form action="" method="post">
 						
-						<p>Make a PayPal Payment</p>
+						<p>Make a Bitcoin Payment</p>
 						
 						<div class="billingprice">
 						
-							<input type="hidden" name="upload" value="1" />
-							<input type="hidden" name="return" value="<?php echo $this->config->item('returnurl');?>" />
-							<input type="hidden" name="notify_url" value="<?php echo $this->config->item('notifyurl');?>" />
-							<input type="hidden" name="cmd" value="_cart" />
-							<input type="hidden" name="business" value="<?php echo $paypal['meta_value']; ?>" />
-							
-							<!-- Product 1 -->
-							<input type="hidden" name="item_name_1" value="PayPal Payment" />
-							<input type="hidden" name="item_number_1" value="1" />
-							
 							<label>
 								<input type="radio" name="amount_1" value="5" checked />
 								<div>$5</div>
@@ -63,13 +53,10 @@
 								<div>$250</div>
 							</label>
 							
-							<input type="hidden" name="quantity_1" value="1" />
 						
 						</div>
 						
-						<button type="submit">Pay with PayPal</button>
-						
-						<!-- <input type="image" src="https://www.paypal.com/en_US/i/btn/btn_xpressCheckout.gif"> -->
+						<input type="submit" name="submit" value="Pay with Bitcoin" class="bitcoin_submit"/>
 						
 					</form>
 				</div>

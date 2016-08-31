@@ -1596,43 +1596,51 @@ table td{
 	height: 300px;
 }
 
-.credit_card, .billing_form{
+.billing_type, .billing_form{
 	float: left;
 }
 
-.credit_card{
+.billing_type{
 	margin-right: 100px;
 	color: #656366;
 }
 
-.credit_card ul li{
+.billing_type ul li{
 	padding: 15px 0;
 	margin: 8px 0;
 }
 
-.credit_card ul li a{
-	color: #656366;
+.billing_type ul li.creditcard{
+	width: 88px;
 }
 
-.credit_card ul li.selected a, .credit_card ul li:hover a{
-	color: #1566B6;
-}
-
-.credit_card ul li.selected{
-	border-bottom: 2px solid #1566B6;
-	margin: 8px 0;
+.billing_type ul li.paypal{
 	width: 55px;
 }
 
-.credit_card ul li:hover{
-	margin: 8px 0;
-	width: 70px;
+.billing_type ul li.bitcoin{
+	width: 55px;
 }
 
-.billing_form p {
-	font-size: 20px;
-	font-weight: 600;
-	
+.billing_type ul li.giftcode{
+	width: 72px;
+}
+
+.billing_type ul li a{
+	color: #656366;
+}
+
+.billing_type ul li.selected a, .billing_type ul li:hover a{
+	color: #1566B6;
+}
+
+.billing_type ul li.selected{
+	border-bottom: 2px solid #1566B6;
+	margin: 8px 0;
+}
+
+.billing_type ul li:hover{
+	margin: 8px 0;
 }
 
 .billingprice {
@@ -1685,7 +1693,7 @@ table td{
 	float: left;
 }
 
-.billing_form button{
+.billing_form button, .billing_form .bitcoin_submit{
 	width: 670px;
 	padding: 15px 0;
 	margin-top: 40px;
@@ -1706,6 +1714,11 @@ table td{
 	cursor: pointer; 
 	border-radius: 3px;
 	font-weight: bold;
+}
+
+.billing_form .bitcoin_message{
+	margin: 0 0 20px 150px;
+	color: red;
 }
 
 
