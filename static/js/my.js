@@ -18,7 +18,8 @@ $(document).ready(function () {
    var found = false;
    $(".billing_type a").each(function(){
       var href = $(this).attr("href");
-      if(location==href){
+	  var n= encodeURI(location);
+      if(href != 0 && n.indexOf(href) == 0){
          $(this).parent().addClass("selected");
 		 found = true;
       }
