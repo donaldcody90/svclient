@@ -25,7 +25,7 @@
 					<li><a href="<?php echo site_url('vps/profile').'/'.$data['id']; ?>">Overview</a></li>
 					<li><a href="<?php echo site_url('vps/settings'); ?>">Settings</a></li>
 				</ul>
-				<a href="<?php echo site_url('deploynewserver'); ?>"><div class="deploy_new_server"><span>+</span></div></a>
+				<a href="<?php echo site_url('deploy'); ?>"><div class="deploy_new_server"><span>+</span></div></a>
 			</div>
 			
 			<?php $this->load->view('_base/message'); ?>

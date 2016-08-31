@@ -8,9 +8,6 @@ $(document).ready(function () {
          found = true;
       }
    });
-   if(!found){
-      $(".main-menu a li:first").addClass("selected");
-   }
 });
 
 $(document).ready(function () {

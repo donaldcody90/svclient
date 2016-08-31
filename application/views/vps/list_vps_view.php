@@ -1,6 +1,22 @@
 <?php $this->load->view('_base/header'); ?>
 			
-            <div class="title">VPS List</div>
+            <div class="title">Servers</div>
+			
+			<div class="nav">
+				<ul>
+					<li><a href="<?php echo site_url('vps/lists'); ?>">Profile</a></li>
+					<li><a href="">Instances</a></li>
+					<li><a href="">Snapshots</a></li>
+					<li><a href="">ISO</a></li>
+					<li><a href="">Startup Scripts</a></li>
+					<li><a href="">SSH Keys</a></li>
+					<li><a href="">DNS</a></li>
+					<li><a href="">Backups</a></li>
+					<li><a href="">Block Storage</a></li>
+					<li><a href="">Reserved IPs</a></li>
+				</ul>
+				<a href="<?php echo site_url('deploy'); ?>"><div class="deploy_new_server"><span>+</span></div></a>
+			</div>
 			
 			<?php $this->load->view('_base/message'); ?>
             

@@ -2,6 +2,16 @@
 			
             <div class="title">User Information</div>
 			
+			<div class="nav">
+				<ul>
+					<li><a href="<?php echo site_url('users/profile').'/'.$row['id']; ?>">Profile</a></li>
+					<li><a href="<?php echo site_url('users/update').'/'.$row['id']; ?>">Authentication</a></li>
+					<li><a href="">API</a></li>
+					<li><a href="">Notifications</a></li>
+				</ul>
+				<a href="<?php echo site_url('deploy'); ?>"><div class="deploy_new_server"><span>+</span></div></a>
+			</div>
+			
 			<?php $this->load->view('_base/message'); ?>
 
             <div class="edit-view">

@@ -4,10 +4,10 @@
 			
 			<div class="nav">
 				<ul>
-					<li><a href="<?php echo site_url('billing/paypal'); ?>">Add Funds</a></li>
+					<li><a href="<?php echo site_url('billing'); ?>">Add Funds</a></li>
 					<li><a href="<?php echo site_url('billing/history'); ?>">History</a></li>
 				</ul>
-				<a href="<?php echo site_url('deploynewserver'); ?>"><div class="deploy_new_server"><span>+</span></div></a>
+				<a href="<?php echo site_url('deploy'); ?>"><div class="deploy_new_server"><span>+</span></div></a>
 			</div>
 			
 			<div class="billing_settings">

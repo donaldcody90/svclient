@@ -37,7 +37,14 @@ class Vps extends CI_Controller
 			
 		$data['result']= $this->vps_model->listVps($filterData, $limit, $start);
 		$data['link']= $this->pagination->create_links();
-		$this->load->view('vps/list_vps_view', $data);
+		if(count($data['result']) == 0)
+		{
+			redirect('deploy');
+		}
+		else
+		{
+			$this->load->view('vps/list_vps_view', $data);
+		}
 		
 	}
 	

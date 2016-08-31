@@ -15,6 +15,14 @@
 				</p>
 			</div>
 			
+			<div class="nav">
+				<ul>
+					<li><a href="">Knowledgebase</a></li>
+					<li><a href="<?php echo site_url('support/lists'); ?>">Tickets</a></li>
+				</ul>
+				<a href="<?php echo site_url('deploy'); ?>"><div class="deploy_new_server"><span>+</span></div></a>
+			</div>
+			
 			<div class="ticket">
 			
 				<div>
