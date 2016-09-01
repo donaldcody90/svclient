@@ -53,10 +53,9 @@
 								<div>$250</div>
 							</label>
 							
-						
 						</div>
 						
-						<input type="submit" name="submit" value="Pay with Bitcoin" class="bitcoin_submit"/>
+						<input type="submit" name="submit" value="Pay with Bitcoin" class="submit"/>
 						
 					</form>
 				</div>
