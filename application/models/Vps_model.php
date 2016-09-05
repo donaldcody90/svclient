@@ -70,9 +70,10 @@ class Vps_model extends MY_Model
 	 
 	 
 	 function listVps($filter, $limit, $start){
-		$this->db->select('v.id, s.label, v.vps_label, v.vps_ip, v.create_date');
+		$this->db->select('v.id, v.vps_label, v.vps_ip, v.create_date, s.label, s.location, p.ram');
 		$this->db->from("$this->vps as v");
 		$this->db->join("$this->servers as s", 'v.svid = s.id');
+		$this->db->join("$this->plans as p", 'v.pid = p.id');
 		vst_buildFilter($filter);
 		$this->db->limit($limit, $start);
 		return $this->db->get()->result();
@@ -80,9 +81,10 @@ class Vps_model extends MY_Model
 	 
 	 
 	 function totalVps($filter){
-		$this->db->select('v.id, s.label, v.vps_label, v.vps_ip, v.create_date');
+		$this->db->select('v.id, v.vps_label, v.vps_ip, v.create_date, s.label, s.location, p.ram');
 		$this->db->from("$this->vps as v");
 		$this->db->join("$this->servers as s", 'v.svid = s.id');
+		$this->db->join("$this->plans as p", 'v.pid = p.id');
 		vst_buildFilter($filter);
 		return $this->db->get()->num_rows();
      }

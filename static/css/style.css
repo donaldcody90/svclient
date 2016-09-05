@@ -818,7 +818,7 @@ table td{
 }
 
 .list-DC .cot3{
-	width: 200px;
+	width: 50px;
 }
 
 .list-DC .cot4{
@@ -847,6 +847,10 @@ table td{
 
 .list-DC .cot8 a{
 	color: red;
+}
+
+.list-DC .flag{
+	width: 12%;
 }
 
 

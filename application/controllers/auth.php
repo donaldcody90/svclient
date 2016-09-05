@@ -31,7 +31,7 @@ class Auth extends CI_Controller {
 								'user_id' => $user_id,
 								'username' => $username
 							));
-				redirect('users');
+				redirect('billing');
 			}
 			else{
 				$this->session->set_flashdata('login_error', TRUE);

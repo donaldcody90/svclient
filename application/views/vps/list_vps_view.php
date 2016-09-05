@@ -50,9 +50,10 @@
 						<tr class="zhang1">
 							<td class="cot1">ID</td>
 							<td class="cot2">VPS Label</td>
-							<td class="cot3">VPS IP</td>
-							<td class="cot4">Datacenters</td>
-							<td class="cot5">Create Date</td>
+							<td class="cot3">OS</td>
+							<td class="cot4">Location</td>
+							<td class="cot5">Charges</td>
+							<td class="cot6">Status</td>
 							<td class="cot7"></td>
 							<td class="cot8"></td>
 						</tr>
@@ -61,10 +62,14 @@
 						foreach($result as $row){ ?>
 						<tr>
 							<td><?php echo $row->id; ?></td>
-							<td><a href="<?php echo site_url().'vps/profile/'.$row->id; ?>"><?php echo $row->vps_label; ?></a></td>
-							<td><?php echo $row->vps_ip; ?></td>
-							<td><?php echo $row->label; ?></td>
-							<td><?php echo $row->create_date; ?></td>
+							<td>
+								<a href="<?php echo site_url().'vps/profile/'.$row->id; ?>"><?php echo $row->vps_label; ?></a><br>
+								<span><?php echo $row->ram.' MB Server - '.$row->vps_ip; ?></span>
+							</td>
+							<td></td>
+							<td><img class="flag" src="<?php echo site_url('static/images').'/flag_'.$row->location.'.png'; ?>"/>&nbsp;&nbsp;<?php echo $row->label; ?></td>
+							<td></td>
+							<td></td>
 							<td class="cot7"><a href="<?php echo base_url() . 'vps/update/' . $row->id; ?>" >Edit</a></td>
 							<td class="cot8"><a href="<?php echo base_url() . 'vps/delete/' . $row->id; ?>" onclick="return confirm('Are you sure you want to delete?')">Delete</a></td>
 						</tr>
