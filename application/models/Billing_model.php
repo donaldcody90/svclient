@@ -83,7 +83,8 @@ class Billing_model extends MY_Model
 			}
 			
 		}
-	}*/
+	}
+	*/
 	
 	function servercharge($date){
 		$sql= "UPDATE vps_lifetime as vl
