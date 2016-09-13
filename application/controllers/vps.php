@@ -134,19 +134,25 @@ class Vps extends CI_Controller
 		
 		if($this->input->post('deploy'))
 		{
-			$data['cid']= $this->session->userdata('user_id');
+			$data['cid']= $data2['cid']= $this->session->userdata('user_id');
 			$data['pid']= $this->input->post('plan');
 			$data['svid']= $this->input->post('server');
 			$data['vps_label']= $this->input->post('label');
 			$data['vps_ip']= $this->input->post('ip');
 			$data['rootpass']= RandomString(30);
 			$data['create_date']= date('Y-m-d H:i:s');
+			$data['status']= 1;
 			// $data['space']= $this->input->post('space');
 			// $data['ram']= $this->input->post('ram');
 			$result= $this->vps_model->addVps($data);
 			
 			if ($result == TRUE)
 			{
+				$data2['vps_id']= $result;
+				$data2['month']= date("m");
+				$data2['year']= date("Y");
+				$data2['start_date']= $data2['end_date']= date("Y-m-d H:i:s");
+				$this->vps_model->addVpslifetime($data2);
 				message_flash('Added Successfully!');
 				redirect('vps/lists');
 			}

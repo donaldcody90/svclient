@@ -51,9 +51,39 @@ class Billing_model extends MY_Model
 	}
 	
 	
+	/*
+		1. Đảm bảo là khi tạo VPS thì cần phải insert vào vps_lifetime
+		
+		2. Cần 1 hàm update lại tiền, ngày cho 1 VPS, truyền vào VPS ID --> Tháng hiện tại, Năm hiện tại 
+		
+		3. 1 hàm cronjob tự động tính tiền
+		 Duyệt tòan bộ VPS --> sau đó gọi cái hàm ở mục 2
 	
-
 	
+	function calVPSPrice($VPSID)
+	{
+		$currentDate=date('Y-m-d h:i:s');
+		$month=xxx
+		$year = xxx
+		$vps_hour_price= xxxx;
+		
+		UPDATE vps_lifetime set end_date=currentDate and amount=amount+$vps_hour_price where vps_id=$VPSID and month=$monht and year=yeah
+		
+	}
+	
+	function cronjobAllVPS
+	{
+		// lấy ra tòan bộ VPS
+		$vpss=$this->model->getAllVPS();
+		if($vpss)
+		{
+			foreach($vpss as $vp)
+			{
+				$this->calVPSPrice($vp['id']);
+			}
+			
+		}
+	}*/
 	
 	function servercharge($date){
 		$sql= "UPDATE vps_lifetime as vl

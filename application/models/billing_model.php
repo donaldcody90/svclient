@@ -58,7 +58,7 @@ class Billing_model extends MY_Model
 		
 		3. 1 hàm cronjob tự động tính tiền
 		 Duyệt tòan bộ VPS --> sau đó gọi cái hàm ở mục 2
-	*/
+	
 	
 	function calVPSPrice($VPSID)
 	{
@@ -83,7 +83,7 @@ class Billing_model extends MY_Model
 			}
 			
 		}
-	}
+	}*/
 	
 	function servercharge($date){
 		$sql= "UPDATE vps_lifetime as vl

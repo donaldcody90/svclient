@@ -7,6 +7,7 @@ class Vps_model extends MY_Model
 	private $servers= 'servers';
 	private $plans= 'plans';
 	private $customers= 'customers';
+	private $vps_lifetime= 'vps_lifetime';
 	
 	public function __construct()
 	{
@@ -103,6 +104,14 @@ class Vps_model extends MY_Model
 							'table'			=> $this->plans,
 							'param_where'  	=> $params_where,
 							'list'         	=> $is_list
+		));
+	}
+	
+	function addVpslifetime($data)
+	{
+		return $this->_save(array(
+				'table'		=> $this->vps_lifetime,
+				'data'		=> $data
 		));
 	}
 	 

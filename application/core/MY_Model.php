@@ -186,9 +186,9 @@ class MY_Model extends CI_Model{
 			$this->db->set($data);
 			// $this->db->insert($param['table']);
 			$insert = $this->db->insert($param['table'], $data);
-			// $insert_id = $this->db->insert_id();
+			$insert_id = $this->db->insert_id();
 			$this->db->flush_cache();
-			return $insert;
+			return $insert_id;
 		}
 		else{
 			$this->db->set($data);
