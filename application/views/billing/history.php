@@ -14,21 +14,21 @@
 			
 				<div class="balance_description">
 					<div class="balance">
-						<span class="balance_value">-$5.00</span><br>
+						<span class="balance_value">$<?php echo $pendingcharges['amount'] + $pendingcharges['total']; ?></span><br>
 						<span class="balance_name">Previous Balance</span>
 					</div>
 					
-					<span class="operator">+</span>
+					<span class="operator">-</span>
 					
 					<div class="balance">
-						<span class="balance_value charge">$0.54</span><br>
+						<span class="balance_value charge">$<?php echo $pendingcharges['total']; ?></span><br>
 						<span class="balance_name">Charges This Month</span>
 					</div>
 					
 					<span class="operator">=</span>
 					
 					<div class="balance">
-						<span class="balance_value">-$4.46</span><br>
+						<span class="balance_value">$<?php echo $pendingcharges['amount']; ?></span><br>
 						<span class="balance_name">Current Balance</span>
 					</div>
 				</div>
@@ -47,20 +47,21 @@
 						<tr>
 							<td>Pending Charges</td>
 							<td>---</td>
-							<td>0.54</td>
-							<td>-$4.46</td>
+							<td><?php echo '$'.$pendingcharges['total']; ?></td>
+							<td><?php echo '$'.$pendingcharges['amount']; ?></td>
 							<td></td>
 							<td><a href=""><img src="<?php echo site_url('static/images').'/logo39.png'; ?>" /></a></td>
 						</tr>
-					
+						<?php foreach($billing as $value){ ?>
 						<tr>
-							<td>Paypal</td>
-							<td>Aug 22 2016</td>
-							<td>-$5.00</td>
-							<td>-$5.00</td>
+							<td><?php echo $value['description']; ?></td>
+							<td><?php echo $value['created_date']; ?></td>
+							<td>$<?php echo $value['amount']; ?></td>
+							<td>$<?php echo $value['balance']; ?></td>
 							<td>completed</td>
 							<td><a href=""><img src="<?php echo site_url('static/images').'/logo39.png'; ?>" /></a></td>
 						</tr>
+						<?php } ?>
 					</table>
 				</div>
 				

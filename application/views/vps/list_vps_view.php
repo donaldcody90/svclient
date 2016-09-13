@@ -21,27 +21,10 @@
 			<?php $this->load->view('_base/message'); ?>
             
 			<div class="list-DC">
-				<div>
-					<a href="<?php echo base_url().'deploy'; ?>"><button>Add new Server</button></a>
-					
-					<div class="search">
+				<div class="search">
 						<?php echo form_open(base_url().'vps/lists', 'method= "GET"'); ?>
 							<input type="search" value="<?php echo $this->input->get('filter_vps_ip') ?>" name="filter_vps_ip" placeholder="Search by IP" />
 						<?php echo form_close() ?>
-					</div>
-				</div>
-				
-				<div>
-					<center><?php 
-						if ($this->session->flashdata('success'))
-						{
-							echo '<div class="error change_message">Successful!</div>';
-						}
-						if ($this->session->flashdata('error'))
-						{
-							echo '<div class="error change_message">Failed!</div>';
-						}
-					?></center>
 				</div>
 				
 				<div>
@@ -80,6 +63,7 @@
 							<td></td>
 							<td></td>
 							<td><center><?php echo $link; ?></center></td>
+							<td></td>
 							<td></td>
 							<td></td>
 							<td></td>

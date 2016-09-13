@@ -12,7 +12,8 @@ class Cronjob extends CI_Controller
 	
 	function autoinvoice()
 	{
-		$result= $this->billing_model->servercharge();
+		$date= date("Y-m-d h:i:s");
+		$result= $this->billing_model->servercharge($date);
 		if($result==true){
 			$result_2= $this->billing_model->moneydecrease();
 			if($result_2==false){
@@ -23,9 +24,13 @@ class Cronjob extends CI_Controller
 	
 	function resetservercharge()
 	{
-		$result= $this->billing_model->noteservercharge();
+		$month= date("m");
+		$year= date("Y");
+		$date= date("Y-m-d");
+		$result= $this->billing_model->noteservercharge($month, $year, $date);
 		if($result==true){
-			$result_2= $this->billing_model->resetservercharge();
+			$date_time= date("Y-m-d h:i:s");
+			$result_2= $this->billing_model->resetservercharge($month, $year, $date_time);
 			if($result_2==false){
 				echo "Failed";
 			}

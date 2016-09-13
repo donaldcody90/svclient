@@ -231,7 +231,14 @@ class Billing extends CI_Controller
 	
 	function history()
 	{
-		$this->load->view('billing/history');
+		$cid= $this->session->userdata('user_id');
+		$param_where= array('b.cid'=> $cid);
+		$param_where2= array('cid' => $cid);
+		$result['pendingcharges']= $this->billing_model->PendingCharges($param_where);
+		//print_r($result['pendingcharges']);die;
+		$result['billing']= $this->billing_model->billing($param_where2, true);
+		//print_r($result['billing']);die;
+		$this->load->view('billing/history', $result);
 	}
 	
 	

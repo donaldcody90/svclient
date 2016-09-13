@@ -802,6 +802,11 @@ table td{
 }
 
 .list-DC .search{
+	height: 40px;
+	width: 100%;
+}
+
+.list-DC .search form{
 	float: right;
 }
 

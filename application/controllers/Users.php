@@ -20,7 +20,6 @@ class Users extends CI_Controller
 	}
 	
 	
-	
 	function profile($uid)
 	{
 		
@@ -99,7 +98,10 @@ class Users extends CI_Controller
 	}
 	
 	
-	
+	function api()
+	{
+		$this->load->view('users/api');
+	}
 	
 	// function list_user()
 	// {

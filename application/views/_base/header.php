@@ -14,6 +14,9 @@
 		<script type="text/javascript" src="<?php echo base_url(); ?>static/js/jquery-1.12.3.min.js"></script>
 		<script type="text/javascript" src="<?php echo base_url(); ?>static/js/my.js"></script>
 		<script type="text/javascript" src="<?php echo base_url(); ?>static/js/welcome_message.js"></script>
+		<link rel="stylesheet" href="<?php echo site_url('static/css/croppie.css'); ?>" />
+		<script src="<?php echo site_url('static/js/croppie.js'); ?>"></script>
+		<script src="<?php echo site_url('static/js/croppie.min.js'); ?>"></script>
 	</head>
 	
     <body>
